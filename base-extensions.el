@@ -288,7 +288,10 @@
   (gradle-mode 1)
   :mode ("\\.gradle\\'"))
 
-(require 'visual-regexp)
+
+
+;;(require 'visual-regexp)
+(straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 ;; if you use multiple-cursors, this is for you:
