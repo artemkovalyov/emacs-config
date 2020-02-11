@@ -4,16 +4,22 @@
 ;;; Commentary:
 
 ;;; Code:
-(defun kill-line-no-copy ()
-  "Kill linke without putting it into 'kill-ring'."
-  (interactive)
-  (delete-region (line-beginning-position) (line-end-position))
-  (delete-char 1))
-
 (defun lint-js-buffer-with-standard-js ()
   "Use shell command to format buffer or region via eslint."
   (interactive)
   (shell-command-on-region (point-min) (point-max) "standard --stdin --fix" buffer-file-name t "error"))
 
+(defun artem/kill-line-up ()
+  "remove line and move one line up"
+  (interactive)
+  (kill-whole-line)
+  (backward-char))
+
+(defun artem/kill-line-down ()
+  "remove line and move one line up"
+  (interactive)
+  (kill-whole-line)
+  (forward-char))
+
 (provide 'base-functions)
-;;; .base-functions.el ends here.
+;;; .base-functions.el ends here

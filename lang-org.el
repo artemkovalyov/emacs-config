@@ -4,23 +4,62 @@
 
 ;;; Code:
 
-(setq org-export-backends nil)
 
 (use-package org
   :config
   (setq org-directory "~/org-files"
-        org-default-notes-file (concat org-directory "/todo.org")
-	org-archive-location "/home/artem/life/archive/archive.org::* From %s"
-	org-clock-persist 'history)
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda))
+	org-export-backends nil
+	org-refile-allow-creating-parent-nodes 'confirm
+	org-refile-use-outline-path 'file
+	org-outline-path-complete-in-steps nil
+	org-refile-allow-creating-parent-nodes 'confirm
+	org-enforce-todo-dependencies t
+	org-log-done 'time
+	org-catch-invisible-edits t
+	org-startup-indented t ; Enable `org-indent-mode' by default
+	org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DEFERRED(d)" "PROJECT(p)" "RECUR(r)" "|" "DELEGATED" "SOMEDAY" "DONE" "CANCELED(c)")
+			    (sequence "NOTE(n)" "IDEA(i)" "BLOG(b)" "OUTDATED(o)")
+			    (sequence "WATCH(w)" "LISTEN(n)" "READ(r)" "ARCHIVED(a)")
+			    (sequence "EPIC(e)" "FEATURE(f)" "STORY(s)" "FUNCTIONAL" "NON-FUNCTIONAL" "|" "DELIVERED"))
+	org-todo-keyword-faces	(quote
+				 (("TODO" :foreground "gold" :weight bold)
+				  ("IN-PROGRESS" :foreground "orangered" :weight bold)
+				  ("EPIC" :foreground "deep sky blue" :weight bold)
+				  ("STORY" :foreground "royal blue" :weight bold)
+				  ("RECUR" :foreground "cornflowerblue" :weight bold)
+				  ("NOTE" :foreground "brown" :weight bold)
+				  ("WAITING" :foreground "red" :weight bold)
+				  ("DELEGATED" :foreground "dark violet" :weight bold)
+				  ("DEFERRED" :foreground "khaki" :weight bold)
+				  ("SOMEDAY" :foreground "coral" :weight bold)
+				  ("PROJECT" :foreground "#088e8e" :weight bold)
+				  ("WATCH" :foreground "gold" :weight bold)
+				  ("LISTEN" :foreground "deep sky blue" :weight bold)
+				  ("READ" :foreground "coral" :weight bold)
+				  ("ARCHIVED" :foreground "violet" :weight bold)
+				  ("BLOG" :foreground "coral" :weight bold)
+				  ("IDEA" :foreground "gold" :weight bold)
+				  ("OUTDATED" :foreground "violet" :weight bold))))
 
-(use-package org-projectile
-  :config
-  (org-projectile-per-project)
-  (setq org-projectile-per-project-filepath "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
+	(setq org-archive-location (concat org-directory "/archive/archive.org::* From %s"))
+	(setq org-agenda-files (list (concat org-directory "/life/org/")))
+	;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
+	(setq org-refile-targets (quote ((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5))))
+        (setq org-default-notes-file (concat org-directory "/todo.org"))
+	;; (org-clock-persistence-insinuate)
+	:bind
+	("C-c l" . org-store-link)
+	("s-c" . org-capture)
+	([f12] . org-agenda)
+	(:map org-mode-map
+	      ("C-a" . mark-whole-buffer))) ;; use-package for `org'
+
+
+;; (use-package org-projectile
+;;   :config
+;;   (org-projectile-per-project)
+;;   (setq org-projectile-per-project-filepath "todo.org"
+;; 	org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
 
 (use-package org-bullets
   :config
@@ -29,30 +68,6 @@
             (lambda ()
               (org-bullets-mode t))))
 
-;; Org Mode redefines
-(define-key org-mode-map (kbd "C-a") 'mark-whole-buffer)
-(define-key org-mode-map (kbd "M-h") 'mark-whole-buffer)
-
-;; My agenda files
-(setq org-agenda-files (quote ("/home/artem/life/org/")))
-
-;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
- (setq org-refile-targets (quote ((nil :maxlevel . 5)
-				  (org-agenda-files :maxlevel . 5))))
-;; org-refiling options
-(setq org-refile-allow-creating-parent-nodes 'confirm)
-(setq org-refile-use-outline-path 'file)
-(setq org-outline-path-complete-in-steps nil)
-(setq org-refile-allow-creating-parent-nodes 'confirm)
-(setq org-enforce-todo-dependencies t)
-;; (setq org-completion-use-ido nil)
-
-;; org export options
-;; (use-package ox-gfm
-;;   ;; :demand t
-;;   ;; :commands ox-gfm-export-to-markdown
-;;   )
-
 (use-package ox-pandoc
   :config
   (setq org-pandoc-menu-entry
@@ -60,8 +75,6 @@
 	  (36 "as html5." org-pandoc-export-as-html5)
 	  (53 "to html5-pdf and open." org-pandoc-export-to-html5-pdf-and-open)
 	  (37 "to html5-pdf." org-pandoc-export-to-html5-pdf)
-	  ;; (?g "to gfm and open." org-pandoc-export-to-gfm-and-open)
-	  ;; (?G "as gfm." org-pandoc-export-as-gfm)
 	  (60 "to slideous and open." org-pandoc-export-to-slideous-and-open)
 	  (44 "as slideous." org-pandoc-export-as-slideous)
 	  (61 "to ms-pdf and open." org-pandoc-export-to-ms-pdf-and-open)
@@ -103,53 +116,10 @@
 	  (121 "to slidy and open." org-pandoc-export-to-slidy-and-open)
 	  (89 "as slidy." org-pandoc-export-as-slidy)
 	  (122 "to dzslides and open." org-pandoc-export-to-dzslides-and-open)
-	  (90 "as dzslides." org-pandoc-export-as-dzslides)))
-  )
+	  (90 "as dzslides." org-pandoc-export-as-dzslides))))
 
 
-(setq org-todo-keywords
-      '(
-	(sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DEFERRED(d)" "PROJECT(p)" "RECUR(r)" "|" "DELEGATED" "SOMEDAY" "DONE" "CANCELED(c)")
-	(sequence "NOTE(n)" "IDEA(i)" "BLOG(b)" "OUTDATED(o)")
-	(sequence "WATCH(w)" "LISTEN(n)" "READ(r)" "ARCHIVED(a)")
-	(sequence "EPIC(e)" "FEATURE(f)" "STORY(s)" "FUNCTIONAL" "NON-FUNCTIONAL" "|" "DELIVERED")))
-
-
-(setq org-todo-keyword-faces
-   (quote
-    (
-     ("TODO" :foreground "gold" :weight bold)
-     ("IN-PROGRESS" :foreground "orangered" :weight bold)
-     ("EPIC" :foreground "deep sky blue" :weight bold)
-     ("STORY" :foreground "royal blue" :weight bold)
-     ("RECUR" :foreground "cornflowerblue" :weight bold)
-     ("NOTE" :foreground "brown" :weight bold)
-     ("WAITING" :foreground "red" :weight bold)
-     ("DELEGATED" :foreground "dark violet" :weight bold)
-     ("DEFERRED" :foreground "khaki" :weight bold)
-     ("SOMEDAY" :foreground "coral" :weight bold)
-     ("PROJECT" :foreground "#088e8e" :weight bold)
-     ("WATCH" :foreground "gold" :weight bold)
-     ("LISTEN" :foreground "deep sky blue" :weight bold)
-     ("READ" :foreground "coral" :weight bold)
-     ("ARCHIVED" :foreground "violet" :weight bold)
-     ("BLOG" :foreground "coral" :weight bold)
-     ("IDEA" :foreground "gold" :weight bold)
-     ("OUTDATED" :foreground "violet" :weight bold)
-     )))
-
-(setq org-log-done 'time)
-(setq org-catch-invisible-edits t)
-(with-eval-after-load 'org
-  (setq org-startup-indented t) ; Enable `org-indent-mode' by default
-  (add-hook 'org-mode-hook #'visual-line-mode))
-
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-(setq org-log-done 'time)
-
-
-(defun wicked/org-update-checkbox-count (&optional all)
+(defun artem/org-update-checkbox-count (&optional all)
   "Update the checkbox statistics in the current section.
 This will find all statistic cookies like [57%] and [6/12] and update
 them with the current numbers.  With optional prefix argument ALL,
@@ -206,10 +176,7 @@ do this for the whole buffer."
 (defadvice org-update-checkbox-count (around wicked activate)
   "Fix the built-in checkbox count to understand headlines."
   (setq ad-return-value
-	(wicked/org-update-checkbox-count (ad-get-arg 1))))
-
-(global-set-key [f12] 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+	(artem/org-update-checkbox-count (ad-get-arg 1))))
 
 (require 'org-capture-templates)
 

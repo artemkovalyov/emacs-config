@@ -11,7 +11,7 @@
 	 "a" 				; key
 	 "Add Task"			; description
 	 entry				; type
-	 (file+headline "~/life/org/backlog.org" "Backlog") ; target destination
+	 (file+headline "~/org-files/life/org/backlog.org" "Backlog") ; target destination
          "* TODO %? \n :PROPERTIES: \n :ID: \n %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:" ; template
 	 :prepend t 			; props - add latest to the beginning
 	 :clock-in t			; props
@@ -22,7 +22,7 @@
 	 "w"
 	 "Watch"
 	 entry
-	 (file+headline "~/life/org/watch.org" "Inbox")
+	 (file+headline "~/org-files/life/org/watch.org" "Inbox")
          "* WATCH %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 	(
@@ -36,7 +36,7 @@
 	 "l"
 	 "Listen"
 	 entry
-	 (file+headline "~/life/org/listen.org" "Inbox")
+	 (file+headline "~/org-files/life/org/listen.org" "Inbox")
       "* LISTEN %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -45,7 +45,7 @@
 	 "b"
 	 "Blog"
 	 entry
-	 (file+headline "~/life/org/blog.org" "Inbox")
+	 (file+headline "~/org-files/life/org/blog.org" "Inbox")
          "* BLOG %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -53,7 +53,7 @@
 	("i"
 	 "Idea"
 	 entry
-	 (file+headline "~/life/org/ideas.org" "Inbox")
+	 (file+headline "~/org-files/life/org/ideas.org" "Inbox")
          "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -61,7 +61,7 @@
 	("s"
 	 "Software"
 	 entry
-	 (file+headline "~/life/org/blog.org" "Inbox")
+	 (file+headline "~/org-files/life/org/blog.org" "Inbox")
          "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -69,7 +69,7 @@
 	("j"
 	 "Journal"
 	 entry
-	 (file+datetree "~/life/org/journal.org")
+	 (file+datetree "~/org-files/life/org/journal.org")
          "* NOTE %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)))
 

@@ -54,7 +54,6 @@
                  (window-height   . 0.15)))
   :config
   (setq flycheck-javascript-standard-executable "/home/artem/.yarn/bin/standard")
-  ;; (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
 (use-package comment-dwim-2
@@ -145,22 +144,6 @@
   ("C-c C->" . mc/mark-all-like-this)
   ("s-<mouse-1>" . mc/add-cursor-on-click))
 
-(use-package neotree
-  :init
-  (setq projectile-switch-project-action 'neotree-projectile-action)
-  :bind
-  (([f8] . neotree-toggle)
-  :map neotree-mode-map
-  ("k" . neotree-next-line)
-  ("i" . neotree-previous-line))
-  :config
-  (setq neo-theme 'arrow
-        neotree-smart-open t
-        neo-window-fixed-size nil
-	neo-show-hidden-files t
-	projectile-indexing-method 'hybrid
-	projectile-sort-order 'recently-active))
-
 (use-package page-break-lines)
 
 (use-package projectile
@@ -220,18 +203,6 @@
   :config
   (yas-global-mode 1))
 
-(use-package awesome-tab
-  :load-path
-  (lambda () (concat user-emacs-directory "elpa/awesome-tab/"))
-  :bind
-  ("M-s-l" . awesome-tab-forward)
-  ("M-s-j" . awesome-tab-backward)
-  :init
-  (require 'awesome-tab)
-  :config
-  (setq awesome-tab-style "bar")
-  (awesome-tab-mode t))
-
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -240,8 +211,7 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-
-(use-package dimmer
+ (use-package dimmer
   :disabled
   :custom
   (dimmer-fraction 0.3)

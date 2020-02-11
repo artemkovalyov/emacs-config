@@ -16,9 +16,19 @@
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories.")
 
+(use-package drag-stuff
+  :config
+  (drag-stuff-global-mode 1)
+  :bind
+  ("C-j" . drag-stuff-left)
+  ("C-l" . drag-stuff-right)
+  ("C-i" . drag-stuff-up)
+  ("C-k" . drag-stuff-down))
+
 ;; Core settings
 ;; UTF-8 please
 (set-charset-priority 'unicode)
+(global-visual-line-mode)
 (setq locale-coding-system   'utf-8)   ; pretty
 (set-terminal-coding-system  'utf-8)   ; pretty
 (set-keyboard-coding-system  'utf-8)   ; pretty
