@@ -10,6 +10,17 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (centaur-tabs-headline-match)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-set-close-button nil)
+  :bind
+  ("M-s-j" . centaur-tabs-backward)
+  ("M-s-l" . centaur-tabs-forward))
+
 (use-package dashboard
   :init
   (setq dashboard-items '((recents  . 5)
