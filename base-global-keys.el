@@ -8,15 +8,9 @@
 (global-unset-key (kbd "C-m"))
 (global-unset-key (kbd "M-q"))
 (global-unset-key (kbd "M-i"))
-(global-unset-key (kbd "C-k"))
-(global-unset-key (kbd "C-i"))
-(global-unset-key (kbd "C-j"))
-(global-unset-key (kbd "C-l"))
 
 (global-set-key (kbd "<tab>") 'indent-for-tab-command)
-(global-set-key (kbd "C-S-D") 'duplicate-thing)
-(global-set-key (kbd "C-<down>") 'elpy-nav-move-line-or-region-down)
-(global-set-key (kbd "C-<up>") 'elpy-nav-move-line-or-region-up)
+(global-set-key (kbd "C-d") 'duplicate-thing)
 (global-set-key (kbd "C-S-k") 'artem/kill-line-down)
 (global-set-key (kbd "C-S-i") 'artem/kill-line-up)
 (global-set-key (kbd "M-k") 'next-line)
@@ -41,9 +35,6 @@
 (global-set-key (kbd "M-u") 'backward-sexp)
 (global-set-key (kbd "M-m") 'forward-sexp)
 (global-set-key (kbd "C-v") 'yank)
-
-
-
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

@@ -4,6 +4,10 @@
 
 ;;; Code:
 
+(straight-use-package '(helm-org :type git :host github :repo "emacs-helm/helm-org"))
+(add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))
+(add-to-list 'helm-completing-read-handlers-alist '(org-set-tags-command . helm-org-completing-read-tags))
+
 
 (use-package org
   :config
@@ -16,6 +20,7 @@
 	org-enforce-todo-dependencies t
 	org-log-done 'time
 	org-catch-invisible-edits t
+	org-fast-tag-completion nil
 	org-startup-indented t ; Enable `org-indent-mode' by default
 	org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DEFERRED(d)" "PROJECT(p)" "RECUR(r)" "|" "DELEGATED" "SOMEDAY" "DONE" "CANCELED(c)")
 			    (sequence "NOTE(n)" "IDEA(i)" "BLOG(b)" "OUTDATED(o)")
@@ -119,6 +124,9 @@
 	  (90 "as dzslides." org-pandoc-export-as-dzslides))))
 
 
+(add-to-list 'helm-completing-read-handlers-alist '(org-set-tags))
+
+
 (defun artem/org-update-checkbox-count (&optional all)
   "Update the checkbox statistics in the current section.
 This will find all statistic cookies like [57%] and [6/12] and update
@@ -157,7 +165,7 @@ do this for the whole buffer."
 		   (t nil))
 	      c-on 0 c-off 0)
 	(goto-char e1)
-	(when lim
+i	(when lim
 	  (while (re-search-forward re-box lim t)
 	    (if (member (match-string 2) '("[ ]" "[-]"))
 		(setq c-off (1+ c-off))
@@ -177,6 +185,7 @@ do this for the whole buffer."
   "Fix the built-in checkbox count to understand headlines."
   (setq ad-return-value
 	(artem/org-update-checkbox-count (ad-get-arg 1))))
+
 
 (require 'org-capture-templates)
 

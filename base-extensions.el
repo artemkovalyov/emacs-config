@@ -297,5 +297,5 @@
 ;; if you use multiple-cursors, this is for you:
 (define-key global-map (kbd "C-c m") 'vr/mc-mark)
 
-
+(straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
 (provide 'base-extensions)

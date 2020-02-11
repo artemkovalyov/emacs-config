@@ -45,8 +45,7 @@
 
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
-
+    (treemacs-resize-icons 22)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t)
@@ -60,11 +59,18 @@
   (:map global-map
         ("M-0"       . treemacs-select-window)
         ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
+        ([f8]   . treemacs)
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
-
+        ("C-x t M-t" . treemacs-find-tag))
+  (:map treemacs-mode-map
+      ("i" . treemacs-previous-neighbour)
+      ("k" . treemacs-next-neighbour)
+      ("M-K" . treemacs-next-line-other-window)
+      ("M-I" . treemacs-previous-line-other-window)
+      ("M-i"   . treemacs-previous-line)
+      ("M-k"   . treemacs-next-line)
+      ))
 (use-package treemacs-evil
   :after treemacs evil
   :ensure t)
