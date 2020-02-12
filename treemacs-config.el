@@ -69,8 +69,8 @@
       ("M-K" . treemacs-next-line-other-window)
       ("M-I" . treemacs-previous-line-other-window)
       ("M-i"   . treemacs-previous-line)
-      ("M-k"   . treemacs-next-line)
-      ))
+      ("M-k"   . treemacs-next-line)))
+
 (use-package treemacs-evil
   :after treemacs evil
   :ensure t)
