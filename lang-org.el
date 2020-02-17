@@ -47,7 +47,7 @@
 				  ("OUTDATED" :foreground "violet" :weight bold))))
   ;; This vars should be assigned after the previous one as they use vars' values assigned by it
 	(setq org-archive-location (concat org-directory "/archive/archive.org::* From %s"))
-	(setq org-agenda-files (list (concat org-directory "/life/org/")))
+	(setq org-agenda-files (list (concat org-directory "/life/") (concat org-directory "/sap/")))
 	;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 	(setq org-refile-targets (quote ((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5))))
         (setq org-default-notes-file (concat org-directory "/todo.org"))
@@ -165,7 +165,7 @@ do this for the whole buffer."
 		   (t nil))
 	      c-on 0 c-off 0)
 	(goto-char e1)
-i	(when lim
+	(when lim
 	  (while (re-search-forward re-box lim t)
 	    (if (member (match-string 2) '("[ ]" "[-]"))
 		(setq c-off (1+ c-off))
