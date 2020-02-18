@@ -47,7 +47,10 @@
 				  ("OUTDATED" :foreground "violet" :weight bold))))
   ;; This vars should be assigned after the previous one as they use vars' values assigned by it
 	(setq org-archive-location (concat org-directory "/archive/archive.org::* From %s"))
-	(setq org-agenda-files (list (concat org-directory "/life/") (concat org-directory "/sap/")))
+	(setq org-agenda-files (list
+				(concat org-directory "/life/")
+				(concat org-directory "/sap/inbox.org")
+				(concat org-directory "/sap/support/issues.org")))
 	;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 	(setq org-refile-targets (quote ((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5))))
         (setq org-default-notes-file (concat org-directory "/todo.org"))

@@ -4,7 +4,7 @@
 ;;; Code:
 (use-package ace-jump-mode
   :bind
-  ("C-j" . ace-jump-mode))
+  ("C-S-j" . ace-jump-mode))
 
 (use-package company
   :config
