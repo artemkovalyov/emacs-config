@@ -143,7 +143,10 @@
   ("C-x g p" . magit-push)
   ("C-x g u" . magit-pull)
   ("C-x g e" . magit-ediff-resolve)
-  ("C-x g r" . magit-rebase-interactive))
+  ("C-x g r" . magit-rebase-interactive)
+  (:map magit-mode-map
+	("<tab>" . magit-section-toggle)))
+
 
 (use-package magit-popup)
 

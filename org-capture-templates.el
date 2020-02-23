@@ -65,6 +65,14 @@
          "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
+	;; Support cases
+	("s"
+	 "Software"
+	 entry
+	 (file+headline "~/org-files/life/org/blog.org" "Inbox")
+         "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
+	 :prepend t)
+
       ;; My dear diary that I never write
 	("j"
 	 "Journal"
