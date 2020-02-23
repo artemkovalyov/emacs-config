@@ -4,7 +4,7 @@
 ;;; Code:
 (use-package ace-jump-mode
   :bind
-  ("C-j" . ace-jump-mode))
+  ("C-S-j" . ace-jump-mode))
 
 (use-package company
   :config
@@ -118,8 +118,6 @@
   (setq helm-swoop-split-with-multiple-windows t
 	helm-swoop-split-direction 'split-window-horizontally))
 
-
-
 ;; show line numbers
 (use-package linum
   :config
@@ -131,10 +129,10 @@
   :config
   (hlinum-activate))
 
-
 ;; git too for Emacs
 (use-package magit
   :config
+  (setq magit-refresh-status-buffer nil)
   :bind
   ;; Magit
   ("C-x g s" . magit-status)
@@ -291,8 +289,6 @@
   (gradle-mode 1)
   :mode ("\\.gradle\\'"))
 
-
-
 ;;(require 'visual-regexp)
 (straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
 (define-key global-map (kbd "C-c r") 'vr/replace)
@@ -300,5 +296,7 @@
 ;; if you use multiple-cursors, this is for you:
 (define-key global-map (kbd "C-c m") 'vr/mc-mark)
 
+;;duplicating lines and words
 (straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
+
 (provide 'base-extensions)

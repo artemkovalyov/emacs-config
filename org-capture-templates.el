@@ -11,7 +11,7 @@
 	 "a" 				; key
 	 "Add Task"			; description
 	 entry				; type
-	 (file+headline "~/org-files/life/org/backlog.org" "Backlog") ; target destination
+	 (file+headline "~/org-files/life/backlog.org" "Backlog") ; target destination
          "* TODO %? \n :PROPERTIES: \n :ID: \n %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:" ; template
 	 :prepend t 			; props - add latest to the beginning
 	 :clock-in t			; props
@@ -22,21 +22,21 @@
 	 "w"
 	 "Watch"
 	 entry
-	 (file+headline "~/org-files/life/org/watch.org" "Inbox")
+	 (file+headline "~/org-files/life/watch.org" "Inbox")
          "* WATCH %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 	(
 	 "r"
 	 "Read"
 	 entry
-	 (file+headline "~/life/org/read.org" "Inbox")
+	 (file+headline "~/life/read.org" "Inbox")
          "* READ %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 	(
 	 "l"
 	 "Listen"
 	 entry
-	 (file+headline "~/org-files/life/org/listen.org" "Inbox")
+	 (file+headline "~/org-files/life/listen.org" "Inbox")
       "* LISTEN %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -45,7 +45,7 @@
 	 "b"
 	 "Blog"
 	 entry
-	 (file+headline "~/org-files/life/org/blog.org" "Inbox")
+	 (file+headline "~/org-files/life/blog.org" "Inbox")
          "* BLOG %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -53,15 +53,31 @@
 	("i"
 	 "Idea"
 	 entry
-	 (file+headline "~/org-files/life/org/ideas.org" "Inbox")
+	 (file+headline "~/org-files/life/ideas.org" "Inbox")
          "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
+	 :prepend t)
+
+	;; SAP: Support Issue
+	("c"
+	 "SAP Support Case"
+	 entry
+	 (file+headline "~/org-files/sap/support/issues.org" "Inbox")
+         "* TODO %? %^g \n :PROPERTIES: \n :ID:      %(shell-command-to-slltring \"uuidgen\"):CREATED:  %U  \n:END:"
+	 :prepend t)
+
+	;; SAP: tasks
+	("p"
+	 "SAP task"
+	 entry
+	 (file+headline "~/org-files/sap/inbox.org" "Inbox")
+         "* TODO %? %^g \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U  \n :END:"
 	 :prepend t)
 
 	;; Ideas about anything
 	("s"
 	 "Software"
 	 entry
-	 (file+headline "~/org-files/life/org/blog.org" "Inbox")
+	 (file+headline "~/org-files/life/blog.org" "Inbox")
          "* IDEA %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 
@@ -77,7 +93,7 @@
 	("j"
 	 "Journal"
 	 entry
-	 (file+datetree "~/org-files/life/org/journal.org")
+	 (file+datetree "~/org-files/life/journal.org")
          "* NOTE %? \n :PROPERTIES: \n :ID:      %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)))
 
