@@ -29,7 +29,7 @@
 	 "r"
 	 "Read"
 	 entry
-	 (file+headline "~/life/read.org" "Inbox")
+	 (file+headline "~/org-files/life/read.org" "Inbox")
          "* READ %? \n :PROPERTIES: \n :LINK: \n :ID:       %(shell-command-to-string \"uuidgen\"):CREATED:  %U \n :END:"
 	 :prepend t)
 	(
