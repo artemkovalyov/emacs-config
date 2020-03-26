@@ -1,3 +1,6 @@
+;; install emmet for HTML tags templates
+(straight-use-package 'emmet-mode)
+
 (use-package prettier-js
   :ensure t
   :config
