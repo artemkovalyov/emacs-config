@@ -6,13 +6,13 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "emacs-config"))
 
+(require 'base)
 (require 'base-functions)
 (require 'base-global-keys)
 (require 'base-theme)
-(require 'base)
 (require 'base-extensions)
 (require 'lsp-base)
-;;(require 'lang-python)
+;; (require 'lang-typescript)
 ;;(require 'lang-go)
 (require 'lang-javascript)
 ;;(require 'lang-java)

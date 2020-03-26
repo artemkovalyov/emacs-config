@@ -40,7 +40,7 @@
 
 ;; (use-package lsp-java
 ;;   :ensure t
-;;   :after lsp
+;;   :after lsp-mode
 ;;   :init
 ;;   (setq lsp-java-vmargs
 ;;         (list

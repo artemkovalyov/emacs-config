@@ -1,7 +1,7 @@
-;;; package --- base.el
+ ;;; package --- base.el
 ;;; Commentary:
 ;;; Code:
-(package-initialize)
+;; (package-initialize)
 
 ;; straight.el package manager
 (defvar bootstrap-version)
@@ -17,20 +17,21 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(straight-use-package 'el-patch)
-(setq straight-use-package-by-default t)
+
 (straight-use-package 'use-package)
+(straight-use-package 'el-patch)
+(use-package el-patch
+  :straight t)
+(setq straight-use-package-by-default t)
 
 
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/")
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-(when (not package-archive-contents)
-  (package-refresh-contents))
 
-;; (unless (package-installed-p 'use-package)
-;;   (package-install 'use-package))
-;; (require 'use-package)
+;;(add-to-list 'package-archives
+;;	     '("melpa" . "https://melpa.org/packages/")
+;;             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+;;(when (not package-archive-contents)
+;;  (package-refresh-contents))
+
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
@@ -100,7 +101,7 @@
 (unless (file-exists-p (concat temp-dir "/auto-save-list"))
 		       (make-directory (concat temp-dir "/auto-save-list") :parents))
 
-(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-noiii-p 'y-or-n-p)
 
 (global-auto-revert-mode t)
 (global-hl-line-mode)

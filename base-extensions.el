@@ -7,6 +7,8 @@
   ("C-S-j" . ace-jump-mode))
 
 (use-package company
+  :init
+  (setq company-minimum-prefix-length 1)
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -208,12 +210,17 @@
 
 (use-package wgrep)
 
+(straight-use-package 'yasnippet)
 (use-package yasnippet
   :bind
   (:map yas-minor-mode-map
 	("<backtab>" . yas-expand))
   :config
-  (yas-global-mode 1))
+  ;; (yas-global-mode 1)
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
+
+(straight-use-package 'yasnippet-snippets)
 
 (use-package markdown-mode
   :ensure t
