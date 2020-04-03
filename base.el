@@ -101,7 +101,7 @@
 (unless (file-exists-p (concat temp-dir "/auto-save-list"))
 		       (make-directory (concat temp-dir "/auto-save-list") :parents))
 
-(fset 'yes-or-noiii-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (global-auto-revert-mode t)
 (global-hl-line-mode)

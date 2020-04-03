@@ -9,8 +9,8 @@
 (use-package company
   :init
   (setq company-minimum-prefix-length 1)
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :hook
+  (after-init . global-company-mode))
 
 (use-package centaur-tabs
   :demand
@@ -218,7 +218,9 @@
   :config
   ;; (yas-global-mode 1)
   (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :hook
+  (prog-mode . yas-minor-mode)
+  (markdown-mode . yas-minor-mode))
 
 (straight-use-package 'yasnippet-snippets)
 

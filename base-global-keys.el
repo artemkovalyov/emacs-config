@@ -9,8 +9,8 @@
 (global-unset-key (kbd "M-q"))
 (global-unset-key (kbd "M-i"))
 
-(global-set-key (kbd "M-s-[") 'shrink-window-horizontally)
-(global-set-key (kbd "M-s-]") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-{") 'shrink-window-horizontally)
+(global-set-key (kbd "C-}") 'enlarge-window-horizontally)
 (global-set-key (kbd "<tab>") 'indent-for-tab-command)
 (global-set-key (kbd "C-d") 'duplicate-thing)
 (global-set-key (kbd "C-S-k") 'artem/kill-line-down)
