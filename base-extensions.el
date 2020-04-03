@@ -223,6 +223,7 @@
   (markdown-mode . yas-minor-mode))
 
 (straight-use-package 'yasnippet-snippets)
+(straight-use-package 'react-snippets)
 
 (use-package markdown-mode
   :ensure t
