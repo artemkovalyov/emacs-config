@@ -10,7 +10,12 @@
   :init
   (setq company-minimum-prefix-length 1)
   :hook
-  (after-init . global-company-mode))
+  (after-init . global-company-mode)
+  :bind
+  (:map company-mode-map
+	("C-M-k" . company-select-next)
+	("C-M-i" . company-select-previous))
+  )
 
 (use-package centaur-tabs
   :demand
@@ -34,7 +39,6 @@
 	dashboard-startup-banner nil)
   :config
   (dashboard-setup-startup-hook))
-
 (use-package ediff
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain

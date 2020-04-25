@@ -6,7 +6,7 @@
 ;;; Code:
 
 (setq ispell-choices-win-default-height 3)
-
+(setq flyspell-use-meta-tab nil)
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
@@ -31,6 +31,5 @@
   (flyspell-goto-next-error)
   (ispell-word))
 (global-set-key (kbd "M-<f7>") 'flyspell-check-next-highlighted-word)
-
 (provide 'spelling)
 ;;; spelling ends here
