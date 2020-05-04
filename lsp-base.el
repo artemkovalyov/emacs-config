@@ -7,7 +7,8 @@
 ;;; activate LSP mode
 (use-package lsp-mode
 :init
-  (setq lsp-keymap-prefix "s-m")
+(setq lsp-keymap-prefix "s-m")
+(setq lsp-gopls-server-path "~/go/bin/gopls")
 :commands (lsp lsp-deferred)
 :custom
 ;; debug
@@ -20,7 +21,7 @@
 (lsp-response-timeout 10)
 (lsp-prefer-flymake :none) ;; t(flymake), nil(lsp-ui), or :none
 :hook
-((js-mode typescript-mode) . lsp-deferred)
+((js-mode typescript-mode go-mode) . lsp-deferred)
 :bind
 (:map lsp-mode-map
 ("C-c r"   . lsp-rename))
