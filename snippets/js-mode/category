@@ -1,0 +1,10 @@
+# key: cat
+# name: Docusaurus category
+# --
+{
+  type: 'category',
+  label: '${1:Label name}',
+  items: [
+
+  ],
+},

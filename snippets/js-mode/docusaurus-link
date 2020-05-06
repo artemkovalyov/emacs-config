@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Docusaurus sidebar link
+# key: link
+# --
+
+{
+  type: 'link',
+  label: '${1:Custom Label}',
+  href: '${https://example.com}'
+}

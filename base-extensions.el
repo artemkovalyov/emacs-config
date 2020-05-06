@@ -220,6 +220,7 @@
   (:map yas-minor-mode-map
 	("<backtab>" . yas-expand))
   :config
+  (setq yas-snippet-dirs '("~/.emacs.d/emacs-config/snippets"))
   ;; (yas-global-mode 1)
   (yas-reload-all)
   :hook

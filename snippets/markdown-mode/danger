@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: danger
+# key: danger
+# --
+:::danger
+${1:Danger danger, mayday!}
+:::

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: note
+# key: note
+# --
+:::note
+${1:The content and title *can* include markdown.}
+:::

@@ -1,0 +1,30 @@
+# key: 2tabs
+# name: Tabs for two code blocks (2tabs)
+# --
+<Tabs
+  defaultValue=${1:"js"}
+  values={[
+    { label: 'JavaScript', value: 'js', },
+    { label: 'Java', value: 'java', },
+  ]
+}>
+<TabItem value="js">
+
+\`\`\`js
+function helloWorld() {
+  console.log('Hello, world!');
+}
+\`\`\`
+
+<TabItem value="java">
+
+\`\`\`java
+class HelloWorld {
+  public static void main(String args[]) {
+    System.out.println("Hello, World");
+  }
+}
+\`\`\`
+
+</TabItem>
+</Tabs>

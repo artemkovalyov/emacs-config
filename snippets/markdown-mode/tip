@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tip
+# key: tip
+# --
+:::tip You can specify an optional title
+${1:Heads up! Here's a pro-tip.}
+:::
