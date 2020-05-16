@@ -4,10 +4,10 @@
 ;;; Commentary:
 
 ;;; Code:
-(defun lint-js-buffer-with-standard-js ()
-  "Use shell command to format buffer or region via eslint."
-  (interactive)
-  (shell-command-on-region (point-min) (point-max) "standard --stdin --fix" buffer-file-name t "error"))
+;; (defun lint-js-buffer-with-standard-js ()
+;;   "Use shell command to format buffer or region via eslint."
+;;   (interactive)
+;;   (shell-command-on-region (point-min) (point-max) "standard --stdin --fix" buffer-file-name t "error"))
 
 (defun artem/kill-line-up ()
   "remove line and move one line up"
@@ -43,6 +43,9 @@ point reaches the beginning or end of the buffer, stop there."
     (back-to-indentation)
     (when (= orig-point (point))
       (beginning-of-line))))
+
+(defun insert-current-date () (interactive)
+    (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
 
 (provide 'base-functions)
 ;;; .base-functions.el ends here

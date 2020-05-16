@@ -224,8 +224,7 @@
   ;; (yas-global-mode 1)
   (yas-reload-all)
   :hook
-  (prog-mode . yas-minor-mode)
-  (markdown-mode . yas-minor-mode))
+  ((prog-mode markdown-mode) . yas-minor-mode))
 
 (straight-use-package 'yasnippet-snippets)
 (straight-use-package 'react-snippets)
