@@ -8,7 +8,8 @@
 
 (use-package company
   :init
-  (setq company-minimum-prefix-length 1)
+  (setq company-minimum-prefix-length 1
+	company-idle-delay 0.0)
   :hook
   (after-init . global-company-mode)
   :bind
@@ -39,6 +40,7 @@
 	dashboard-startup-banner nil)
   :config
   (dashboard-setup-startup-hook))
+
 (use-package ediff
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
@@ -58,25 +60,15 @@
   :bind
   ("C-=" . er/expand-region))
 
+(straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
 (use-package flycheck
-  :defer t
-  :ensure t
-  :init
-  (add-to-list 'display-buffer-alist
-               `(,(rx bos "*Flycheck errors*" eos)
-                 (display-buffer-reuse-window
-                  display-buffer-in-side-window)
-                 (side            . bottom)
-                 (reusable-frames . visible)
-                 (window-height   . 0.15)))
-  :config
-  (setq flycheck-javascript-standard-executable "/home/artem/.yarn/bin/standard")
-  )
+  :defer t )
 
 (use-package comment-dwim-2
   :bind
   ("M-;" . comment-dwim-2))
 
+(straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
 (use-package helm
   :init
   (require 'helm-config)
@@ -135,7 +127,7 @@
   :config
   (hlinum-activate))
 
-;; git too for Emacs
+(straight-use-package '(magit :type git :host github :repo "magit/magit"))
 (use-package magit
   :config
   (setq magit-refresh-status-buffer nil)
@@ -162,8 +154,6 @@
   ("C-c C->" . mc/mark-all-like-this)
   ("s-<mouse-1>" . mc/add-cursor-on-click))
 
-(use-package page-break-lines)
-
 (use-package projectile
   :ensure t
   :config
@@ -173,14 +163,12 @@
   (projectile-register-project-type 'yarn '("package.json"))
   (projectile-mode 1))
 
-(use-package recentf
-  :config
-  (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
-  (recentf-mode 1))
+;; (use-package recentf
+;;   :config
+;;   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
+;;   (recentf-mode 1))
 
 (use-package smartparens)
-
-(use-package smex)
 
 (use-package undo-tree
   :bind
@@ -253,17 +241,14 @@
   :config
   (dimmer-mode t))
 
-(use-package golden-ratio
-  :disabled
-  :custom
-  (golden-ratio-mode 1))
-
 (use-package yaml-mode
+  :defer t
   :mode ("\\.yaml\\'" "\\.yml\\'")
   :custom-face
   (font-lock-variable-name-face ((t (:foreground "violet")))))
 
 (use-package dockerfile-mode
+  :defer t
   :mode "\\Dockerfile\\'")
 
 (use-package nyan-mode
@@ -282,20 +267,12 @@
   (emacs-lisp-mode . rainbow-mode)
   (js-mode . rainbow-mode))
 
-;; volatile highlights - temporarily highlight changes from pasting etc
-(use-package volatile-highlights
-  :config
-  (volatile-highlights-mode t))
 
 ;; volatile highlights - temporarily highlight changes from pasting etc
 (use-package volatile-highlights
   :config
   (volatile-highlights-mode t))
 
-;; (use-package beacon
-;;   :custom
-;;   (beacon-color "#f1fa8c")
-;;   :hook (after-init . beacon-mode))
 
 ;; Gradle
 (use-package gradle-mode

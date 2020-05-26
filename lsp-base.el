@@ -3,23 +3,16 @@
 ;;; Code:
 
 
-(straight-use-package 'lsp-mode)
+(straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
+
 ;;; activate LSP mode
 (use-package lsp-mode
 :init
 (setq lsp-keymap-prefix "s-m")
-(setq lsp-gopls-server-path "~/go/bin/gopls")
+(setq lsp-prefer-capf t)
+(setq lsp-eslint-auto-fix-on-save t)
+;; (setq lsp-gopls-server-path "~/go/bin/gopls")
 :commands (lsp lsp-deferred)
-:custom
-;; debug
-(lsp-print-io nil)
-(lsp-trace nil)
-(lsp-print-performance nil)
-;; general
-(lsp-auto-guess-root t)
-(lsp-document-sync-method 'incremental) ;; none, full, incremental, or nil
-(lsp-response-timeout 10)
-(lsp-prefer-flymake :none) ;; t(flymake), nil(lsp-ui), or :none
 :hook
 ((js-mode typescript-mode go-mode) . lsp-deferred)
 :bind
@@ -28,7 +21,7 @@
 :config
 (require 'lsp-clients))
 
-(straight-use-package 'lsp-ui)
+(straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
 (use-package lsp-ui
   :commands
@@ -82,16 +75,6 @@
   :hook
 (lsp-mode . lsp-ui-mode))
 
-
-;; Lsp completion
-(straight-use-package 'company-lsp)
-(use-package company-lsp
-  :custom
-  (company-lsp-cache-candidates t) ;; auto, t(always using a cache), or nil
-  (company-lsp-async t)
-  (company-lsp-enable-snippet t)
-  (company-lsp-enable-recompletion t))
-
 (straight-use-package 'helm-lsp)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
@@ -102,5 +85,8 @@
 (use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
+;; eslint lsp
+(setq lsp-eslint-server-command
+  `("node"  ,(expand-file-name "~/.emacs.d/emacs-config/eslintServer.js") "--stdio"))
 (provide 'lsp-base)
 ;;; lsp-base.el ends here

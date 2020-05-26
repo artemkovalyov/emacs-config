@@ -24,14 +24,8 @@
   :straight t)
 (setq straight-use-package-by-default t)
 
-
-
-;;(add-to-list 'package-archives
-;;	     '("melpa" . "https://melpa.org/packages/")
-;;             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-;;(when (not package-archive-contents)
-;;  (package-refresh-contents))
-
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024 1024)) ;; 1mb
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
@@ -78,7 +72,8 @@
       inhibit-startup-message            t
       fringes-outside-margins            t
       x-select-enable-clipboard          t
-      use-package-always-ensure          t)
+      use-package-always-ensure          t
+      gc-cons-threshold                  100000000)
 
 ;; Bookmarks
 (setq
@@ -128,9 +123,6 @@
         (lambda() (set-fill-column 120)))
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; (setq org-export-backends '(html))
-
 
 (provide 'base)
 ;;; base ends here
