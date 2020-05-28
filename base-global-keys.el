@@ -20,9 +20,8 @@
 (global-set-key (kbd "M-j") 'backward-char)
 (global-set-key (kbd "M-l") 'forward-char)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
-(global-set-key (kbd "M-e") 'move-end-of-line)
-(global-set-key (kbd "s-e") 'smarter-move-beginning-of-line)
-(global-set-key (kbd "M-e") 'end-of-line)
+(global-set-key (kbd "M-w") 'artem/beginning-of-line)
+(global-set-key (kbd "M-e") 'artem/end-of-line)
 (global-set-key (kbd "s-l") 'forward-word)
 (global-set-key (kbd "s-j") 'backward-word)
 (global-set-key (kbd "M-r") 'eval-last-sexp)
@@ -37,7 +36,10 @@
 (global-set-key (kbd "M-n") 'forward-list)
 (global-set-key (kbd "M-u") 'backward-sexp)
 (global-set-key (kbd "M-m") 'forward-sexp)
-(global-set-key (kbd "C-v") 'yank)
+(global-set-key (kbd "C-v") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x k") 'artem/kill-rest-of-line)
+(global-set-key (kbd "M-v") 'yank)
+(global-set-key (kbd "M-c") 'kill-ring-save)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

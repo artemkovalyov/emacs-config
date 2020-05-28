@@ -1,4 +1,4 @@
- ;;; package --- base.el
+;;; package --- base.el
 ;;; Commentary:
 ;;; Code:
 ;; (package-initialize)
@@ -118,7 +118,7 @@
 (delete-selection-mode 1)
 (setq next-line-add-newlines t)
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook
         (lambda() (set-fill-column 120)))
 ;; Delete trailing whitespace before save

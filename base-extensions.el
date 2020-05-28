@@ -81,16 +81,14 @@
 	helm-ff-skip-boring-files t)
   (helm-mode 1)
   :bind (("M-x" . helm-M-x)
-         ("C-x C-m" . helm-M-x)
          ("C-o" . helm-find-files)
          ("s-o" . helm-projectile)
-         ("C-x c o" . helm-occur)
          ("s-d" . helm-projectile-find-dir)
-         ("s-g" . helm-projectile-grep)
+         ("s-a" . helm-ag)
          ("s-f" . helm-projectile-find-file)
          ("M-y" . helm-show-kill-ring)
-	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("C-b" . helm-buffers-list)
+	 ("M-s M-s" . helm-projectile)
+	 ("C-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
 	 ("C-i" . helm-select-action)
@@ -98,17 +96,19 @@
 	 ("M-i" . helm-previous-line)
 	 :map helm-find-files-map
 	 ("M-i" . helm-previous-line)
-	 ;; :map helm-find-files-map
-	 ;; ("<tab>" . helm-execute-persistent-action)
+	 ("M-k" . helm-next-line)
+	 :map helm-generic-files-map
+	 ("M-i" . helm-previous-line)
+	 ("M-k" . helm-next-line)
 	 ))
 
-
+(straight-use-package '(helm-ag :type git :host github :repo "emacsorphanage/helm-ag"))
 (use-package helm-ag)
 
-(use-package helm-git-grep)
-
+(straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
 (use-package helm-projectile)
 
+(straight-use-package '(helm-swoop :type git :host github :repo "emacsorphanage/helm-swoop"))
 (use-package helm-swoop
   :bind
   ("s-z" . helm-swoop)
