@@ -119,10 +119,17 @@
 (setq next-line-add-newlines t)
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook
-        (lambda() (set-fill-column 120)))
+;; (add-hook 'text-mode-hook
+;;         (lambda() (set-fill-column 120)))
+
+(setq-default fill-column '120)
+
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; change default size of diff region from a word to a char
+(setq-default ediff-forward-word-function 'forward-char)
+
 
 (provide 'base)
 ;;; base ends here

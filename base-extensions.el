@@ -87,7 +87,8 @@
          ("s-a" . helm-ag)
          ("s-f" . helm-projectile-find-file)
          ("M-y" . helm-show-kill-ring)
-	 ("M-s M-s" . helm-projectile)
+	 ("M-s M-s" . helm-projectile-switch-project)
+	 ("M-s s" . helm-projectile)
 	 ("C-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
