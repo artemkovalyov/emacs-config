@@ -44,8 +44,15 @@
 (use-package ediff
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
-	ediff-diff-options "-w"))
-  (setq-default ediff-highlight-all-diffs 'nil)
+	ediff-diff-options "-w")
+  (setq-default ediff-forward-word-function 'forward-char)
+  (setq-default ediff-highlight-all-diffs 't)
+  (defun artem-ediff-hook ()
+    (ediff-setup-keymap)
+    (define-key ediff-mode-map (kbd "M-i") 'ediff-previous-difference)
+    (define-key ediff-mode-map (kbd "M-k") 'ediff-next-difference))
+  :hook (ediff-mode . artem-ediff-hook)
+)
 
 (use-package exec-path-from-shell
   :config

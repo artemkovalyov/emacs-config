@@ -18,14 +18,13 @@
   (load bootstrap-file nil 'nomessage))
 
 
-(straight-use-package 'use-package)
-(straight-use-package 'el-patch)
+(straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
+(straight-use-package '(el-patch :type git :host github :repo "raxod502/el-patch"))
+
 (use-package el-patch
   :straight t)
 (setq straight-use-package-by-default t)
 
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024 1024)) ;; 1mb
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
@@ -52,28 +51,37 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; Emacs customizations
-(setq confirm-kill-emacs                  'y-or-n-p
-      confirm-nonexistent-file-or-buffer  t
-      save-interprogram-paste-before-kill t
-      mouse-yank-at-point                 t
-      require-final-newline               t
-      visible-bell                        nil
-      ring-bell-function                  'ignore
-      custom-file                         "~/.emacs.d/.custom.el"
-      minibuffer-prompt-properties
-      '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)
+(setq-default
+ confirm-kill-emacs                  'y-or-n-p
+ confirm-nonexistent-file-or-buffer  t
+ save-interprogram-paste-before-kill t
+ mouse-yank-at-point                 t
+ require-final-newline               t
+ visible-bell                        nil
+ ring-bell-function                  'ignore
+ custom-file                         "~/.emacs.d/.custom.el"
+ minibuffer-prompt-properties
+ '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)
 
-      ;; Disable non selected window highlight
-      cursor-in-non-selected-windows     nil
-      highlight-nonselected-windows      nil
-      ;; PATH
-      exec-path                          (append exec-path '("/usr/local/bin/"))
-      indent-tabs-mode                   nil
-      inhibit-startup-message            t
-      fringes-outside-margins            t
-      x-select-enable-clipboard          t
-      use-package-always-ensure          t
-      gc-cons-threshold                  100000000)
+ ;; Disable non selected window highlight
+ cursor-in-non-selected-windows     nil
+ highlight-nonselected-windows      nil
+ ;; PATH
+ exec-path                          (append exec-path '("/usr/local/bin/"))
+ indent-tabs-mode                   nil
+ inhibit-startup-message            t
+ fringes-outside-margins            t
+ x-select-enable-clipboard          t
+ use-package-always-ensure          t
+ ;; improved memory defaults
+ gc-cons-threshold                  100000000
+ read-process-output-max (* 1024 1024 1024)
+
+ ;; improve ediff granularity to a char
+ ediff-forward-word-function 'forward-char
+ ;; improve ediff highlight for quick comparisons
+ ediff-highlight-all-diffs t
+ )
 
 ;; Bookmarks
 (setq
@@ -82,7 +90,7 @@
  bookmark-default-file              (concat temp-dir "/bookmarks"))
 
 ;; Backups enabled, use nil to disable
-(setq
+(setq-default
  history-length                     1000
  backup-inhibited                   nil
  make-backup-files                  t
@@ -129,7 +137,7 @@
 
 ;; change default size of diff region from a word to a char
 (setq-default ediff-forward-word-function 'forward-char)
-
+(setq-default ediff-highlight-all-diffs t)
 
 (provide 'base)
 ;;; base ends here
