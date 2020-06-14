@@ -13,9 +13,14 @@
   :hook
   (after-init . global-company-mode)
   :bind
-  (:map company-mode-map
-	("C-M-k" . company-select-next)
-	("C-M-i" . company-select-previous))
+  (:map company-active-map
+	("M-k" . company-select-next)
+	("M-i" . company-select-previous)
+        ("M-f" . company-filter-candidates)
+        ("M-s" . company-search-candidates))
+  (:map company-search-map
+        ("M-k" . company-select-next)
+        ("M-i" . company-select-previous))
   )
 
 (use-package centaur-tabs
@@ -64,7 +69,6 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
-  :
   :bind
   ("C-=" . er/expand-region))
 
