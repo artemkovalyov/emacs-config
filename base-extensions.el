@@ -8,8 +8,8 @@
 
 (use-package company
   :init
-  (setq company-minimum-prefix-length 1
-	company-idle-delay 0.0)
+  (setq company-minimum-prefix-length 2
+	company-idle-delay 0.1)
   :hook
   (after-init . global-company-mode)
   :bind
@@ -64,6 +64,7 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
+  :
   :bind
   ("C-=" . er/expand-region))
 
@@ -73,7 +74,7 @@
 
 (use-package comment-dwim-2
   :bind
-  ("M-;" . comment-dwim-2))
+  ("C-/" . comment-dwim-2))
 
 (straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
 (use-package helm
@@ -180,9 +181,9 @@
 
 (use-package undo-tree
   :bind
-  ("C-." . undo-tree-visualize)
+  ("M-z" . undo-tree-visualize)
   ("C-z" . undo-tree-undo)
-  ("M-z" . undo-tree-redo)
+  ("<С-S-z>" . undo-tree-redo)
   :config
   ;; Remember undo history
   (setq

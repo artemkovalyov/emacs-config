@@ -10,7 +10,7 @@
 :init
 (setq lsp-keymap-prefix "s-m")
 (setq lsp-prefer-capf t)
-(setq lsp-eslint-auto-fix-on-save t)
+;; (setq lsp-eslint-auto-fix-on-save t)
 ;; (setq lsp-gopls-server-path "~/go/bin/gopls")
 :commands (lsp lsp-deferred)
 :hook
@@ -86,7 +86,7 @@
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; eslint lsp
-(setq lsp-eslint-server-command
-  `("node"  ,(expand-file-name "~/.emacs.d/emacs-config/eslintServer.js") "--stdio"))
+;; (setq lsp-eslint-server-command
+;;   `("node"  ,(expand-file-name "~/.emacs.d/emacs-config/eslintServer.js") "--stdio"))
 (provide 'lsp-base)
 ;;; lsp-base.el ends here

@@ -6,10 +6,7 @@
 ---
 id: ${1:document-slag}
 title: ${2:Feature title}
-hide_title: ${3:false}
-hide_table_of_contents: ${4:false}
 sidebar_label: ${5:Shiny label :)}
-custom_edit_url: ${6:https://github.com}
 description: ${7:Why should I read this?!}
 keywords:
   - sap
@@ -18,5 +15,4 @@ keywords:
   - cloud native
   - cloud sdk
   - sap cloud sdk
-image: ${8:}
 ---
