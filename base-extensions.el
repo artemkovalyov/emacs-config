@@ -8,8 +8,8 @@
 
 (use-package company
   :init
-  (setq company-minimum-prefix-length 2
-	company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 3
+	company-idle-delay 0)
   :hook
   (after-init . global-company-mode)
   :bind
