@@ -1,9 +1,8 @@
+;;(straight-use-package '(treemacs :type git :host github :repo "Alexander-Miller/treemacs"))
+
 (use-package treemacs
   :ensure t
   :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
     (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
@@ -23,6 +22,7 @@
           treemacs-is-never-other-window         nil
           treemacs-max-git-entries               5000
           treemacs-missing-project-action        'ask
+          treemacs-move-forward-on-expand        nil
           treemacs-no-png-images                 nil
           treemacs-no-delete-other-windows       t
           treemacs-project-follow-cleanup        nil
@@ -41,12 +41,14 @@
           treemacs-space-between-root-nodes      t
           treemacs-tag-follow-cleanup            t
           treemacs-tag-follow-delay              1.5
-          treemacs-width                         35
-	 )
+          treemacs-user-mode-line-format         nil
+          treemacs-user-header-line-format       nil
+          treemacs-width                         35)
 
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
-    (treemacs-resize-icons 22)
+    ;;(treemacs-resize-icons 44)
+
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t)
@@ -72,9 +74,9 @@
       ("M-i"   . treemacs-previous-line)
       ("M-k"   . treemacs-next-line)))
 
-(use-package treemacs-evil
-  :after treemacs evil
-  :ensure t)
+;(use-package treemacs-evil
+;  :after treemacs evil
+;  :ensure t)
 
 (use-package treemacs-projectile
   :after treemacs projectile

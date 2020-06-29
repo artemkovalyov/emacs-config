@@ -18,13 +18,36 @@
   (load bootstrap-file nil 'nomessage))
 
 
-(straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
 (straight-use-package '(el-patch :type git :host github :repo "raxod502/el-patch"))
+(straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
 
 (use-package el-patch
   :straight t)
 (setq straight-use-package-by-default t)
 
+;; (straight-use-package 'gcmh)
+;; (use-package gcmh
+;;   :demand t
+;;   :init
+;;   (setq gcmh-verbose             t
+;;         gcmh-lows-cons-threshold #x800000
+;;         gcmh-high-cons-threshold most-positive-fixnum
+;;         gcmh-idle-delay          3600)
+;;   :config
+;;   (gcmh-mode))
+
+(straight-use-package 'benchmark-init)
+(use-package benchmark-init
+  :demand t
+  :hook ((after-init . benchmark-init/deactivate)))
+
+(setq hscroll-margin                  7
+      scroll-margin                   7
+      hscroll-step                    7
+      scroll-step                     7
+      scroll-conservatively           100000
+      scroll-preserve-screen-position 'always
+      mac-mouse-wheel-smooth-scroll    nil)
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
@@ -74,13 +97,17 @@
  x-select-enable-clipboard          t
  use-package-always-ensure          t
  ;; improved memory defaults
- gc-cons-threshold                  100000000
+ gc-cons-threshold                 100000000 ;;most-positive-fixnum
  read-process-output-max (* 1024 1024 1024)
 
  ;; improve ediff granularity to a char
  ediff-forward-word-function 'forward-char
  ;; improve ediff highlight for quick comparisons
  ediff-highlight-all-diffs t
+ debug-on-error         t
+ message-log-max        t
+ load-prefer-newer      t
+ ad-redefinition-action 'accept
  )
 
 ;; Bookmarks

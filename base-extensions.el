@@ -21,6 +21,7 @@
   (:map company-search-map
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous))
+ ;; ("<tab>" . company-indent-or-complete-common)
   )
 
 (use-package centaur-tabs
@@ -286,6 +287,15 @@
   :config
   (volatile-highlights-mode t))
 
+(straight-use-package 'helpful)
+(use-package helpful
+  :bind (("C-c C-d" . helpful-at-point)
+         ("C-h f" . 'helpful-callable)
+         ("C-h v" . 'helpful-variable)
+         ("C-h k" . 'helpful-key)
+         ("C-h F" . 'helpful-function)
+         ("C-h C" . 'helpful-command))
+ )
 
 ;; Gradle
 (use-package gradle-mode
