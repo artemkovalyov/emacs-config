@@ -4,22 +4,22 @@
 
 
 (straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
+(straight-use-package '(lsp-java :type git :host github :repo "emacs-lsp/lsp-java"))
 
 ;;; activate LSP mode
 (use-package lsp-mode
-:init
-(setq lsp-keymap-prefix "s-m")
-(setq lsp-prefer-capf t)
-;; (setq lsp-eslint-auto-fix-on-save t)
-;; (setq lsp-gopls-server-path "~/go/bin/gopls")
-:commands (lsp lsp-deferred)
-:hook
-((js-mode typescript-mode go-mode) . lsp-deferred)
-:bind
-(:map lsp-mode-map
-("C-c r"   . lsp-rename))
-:config
-(require 'lsp-clients))
+  :init
+  (setq lsp-keymap-prefix "s-m"
+        lsp-prefer-capf t)
+
+  :commands (lsp lsp-deferred)
+  :hook
+  ((js-mode typescript-mode go-mode) . lsp-deferred)
+  :bind
+  (:map lsp-mode-map
+        ("C-c r"   . lsp-rename))
+  :config
+  (require 'lsp-clients))
 
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
@@ -73,20 +73,58 @@
 	("C-c s"   . lsp-ui-sideline-mode)
 	("C-c d"   . toggle-lsp-ui-doc))
   :hook
-(lsp-mode . lsp-ui-mode))
+  (lsp-mode . lsp-ui-mode))
 
-(straight-use-package 'helm-lsp)
+(straight-use-package '(helm-lsp :type git :host github :repo "emacs-lsp/helm-lsp"))
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
-(straight-use-package 'lsp-treemacs)
+
+(straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 ;; optionally if you want to use debugger
-(straight-use-package 'dap-mode)
-(use-package dap-mode)
+
+(straight-use-package '(dap-mode :type git :host github :repo "emacs-lsp/dap-mode"))
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-;; eslint lsp
-;; (setq lsp-eslint-server-command
-;;   `("node"  ,(expand-file-name "~/.emacs.d/emacs-config/eslintServer.js") "--stdio"))
+(require 'lsp-java)
+(require 'dap-java)
+
+(add-hook 'java-mode-hook #'lsp)
+(setq lsp-java-vmargs
+      (list
+       "-noverify"
+       "-Xmx2G"
+       "-XX:+UseG1GC"
+       "-XX:+UseStringDeduplication"
+       (concat "-javaagent:" "/home/i531196/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar")
+       (concat "-Xbootclasspath/a:" "/home/i531196/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar"))
+      lsp-file-watch-ignored
+      '(".idea" ".ensime_cache" ".eunit" "node_modules"
+        ".git" ".hg" ".fslckout" "_FOSSIL_"
+        ".bzr" "_darcs" ".tox" ".svn" ".stack-work"
+        "build")
+      lsp-java-import-order '["" "java" "javax" "#"]
+      ;; Don't organize imports on save
+      lsp-java-save-action-organize-imports nil
+
+      ;; ;; Formatter profile
+      ;; lsp-java-format-settings-url
+      ;; (concat "file://" jmi/java-format-settings-file))
+
+      ;; lsp-java-java-path "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
+      )
+
+
+;; (use-package lsp-java
+;;   :demand t
+;;   :after (lsp lsp-mode dap-mode)
+;;   :config
+;;   :hook
+;;   (java-mode . lsp)
+;;   )
+
+
 (provide 'lsp-base)
 ;;; lsp-base.el ends here

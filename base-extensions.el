@@ -1,14 +1,15 @@
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
-;;; Code:
+;;;Code:
+
 (use-package ace-jump-mode
   :bind
   ("C-S-j" . ace-jump-mode))
 
 (use-package company
   :init
-  (setq company-minimum-prefix-length 3
+  (setq company-minimum-prefix-length 2
 	company-idle-delay 0)
   :hook
   (after-init . global-company-mode)
@@ -21,19 +22,20 @@
   (:map company-search-map
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous))
- ;; ("<tab>" . company-indent-or-complete-common)
+  ;; ("<tab>" . company-indent-or-complete-common)
   )
 
-(use-package centaur-tabs
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-headline-match)
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-set-close-button nil)
-  :bind
-  ("M-s-j" . centaur-tabs-backward)
-  ("M-s-l" . centaur-tabs-forward))
+;; (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
+;; (use-package centaur-tabs
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (centaur-tabs-headline-match)
+;;   (setq centaur-tabs-style "bar")
+;;   (setq centaur-tabs-set-close-button nil)
+;;   :bind
+;;   ("M-s-j" . centaur-tabs-backward)
+;;   ("M-s-l" . centaur-tabs-forward))
 
 (use-package dashboard
   :init
@@ -58,7 +60,7 @@
     (define-key ediff-mode-map (kbd "M-i") 'ediff-previous-difference)
     (define-key ediff-mode-map (kbd "M-k") 'ediff-next-difference))
   :hook (ediff-mode . artem-ediff-hook)
-)
+  )
 
 (use-package exec-path-from-shell
   :config
@@ -75,33 +77,44 @@
 
 (straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
 (use-package flycheck
-  :defer t )
+  :defer t
+  :config
+  (add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.21))))
 
 (use-package comment-dwim-2
   :bind
-  ("C-/" . comment-dwim-2))
+    ("M-;" . comment-dwim-2))
 
 (straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
 (use-package helm
   :init
-  (require 'helm-config)
-  :config
-  (setq helm-split-window-inside-p t
-        helm-split-window-default-side 'below
-	helm-idle-delay 0.0
-	helm-input-idle-delay 0.01
-	helm-quick-update t
-	helm-ff-skip-boring-files t)
-  (helm-mode 1)
+  (progn
+    (require 'helm-config)
+    ;; (setq helm-candidate-number-limit 100)
+    ;; From https://gist.github.com/antifuchs/9238468
+    (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+	  helm-input-idle-delay 0.01  ; this actually updates things
+					; reeeelatively quickly.
+	  helm-yas-display-key-on-candidate t
+	  helm-quick-update t
+	  helm-M-x-requires-pattern nil
+	  helm-ff-skip-boring-files t
+          helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
+	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
+	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+	  helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
+    (helm-mode))
   :bind (("M-x" . helm-M-x)
          ("C-o" . helm-find-files)
-         ("s-o" . helm-projectile)
-         ("s-d" . helm-projectile-find-dir)
+         ("M-s s" . helm-projectile)
          ("s-a" . helm-ag)
-         ("s-f" . helm-projectile-find-file)
-         ("M-y" . helm-show-kill-ring)
 	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("M-s s" . helm-projectile)
 	 ("C-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
@@ -116,7 +129,6 @@
 	 ("M-k" . helm-next-line)
 	 ))
 
-(straight-use-package '(helm-ag :type git :host github :repo "emacsorphanage/helm-ag"))
 (use-package helm-ag)
 
 (straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
@@ -266,10 +278,7 @@
   :mode "\\Dockerfile\\'")
 
 (use-package nyan-mode
-  :init
-  ;; (setq mode-line-format
-  ;; 	(list
-  ;; 	 '(:eval (list (nyan-create)))))
+
   :custom
    (nyan-cat-face-number 4)
    (nyan-animate-nyancat t)

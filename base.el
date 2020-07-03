@@ -100,10 +100,7 @@
  gc-cons-threshold                 100000000 ;;most-positive-fixnum
  read-process-output-max (* 1024 1024 1024)
 
- ;; improve ediff granularity to a char
- ediff-forward-word-function 'forward-char
- ;; improve ediff highlight for quick comparisons
- ediff-highlight-all-diffs t
+
  debug-on-error         t
  message-log-max        t
  load-prefer-newer      t
@@ -143,6 +140,7 @@
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)
+(tab-bar-mode)
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (  fboundp 'scroll-bar-mode)
