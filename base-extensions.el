@@ -20,10 +20,13 @@
         ("M-f" . company-filter-candidates)
         ("M-s" . company-search-candidates)
         ("<tab>" . company-complete)
-        ("<escape>" . company-abort))
+        ("<escape>" . company-abort)
+        ("<return>" . nil)
+        ("RET" . nil))
   (:map company-search-map
         ("M-k" . company-select-next)
-        ("M-i" . company-select-previous))
+        ("M-i" . company-select-previous)))
+
 
 ;; (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 ;; (use-package centaur-tabs
@@ -89,7 +92,7 @@
 
 (use-package comment-dwim-2
   :bind
-    ("M-;" . comment-dwim-2))
+    ("M-/" . comment-dwim-2))
 
 (straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
 (use-package helm
@@ -198,11 +201,14 @@
 
 (use-package undo-tree
   :bind
-  ("M-z" . undo-tree-visualize)
+  ("C-s-z" . undo-tree-visualize)
   ("C-z" . undo-tree-undo)
   ("<С-S-z>" . undo-tree-redo)
-  :config
+  (:map global-map
+        ("C-/" . nil)
+        ("C-_" . nil))
   ;; Remember undo history
+  :config
   (setq
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
