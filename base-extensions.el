@@ -18,12 +18,12 @@
 	("M-k" . company-select-next)
 	("M-i" . company-select-previous)
         ("M-f" . company-filter-candidates)
-        ("M-s" . company-search-candidates))
+        ("M-s" . company-search-candidates)
+        ("<tab>" . company-complete)
+        ("<escape>" . company-abort))
   (:map company-search-map
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous))
-  ;; ("<tab>" . company-indent-or-complete-common)
-  )
 
 ;; (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 ;; (use-package centaur-tabs
