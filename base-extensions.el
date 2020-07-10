@@ -28,17 +28,17 @@
         ("M-i" . company-select-previous)))
 
 
-;; (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
-;; (use-package centaur-tabs
-;;   :demand
-;;   :config
-;;   (centaur-tabs-mode t)
-;;   (centaur-tabs-headline-match)
-;;   (setq centaur-tabs-style "bar")
-;;   (setq centaur-tabs-set-close-button nil)
-;;   :bind
-;;   ("M-s-j" . centaur-tabs-backward)
-;;   ("M-s-l" . centaur-tabs-forward))
+(straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (centaur-tabs-headline-match)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-set-close-button nil)
+  :bind
+  ("M-s-j" . centaur-tabs-backward)
+  ("M-s-l" . centaur-tabs-forward))
 
 (use-package dashboard
   :init
@@ -246,7 +246,7 @@
   :hook
   ((prog-mode markdown-mode) . yas-minor-mode))
 
-(straight-use-package 'yasnippet-snippets)
+(straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
 
 (use-package markdown-mode
