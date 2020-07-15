@@ -73,8 +73,8 @@
       ("M-I" . treemacs-previous-line-other-window)
       ("M-i"   . treemacs-previous-line)
       ("M-k"   . treemacs-next-line))
-  :hook
-  (treemacs-mode . (lambda () (linum-mode -1)))
+  ;; :hook
+  ;; (treemacs-mode . (lambda () (linum-mode -1)))
   )
 
 ;(use-package treemacs-evil
