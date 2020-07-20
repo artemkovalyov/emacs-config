@@ -2,15 +2,23 @@
 ;;; Commentary: LSP configuration
 ;;; Code:
 
-
 (straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
 (straight-use-package '(lsp-java :type git :host github :repo "emacs-lsp/lsp-java"))
+
+(setq   lsp-eslint-server-command '("node" "/home/artem/server/out/eslintServer.js" "--stdio" )
+        lsp-eslint-auto-fix-on-save t
+        lsp-eslint-enable t
+        lsp-eslint-trace-server "on"
+        lsp-eslint-quiet nil)
 
 ;;; activate LSP mode
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "s-m"
-        lsp-prefer-capf t)
+        lsp-prefer-capf t
+        lsp-log-io t
+        lsp-disabled-clients '(eslint)
+        )
 
   :commands (lsp lsp-deferred)
   :hook
@@ -115,6 +123,7 @@
 
       ;; lsp-java-java-path "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
       )
+
 
 (provide 'lsp-base)
 ;;; lsp-base.el ends here

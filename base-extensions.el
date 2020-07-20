@@ -27,7 +27,6 @@
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous)))
 
-
 (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
   :demand
