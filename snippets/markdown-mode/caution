@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: caution
-# key: caution
-# --
-:::caution
-${1:Warning! You better pay attention!}
-:::

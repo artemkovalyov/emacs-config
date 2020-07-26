@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Import Tab component
-# key: tabimp
-# --
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
