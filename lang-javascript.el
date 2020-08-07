@@ -1,5 +1,6 @@
 ;; install emmet for HTML tags templates
-(straight-use-package 'emmet-mode)
+(straight-use-package '(typescript-mode :type git :host github :repo "emacs-typescript/typescript.el"))
+(straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
 
 ;;(add-hook 'js-mode-hook (lambda () (add-hook 'before-save-hook (lambda()(lsp-eslint-apply-all-fixes)))))
 
