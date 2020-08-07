@@ -237,7 +237,8 @@
 (use-package yasnippet
   :bind
   (:map yas-minor-mode-map
-	("<backtab>" . yas-expand))
+	("<backtab>" . yas-expand)
+        ("M-s y" . yas-insert-snippet))
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/emacs-config/snippets"))
   ;; (yas-global-mode 1)

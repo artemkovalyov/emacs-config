@@ -1,6 +1,0 @@
-# key: info
-# name: info
-# --
-:::info
-${1:Useful information.}
-:::
