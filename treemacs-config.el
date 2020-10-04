@@ -1,4 +1,4 @@
-;;(straight-use-package '(treemacs :type git :host github :repo "Alexander-Miller/treemacs"))
+(straight-use-package '(treemacs :type git :host github :repo "Alexander-Miller/treemacs"))
 
 (use-package treemacs
   :ensure t
@@ -43,7 +43,8 @@
           treemacs-tag-follow-delay              1.5
           treemacs-user-mode-line-format         nil
           treemacs-user-header-line-format       nil
-          treemacs-width                         35)
+          treemacs-width                         35
+)
 
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.

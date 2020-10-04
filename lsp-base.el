@@ -18,6 +18,7 @@
         lsp-prefer-capf t
         lsp-log-io t
         lsp-disabled-clients '(eslint)
+        lsp-treemacs-sync-mode 1
         )
 
   :commands (lsp lsp-deferred)
@@ -26,8 +27,7 @@
   :bind
   (:map lsp-mode-map
         ("C-c r"   . lsp-rename))
-  :config
-  (require 'lsp-clients))
+  )
 
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
@@ -87,12 +87,12 @@
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 
-(straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
+;; (straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 ;; optionally if you want to use debugger
 
-(straight-use-package '(dap-mode :type git :host github :repo "emacs-lsp/dap-mode"))
-(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+;; (straight-use-package '(dap-mode :type git :host github :repo "emacs-lsp/dap-mode")) ;
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode)) ;
 
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
