@@ -25,18 +25,8 @@
   :straight t)
 (setq straight-use-package-by-default t)
 
-;; (straight-use-package 'gcmh)
-;; (use-package gcmh
-;;   :demand t
-;;   :init
-;;   (setq gcmh-verbose             t
-;;         gcmh-lows-cons-threshold #x800000
-;;         gcmh-high-cons-threshold most-positive-fixnum
-;;         gcmh-idle-delay          3600)
-;;   :config
-;;   (gcmh-mode))
-
 (straight-use-package 'benchmark-init)
+
 (use-package benchmark-init
   :demand t
   :hook ((after-init . benchmark-init/deactivate)))
@@ -53,14 +43,6 @@
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories.")
 
-(use-package drag-stuff
-  :config
-  (drag-stuff-global-mode 1)
-  :bind
-  ("C-j" . drag-stuff-left)
-  ("C-l" . drag-stuff-right)
-  ("C-i" . drag-stuff-up)
-  ("C-k" . drag-stuff-down))
 
 ;; Core settings
 ;; UTF-8 please
@@ -97,7 +79,8 @@
  x-select-enable-clipboard          t
  use-package-always-ensure          t
  ;; improved memory defaults
- gc-cons-threshold                 100000000 ;;most-positive-fixnum
+ gc-cons-threshold                 16777216 ;;most-positive-fixnum
+ gc-cons-percentage                0.1
  read-process-output-max (* 1024 1024 1024)
 
 
@@ -110,7 +93,7 @@
 ;; Bookmarks
 (setq
  ;; persistent bookmarks
- bookmark-save-flag                      t
+ bookmark-save-flag                 t
  bookmark-default-file              (concat temp-dir "/bookmarks"))
 
 ;; Backups enabled, use nil to disable
@@ -132,8 +115,10 @@
 
 (global-auto-revert-mode t)
 (global-hl-line-mode)
+(global-display-line-numbers-mode)
 ;; Autoclose brackets
 (electric-pair-mode t)
+
 
 ;; Show column number in status bar
 (column-number-mode)

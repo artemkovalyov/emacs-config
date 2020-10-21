@@ -3,14 +3,47 @@
 
 ;;;Code:
 
+
+;; A more complex, more lazy-loaded config
+(use-package solaire-mode
+  ;; Ensure solaire-mode is running in all solaire-mode buffers
+  :hook (change-major-mode . turn-on-solaire-mode)
+  ;; ...if you use auto-revert-mode, this prevents solaire-mode from turning
+  ;; itself off every time Emacs reverts the file
+  :hook (after-revert . turn-on-solaire-mode)
+  ;; To enable solaire-mode unconditionally for certain modes:
+  :hook (ediff-prepare-buffer . solaire-mode)
+  ;; Highlight the minibuffer when it is activated:
+  :hook (minibuffer-setup . solaire-mode-in-minibuffer)
+  :config
+  ;; The bright and dark background colors are automatically swapped the first
+  ;; time solaire-mode is activated. Namely, the backgrounds of the `default` and
+  ;; `solaire-default-face` faces are swapped. This is done because the colors
+  ;; are usually the wrong way around. If you don't want this, you can disable it:
+  (setq solaire-mode-auto-swap-bg nil)
+
+  (solaire-global-mode +1))
+
+(use-package drag-stuff
+  :config
+  (drag-stuff-global-mode 1)
+  :bind
+  ("C-j" . drag-stuff-left)
+  ("C-l" . drag-stuff-right)
+  ("C-i" . drag-stuff-up)
+  ("C-k" . drag-stuff-down))
+
+
 (use-package ace-jump-mode
   :bind
   ("C-S-j" . ace-jump-mode))
 
+(straight-use-package 'company)
 (use-package company
   :init
-  (setq company-minimum-prefix-length 2
-	company-idle-delay 0)
+  (setq company-minimum-prefix-length 1
+	company-idle-delay 0.2
+        company-backends '(company-capf company-yasnippet))
   :hook
   (after-init . global-company-mode)
   :bind
@@ -144,17 +177,6 @@
   (setq helm-swoop-split-with-multiple-windows t
 	helm-swoop-split-direction 'split-window-horizontally))
 
-;; show line numbers
-(use-package linum
-  :config
-  (setq linum-format " %3d ")
-  (global-linum-mode nil))
-
-;; highlight current line
-(use-package hlinum
-  :config
-  (hlinum-activate))
-
 (straight-use-package '(magit :type git :host github :repo "magit/magit"))
 (use-package magit
   :config
@@ -235,6 +257,7 @@
 
 (straight-use-package 'yasnippet)
 (use-package yasnippet
+  :defer t
   :bind
   (:map yas-minor-mode-map
 	("<backtab>" . yas-expand)
@@ -244,7 +267,7 @@
   ;; (yas-global-mode 1)
   (yas-reload-all)
   :hook
-  ((prog-mode markdown-mode) . yas-minor-mode))
+  ((prog-mode markdown-mode js-mode typescript-mode) . yas-minor-mode))
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
@@ -283,12 +306,12 @@
   :defer t
   :mode "\\Dockerfile\\'")
 
-(use-package nyan-mode
+;; (use-package nyan-mode
 
-  :custom
-   (nyan-cat-face-number 4)
-   (nyan-animate-nyancat t)
-   (nyan-mode t))
+;;   :custom
+;;    (nyan-cat-face-number 4)
+;;    (nyan-animate-nyancat t)
+;;    (nyan-mode t))
 
 (use-package rainbow-mode
   :diminish
