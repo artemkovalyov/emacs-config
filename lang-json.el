@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- json config
 ;;; Commentary:
 ;;; Contains my python configs

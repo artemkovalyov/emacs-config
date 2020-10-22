@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- projectile-help-functions
 
 ;;; Commentary:

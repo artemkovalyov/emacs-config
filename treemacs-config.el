@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (straight-use-package '(treemacs :type git :host github :repo "Alexander-Miller/treemacs"))
 
 (use-package treemacs

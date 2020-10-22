@@ -1,6 +1,8 @@
+
 (straight-use-package '(go-mode :type git :host github :repo "dominikh/go-mode.el"))
 
 (use-package go-mode
+  :defer t
   :config
   ; Use goimports instead of go-fmt
   (setq gofmt-command "goimports")

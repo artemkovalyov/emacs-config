@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package ---  Add your custom functions
 ;; (defun something
 ;;    (do-something))
@@ -61,6 +62,13 @@ point reaches the beginning or end of the buffer, stop there."
 
 (defun insert-current-date () (interactive)
     (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+
+(defun modified-toggle ()
+  (interactive)
+  (let ((saved-point (point)))
+    (end-of-line)
+    (hs-toggle-hiding)
+    (goto-char saved-point)))
 
 (provide 'base-functions)
 ;;; .base-functions.el ends here

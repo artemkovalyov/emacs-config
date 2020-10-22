@@ -1,4 +1,4 @@
-
+;; -*- lexical-binding: t; -*-
 (straight-use-package '(emojify :type git :host github :repo "iqbalansari/emacs-emojify"))
 (use-package emojify  :hook (after-init . global-emojify-mode))
 

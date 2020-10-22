@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- lang-web.el
 
 ;;; Commentary:
@@ -17,7 +18,6 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)
-   ("\\.jsx$" . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2

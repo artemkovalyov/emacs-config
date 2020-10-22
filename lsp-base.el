@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- lsp.el
 ;;; Commentary: LSP configuration
 ;;; Code:

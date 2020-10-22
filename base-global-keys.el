@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- Add your keys here, as such
 
 ;;; Commentary:
@@ -40,9 +41,6 @@
 (global-set-key (kbd "C-x k") 'artem/kill-rest-of-line)
 (global-set-key (kbd "M-v") 'yank)
 (global-set-key (kbd "M-c") 'kill-ring-save)
-(global-set-key (kbd "M-s-j") 'tab-previous)
-(global-set-key (kbd "M-s-l") 'tab-next)
-;(global-set-key (kbd "M-w") 'tab-close)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

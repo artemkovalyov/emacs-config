@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- python configs
 ;;; Commentary:
 ;;; Contains my python configs
@@ -5,6 +6,7 @@
 ;;; Code:
 
 (use-package python
+  :defer t
   :mode ("\\.py" . python-mode)
   :config
   (use-package elpy

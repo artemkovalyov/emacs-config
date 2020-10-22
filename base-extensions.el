@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
@@ -33,7 +34,6 @@
   ("C-i" . drag-stuff-up)
   ("C-k" . drag-stuff-down))
 
-
 (use-package ace-jump-mode
   :bind
   ("C-S-j" . ace-jump-mode))
@@ -63,11 +63,12 @@
 (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
   :demand
+  ;; :defer t
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-headline-match)
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-set-close-button nil)
+  (setq centaur-tabs-style "bar"
+        centaur-tabs-set-close-button nil)
   :bind
   ("M-s-j" . centaur-tabs-backward)
   ("M-s-l" . centaur-tabs-forward))

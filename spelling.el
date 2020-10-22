@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- my spelling config
 
 

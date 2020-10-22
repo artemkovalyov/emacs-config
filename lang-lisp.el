@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (straight-use-package 'slime)
 (straight-use-package '(helm-slime :type git :host github :repo "emacs-helm/helm-slime"))
 

@@ -1,10 +1,33 @@
+;; -*- lexical-binding: t; -*-
 ;;; package --- base.el
 ;;; Commentary:
 ;;; Code:
 ;; (package-initialize)
 
+
+
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq     gc-cons-threshold    art-gc-cons-threshold ;;most-positive-fixnum
+                      gc-cons-percentage   0.1
+                      read-process-output-max           (* 1024 1024 1024))))
+
+(defun defer-garbage-collection-h ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun restore-garbage-collection-h ()
+  ;; Defer it so that commands launched immediately after will enjoy the
+  ;; benefits.
+  (run-at-time
+   1 nil (lambda () (setq gc-cons-threshold art-gc-cons-threshold))))
+
+(add-hook 'minibuffer-setup-hook #'defer-garbage-collection-h)
+(add-hook 'minibuffer-exit-hook #'restore-garbage-collection-h)
+
 ;; straight.el package manager
 (defvar bootstrap-version)
+
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
@@ -78,17 +101,13 @@
  fringes-outside-margins            t
  x-select-enable-clipboard          t
  use-package-always-ensure          t
- ;; improved memory defaults
- gc-cons-threshold                 16777216 ;;most-positive-fixnum
- gc-cons-percentage                0.1
- read-process-output-max (* 1024 1024 1024)
-
-
- debug-on-error         t
- message-log-max        t
- load-prefer-newer      t
- ad-redefinition-action 'accept
- )
+ debug-on-error                     t
+ message-log-max                    t
+ load-prefer-newer                  t
+ window-combination-resize          t
+ x-stretch-cursor                   t
+ truncate-string-ellipsis           "…"
+ ad-redefinition-action             'accept)
 
 ;; Bookmarks
 (setq
@@ -118,6 +137,7 @@
 (global-display-line-numbers-mode)
 ;; Autoclose brackets
 (electric-pair-mode t)
+(global-subword-mode t)
 
 
 ;; Show column number in status bar
@@ -148,6 +168,11 @@
 ;; change default size of diff region from a word to a char
 (setq-default ediff-forward-word-function 'forward-char)
 (setq-default ediff-highlight-all-diffs t)
+
+
+(if (eq initial-window-system 'x)                 ; if started by emacs command or desktop file
+    (toggle-frame-maximized)
+  (toggle-frame-fullscreen))
 
 (provide 'base)
 ;;; base ends here
