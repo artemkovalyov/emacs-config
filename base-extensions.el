@@ -142,28 +142,27 @@
 	  helm-M-x-requires-pattern nil
 	  helm-ff-skip-boring-files t
           helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
-	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
+	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
 	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	  helm-scrol
+	  helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
     (helm-mode))
-  :bind (("M-x" . he
-         ("C-o" . he
+  :bind (("M-x" . helm-M-x)
+         ("C-o" . helm-find-files)
          ("M-s s" . helm-projectile)
-         ("M-s a" . helm-ag)
+         ("s-a" . helm-ag)
 	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("C-b" . he
+	 ("C-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
-	 ("C-i" . he
-	 ("M-k" . he
-	 ("M-i" . he
+	 ("C-i" . helm-select-action)
+	 ("M-k" . helm-next-line)
+	 ("M-i" . helm-previous-line)
 	 :map helm-find-files-map
-	 ("M-i" . he
-	 ("M-k" . he
+	 ("M-i" . helm-previous-line)
+	 ("M-k" . helm-next-line)
 	 :map helm-generic-files-map
-	 ("M-i" . he
-	 ("M-k" . he
-	 ))
+	 ("M-i" . helm-previous-line)
+	 ("M-k" . helm-next-line)))
 
 (use-package helm-ag)
 
