@@ -4,9 +4,6 @@
 ;;; Code:
 ;; (package-initialize)
 
-
-
-
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq     gc-cons-threshold    art-gc-cons-threshold ;;most-positive-fixnum
@@ -164,6 +161,7 @@
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; change default size of diff region from a word to a char
 (setq-default ediff-forward-word-function 'forward-char)

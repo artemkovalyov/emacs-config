@@ -142,27 +142,27 @@
 	  helm-M-x-requires-pattern nil
 	  helm-ff-skip-boring-files t
           helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
-	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
+	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
 	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	  helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
+	  helm-scrol
     (helm-mode))
-  :bind (("M-x" . helm-M-x)
-         ("C-o" . helm-find-files)
+  :bind (("M-x" . he
+         ("C-o" . he
          ("M-s s" . helm-projectile)
-         ("s-a" . helm-ag)
+         ("M-s a" . helm-ag)
 	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("C-b" . helm-mini)
+	 ("C-b" . he
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
-	 ("C-i" . helm-select-action)
-	 ("M-k" . helm-next-line)
-	 ("M-i" . helm-previous-line)
+	 ("C-i" . he
+	 ("M-k" . he
+	 ("M-i" . he
 	 :map helm-find-files-map
-	 ("M-i" . helm-previous-line)
-	 ("M-k" . helm-next-line)
+	 ("M-i" . he
+	 ("M-k" . he
 	 :map helm-generic-files-map
-	 ("M-i" . helm-previous-line)
-	 ("M-k" . helm-next-line)
+	 ("M-i" . he
+	 ("M-k" . he
 	 ))
 
 (use-package helm-ag)
@@ -347,7 +347,7 @@
 (straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
-;; if you use multiple-cursors, this is for you:
+;; if you use multip
 (define-key global-map (kbd "C-c m") 'vr/mc-mark)
 
 ;;duplicating lines and words

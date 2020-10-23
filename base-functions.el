@@ -63,7 +63,8 @@ point reaches the beginning or end of the buffer, stop there."
 (defun insert-current-date () (interactive)
     (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
 
-(defun modified-toggle ()
+;;toggle hide/shoe block for hs-minor-mode
+(defun hs-toggle ()
   (interactive)
   (let ((saved-point (point)))
     (end-of-line)

@@ -33,7 +33,6 @@
 (global-set-key (kbd "s-i") 'scroll-down-command)
 (global-set-key (kbd "M-s-i") 'beginning-of-buffer)
 (global-set-key (kbd "M-s-k") 'end-of-buffer)
-(global-set-key (kbd "M-h") 'backward-list)
 (global-set-key (kbd "M-n") 'forward-list)
 (global-set-key (kbd "M-u") 'backward-sexp)
 (global-set-key (kbd "M-m") 'forward-sexp)
@@ -41,6 +40,7 @@
 (global-set-key (kbd "C-x k") 'artem/kill-rest-of-line)
 (global-set-key (kbd "M-v") 'yank)
 (global-set-key (kbd "M-c") 'kill-ring-save)
+(global-set-key (kbd "<s>-s") 'hs-toggle)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here
