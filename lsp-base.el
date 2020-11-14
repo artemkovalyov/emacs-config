@@ -17,7 +17,7 @@
   :init
   (setq lsp-keymap-prefix "s-m"
         lsp-prefer-capf t
-        lsp-log-io t
+        ;; lsp-log-io t ; enable debug log
         lsp-disabled-clients '(eslint)
         lsp-treemacs-sync-mode 1
         )

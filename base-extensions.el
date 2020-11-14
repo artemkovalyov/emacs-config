@@ -42,7 +42,7 @@
 (use-package company
   :init
   (setq company-minimum-prefix-length 1
-	company-idle-delay 0.2
+	company-idle-delay 0.0
         company-backends '(company-capf company-files company-yasnippet))
   :hook
   (after-init . global-company-mode)
