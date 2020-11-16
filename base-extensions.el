@@ -43,15 +43,15 @@
   :init
   (setq company-minimum-prefix-length 1
 	company-idle-delay 0.0
-        company-backends '(company-capf company-files company-yasnippet))
+        company-backends '((company-capf company-files company-yasnippet)))
   :hook
   (after-init . global-company-mode)
   :bind
   (:map company-active-map
 	("M-k" . company-select-next-or-abort)
 	("M-i" . company-select-previous-or-abort)
-        ("M-f" . company-filter-candidates)
         ("M-s" . company-search-candidates)
+        ("M-f" . company-filter-candidates)
         ("<escape>" . company-abort)
         ("<tab>" . company-complete)
         ("<return>" . nil)
@@ -59,6 +59,7 @@
   (:map company-search-map
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous)))
+
 
 (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
