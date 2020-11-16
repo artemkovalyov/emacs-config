@@ -6,10 +6,15 @@
 (straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
 (straight-use-package '(lsp-java :type git :host github :repo "emacs-lsp/lsp-java"))
 
-(setq   lsp-eslint-server-command '("node" "/home/artem/server/out/eslintServer.js" "--stdio" )
+(setq
+ lsp-eslint-server-command '("node" "/home/artem/.emacs.d/emacs-config/lsp/eslint/server/out/eslintServer.js" "--stdio" )
+        lsp-eslint-enable t
+        lsp-eslint-package-manager "npm"
+        lsp-eslint-format t
         lsp-eslint-auto-fix-on-save t
         lsp-eslint-enable t
-        lsp-eslint-trace-server "on"
+        lsp-eslint-run "onType"
+        ;; lsp-eslint-trace-server "on" - can badly hit performance
         lsp-eslint-quiet nil)
 
 ;;; activate LSP mode
@@ -18,7 +23,7 @@
   (setq lsp-keymap-prefix "s-m"
         lsp-prefer-capf t
         ;; lsp-log-io t ; enable debug log - can be a huge performance hit
-        lsp-disabled-clients '(eslint)
+        ;; lsp-disabled-clients '(eslint)
         lsp-treemacs-sync-mode 1
         )
 

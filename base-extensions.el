@@ -48,12 +48,12 @@
   (after-init . global-company-mode)
   :bind
   (:map company-active-map
-	("M-k" . company-select-next)
-	("M-i" . company-select-previous)
+	("M-k" . company-select-next-or-abort)
+	("M-i" . company-select-previous-or-abort)
         ("M-f" . company-filter-candidates)
         ("M-s" . company-search-candidates)
-        ("<tab>" . company-complete)
         ("<escape>" . company-abort)
+        ("<tab>" . company-complete)
         ("<return>" . nil)
         ("RET" . nil))
   (:map company-search-map
