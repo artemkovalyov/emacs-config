@@ -53,13 +53,13 @@
         ("M-s" . company-search-candidates)
         ("M-f" . company-filter-candidates)
         ("<escape>" . company-abort)
+        ("TAB" . company-complete)
         ("<tab>" . company-complete)
         ("<return>" . nil)
         ("RET" . nil))
   (:map company-search-map
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous)))
-
 
 (straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
@@ -191,9 +191,9 @@
   ("C-x g u" . magit-pull)
   ("C-x g e" . magit-ediff-resolve)
   ("C-x g r" . magit-rebase-interactive)
+  ("C-x g b" . magit-blame)
   (:map magit-mode-map
 	("<tab>" . magit-section-toggle)))
-
 
 (use-package magit-popup)
 
