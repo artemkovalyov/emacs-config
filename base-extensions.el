@@ -260,14 +260,12 @@
   :defer t
   :bind
   (:map yas-minor-mode-map
-	("<backtab>" . yas-expand)
+	("<tab>" . yas-expand)
         ("M-s y" . yas-insert-snippet))
   :config
-  (setq yas-snippet-dirs '("~/.emacs.d/emacs-config/snippets"))
-  ;; (yas-global-mode 1)
   (yas-reload-all)
   :hook
-  ((prog-mode markdown-mode js-mode typescript-mode) . yas-minor-mode))
+  ((prog-mode markdown-mode) . yas-minor-mode))
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
