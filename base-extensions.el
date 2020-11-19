@@ -241,11 +241,6 @@
   :config
   (which-key-mode))
 
-(use-package switch-window
-  :bind
-  ([C-tab] . switch-window)
-  ("C-x o" . switch-window))
-
 (use-package wgrep)
 
 (straight-use-package '(yasnippet :type git :host github :repo "joaotavora/yasnippet"))
@@ -256,10 +251,7 @@
         ("M-s y" . yas-insert-snippet))
   :config
   (yas-reload-all)
-  (yas-global-mode)
-  )
-
-
+  (yas-global-mode))
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
@@ -352,6 +344,7 @@
   (setq switch-window-shortcut-style 'qwerty
         switch-window-minibuffer-shortcut ?z)
   :bind
-  ("s-o" . switch-window))
+  ("M-w" . switch-window)
+  ("M-s-w" . switch-window-then-maximize))
 
 (provide 'base-extensions)
