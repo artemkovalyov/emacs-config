@@ -4,6 +4,7 @@
 
 ;;;Code:
 
+(setq flyspell-use-meta-tab nil)
 
 ;; A more complex, more lazy-loaded config
 (use-package solaire-mode

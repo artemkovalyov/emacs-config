@@ -4,12 +4,16 @@
 ;;; Commentary:
 
 ;;; Code:
+
+(unbind-key "C-M-i" emacs-lisp-mode-map)
+(unbind-key "C-M-i" text-mode-map)
+
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)
 (global-set-key (kbd "C-}") 'enlarge-window-horizontally)
 (global-set-key (kbd "<tab>") 'indent-for-tab-command)
 
 ;; Killing lines
-(global-set-key (kbd "C-M-k") 'artem/kill-line-down)
+(global-set-key (kbd "C-M-k") 'kill-whole-line)
 (global-set-key (kbd "C-M-i") 'artem/kill-line-up)
 
 ;; Moving across text

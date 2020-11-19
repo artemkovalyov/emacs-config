@@ -10,12 +10,6 @@
   (kill-whole-line)
   (backward-char))
 
-(defun artem/kill-line-down ()
-  "remove line and move one line up"
-  (interactive)
-  (kill-whole-line)
-  (forward-char))
-
 (defun artem/kill-rest-of-line ()
   "delete everything till the end of line"
   (interactive)
