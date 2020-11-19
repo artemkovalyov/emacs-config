@@ -7,7 +7,7 @@
 (straight-use-package '(lsp-java :type git :host github :repo "emacs-lsp/lsp-java"))
 
 (setq
- lsp-eslint-server-command '("node" "/home/artem/.emacs.d/emacs-config/lsp/eslint/server/out/eslintServer.js" "--stdio" )
+ lsp-eslint-server-command '("node" "/home/i531196/.emacs.d/emacs-config/lsp/eslint/server/out/eslintServer.js" "--stdio" )
         lsp-eslint-enable t
         lsp-eslint-package-manager "npm"
         lsp-eslint-format t

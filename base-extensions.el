@@ -22,21 +22,22 @@
   ;; `solaire-default-face` faces are swapped. This is done because the colors
   ;; are usually the wrong way around. If you don't want this, you can disable it:
   (setq solaire-mode-auto-swap-bg nil)
-
   (solaire-global-mode +1))
 
-(use-package drag-stuff
-  :config
-  (drag-stuff-global-mode 1)
-  :bind
-  ("C-j" . drag-stuff-left)
-  ("C-l" . drag-stuff-right)
-  ("C-i" . drag-stuff-up)
-  ("C-k" . drag-stuff-down))
+ (use-package drag-stuff
+   :config
+   (drag-stuff-global-mode 1)
+   :bind
+   ("C-j" . drag-stuff-left)
+   ("C-l" . drag-stuff-right)
+   ("C-i" . drag-stuff-up)
+   ("C-k" . drag-stuff-down))
 
-(use-package ace-jump-mode
+(straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
+(use-package avy
   :bind
-  ("C-S-j" . ace-jump-mode))
+  ("M-s M-l" . avy-copy-line)
+  ("M-s j" . avy-goto-word-or-subword-1))
 
 (straight-use-package 'company)
 (use-package company
@@ -61,7 +62,7 @@
         ("M-k" . company-select-next)
         ("M-i" . company-select-previous)))
 
-(straight-use-package '(centaur-tabs type: git :host github :repo "ema2159/centaur-tabs"))
+(straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
   :demand
   ;; :defer t
@@ -71,8 +72,8 @@
   (setq centaur-tabs-style "bar"
         centaur-tabs-set-close-button nil)
   :bind
-  ("M-s-j" . centaur-tabs-backward)
-  ("M-s-l" . centaur-tabs-forward))
+  ("M-s-n" . centaur-tabs-backward)
+  ("M-s-m" . centaur-tabs-forward))
 
 (use-package dashboard
   :init
@@ -214,21 +215,21 @@
   (projectile-register-project-type 'yarn '("package.json"))
   (projectile-mode 1))
 
-;; (use-package recentf
-;;   :config
-;;   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
-;;   (recentf-mode 1))
-
-(use-package smartparens)
+(use-package smartparens
+  :init
+  (setq sp-navigate-reindent-after-up-in-string nil)
+  :bind
+  ("M-s-i" . sp-backward-sexp)
+  ("M-s-k" . sp-forward-sexp)
+  ("M-s-l" . sp-down-sexp)
+  ("M-s-j" . sp-up-sexp)
+  ("M-'" . sp-mark-sexp))
 
 (use-package undo-tree
   :bind
-  ("C-s-z" . undo-tree-visualize)
+  ;;"C-x u" - visualize undo tree
   ("C-z" . undo-tree-undo)
-  ("<С-S-z>" . undo-tree-redo)
-  (:map global-map
-        ("C-/" . nil)
-        ("C-_" . nil))
+  ("C-y" . undo-tree-redo)
   ;; Remember undo history
   :config
   (setq
@@ -240,15 +241,6 @@
   :config
   (which-key-mode))
 
-(use-package windmove
-  :bind
-  ("<C-s-up>" . windmove-up)
-  ("<C-s-down>" . windmove-down)
-  ("<C-s-left>" . windmove-left)
-  ("C-s-j" . windmove-left)
-  ("<C-s-right>" . windmove-right)
-  ("C-s-l" . windmove-right))
-
 (use-package switch-window
   :bind
   ([C-tab] . switch-window)
@@ -256,17 +248,18 @@
 
 (use-package wgrep)
 
-(straight-use-package 'yasnippet)
+(straight-use-package '(yasnippet :type git :host github :repo "joaotavora/yasnippet"))
 (use-package yasnippet
   :defer t
   :bind
   (:map yas-minor-mode-map
-	("<tab>" . yas-expand)
         ("M-s y" . yas-insert-snippet))
   :config
   (yas-reload-all)
-  :hook
-  ((prog-mode markdown-mode) . yas-minor-mode))
+  (yas-global-mode)
+  )
+
+
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
@@ -332,8 +325,7 @@
          ("C-h v" . 'helpful-variable)
          ("C-h k" . 'helpful-key)
          ("C-h F" . 'helpful-function)
-         ("C-h C" . 'helpful-command))
- )
+         ("C-h C" . 'helpful-command)))
 
 ;; Gradle
 (use-package gradle-mode
@@ -345,10 +337,21 @@
 (straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
-;; if you use multip
+;; if you use multiple
 (define-key global-map (kbd "C-c m") 'vr/mc-mark)
 
 ;;duplicating lines and words
 (straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
+(use-package duplicate-thing
+  :bind
+  ("s-d" . duplicate-thing))
+
+(straight-use-package '(switch-windos :type git :host github :repo "dimitri/switch-window"))
+(use-package switch-window
+  :init
+  (setq switch-window-shortcut-style 'qwerty
+        switch-window-minibuffer-shortcut ?z)
+  :bind
+  ("s-o" . switch-window))
 
 (provide 'base-extensions)
