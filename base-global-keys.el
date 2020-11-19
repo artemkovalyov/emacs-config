@@ -9,8 +9,8 @@
 (global-set-key (kbd "<tab>") 'indent-for-tab-command)
 
 ;; Killing lines
-(global-set-key (kbd "C-s-k") 'artem/kill-line-down)
-(global-set-key (kbd "C-s-i") 'artem/kill-line-up)
+(global-set-key (kbd "C-M-k") 'artem/kill-line-down)
+(global-set-key (kbd "C-M-i") 'artem/kill-line-up)
 
 ;; Moving across text
 (global-set-key (kbd "M-k") 'next-line)
@@ -48,6 +48,9 @@
 (global-set-key (kbd "M-s l") 'copy-line)
 ;; Eval
 (global-set-key (kbd "M-r") 'eval-last-sexp)
+
+(global-set-key (kbd "M-s-d") 'backward-kill-word)
+(global-set-key (kbd "M-s r") 'eval-defun)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

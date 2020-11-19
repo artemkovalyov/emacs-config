@@ -338,13 +338,19 @@
   :bind
   ("s-d" . duplicate-thing))
 
-(straight-use-package '(switch-windos :type git :host github :repo "dimitri/switch-window"))
+(straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
   :init
   (setq switch-window-shortcut-style 'qwerty
         switch-window-minibuffer-shortcut ?z)
   :bind
-  ("M-w" . switch-window)
+  ("s-w" . switch-window)
   ("M-s-w" . switch-window-then-maximize))
+
+(straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
+(use-package rg
+  :defer
+  :init
+  (rg-enable-default-bindings))
 
 (provide 'base-extensions)
