@@ -56,8 +56,9 @@
       hscroll-step                    7
       scroll-step                     7
       scroll-conservatively           100000
-      scroll-preserve-screen-position 'always
-      mac-mouse-wheel-smooth-scroll    nil)
+      scroll-preserve-screen-position t
+      mac-mouse-wheel-smooth-scroll    nil
+      scroll-error-top-bottom          t)
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
@@ -104,7 +105,8 @@
  window-combination-resize          t
  x-stretch-cursor                   t
  truncate-string-ellipsis           "…"
- ad-redefinition-action             'accept)
+ ad-redefinition-action             'accept
+ )
 
 ;; Bookmarks
 (setq

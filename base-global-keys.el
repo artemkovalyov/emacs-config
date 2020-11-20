@@ -5,6 +5,7 @@
 
 ;;; Code:
 
+;;makes M-C-i work later on
 (unbind-key "C-M-i" emacs-lisp-mode-map)
 (unbind-key "C-M-i" text-mode-map)
 
