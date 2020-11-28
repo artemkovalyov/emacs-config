@@ -5,6 +5,14 @@
 
 ;;; Code:
 
+;;; Free keys
+
+;;;C-SPC
+;;;C-RET
+;;;M-RET
+;;;
+
+
 ;;makes M-C-i work later on
 (unbind-key "C-M-i" emacs-lisp-mode-map)
 (unbind-key "C-M-i" text-mode-map)
@@ -56,6 +64,9 @@
 
 (global-set-key (kbd "M-s-d") 'backward-kill-word)
 (global-set-key (kbd "M-s r") 'eval-defun)
+
+(global-set-key (kbd "s-SPC") 'set-mark-command)
+
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

@@ -73,8 +73,8 @@
   (setq centaur-tabs-style "bar"
         centaur-tabs-set-close-button nil)
   :bind
-  ("M-s-n" . centaur-tabs-backward)
-  ("M-s-m" . centaur-tabs-forward))
+  ("M-n" . centaur-tabs-backward)
+  ("M-m" . centaur-tabs-forward))
 
 (use-package dashboard
   :init
