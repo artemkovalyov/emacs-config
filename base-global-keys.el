@@ -14,8 +14,12 @@
 
 
 ;;makes M-C-i work later on
-(unbind-key "C-M-i" emacs-lisp-mode-map)
-(unbind-key "C-M-i" text-mode-map)
+(unbind-key "C-M-i")
+;; (unbind-key "C-M-i" emacs-lisp-mode-map)
+;; (unbind-key "C-M-i" emacs-lisp-mode-map)
+;; (unbind-key "C-M-i" lisp-interaction-mode-map)
+
+;; (unbind-key "C-M-i" text-mode-map)
 
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)
 (global-set-key (kbd "C-}") 'enlarge-window-horizontally)
@@ -53,12 +57,11 @@
 
 (global-set-key (kbd "M-s v") 'helm-show-kill-ring)
 (global-set-key (kbd "M-s c") 'kill-region)
-(global-set-key (kbd "C-x k") 'artem/kill-rest-of-line)
+(global-set-key (kbd "M-s M-d") 'artem/kill-rest-of-line)
 (global-set-key (kbd "M-v") 'yank)
 (global-set-key (kbd "M-c") 'kill-ring-save)
 ;; (global-set-key (kbd "s-s") 'hs-toggle)
 (global-set-key (kbd "M-s M-w") 'fixup-whitespace)
-(global-set-key (kbd "M-s l") 'copy-line)
 ;; Eval
 (global-set-key (kbd "M-r") 'eval-last-sexp)
 
@@ -66,7 +69,8 @@
 (global-set-key (kbd "M-s r") 'eval-defun)
 
 (global-set-key (kbd "s-SPC") 'set-mark-command)
-
+;; (global-set-key (kbd "s-h") 'delete-backward-char)
+;; (global-set-key (kbd "s-;") 'delete-char)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

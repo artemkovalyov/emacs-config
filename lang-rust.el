@@ -1,2 +1,3 @@
 
-(provide 'rust)
+
+(provide 'lang-rust)

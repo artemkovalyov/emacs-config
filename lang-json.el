@@ -5,10 +5,11 @@
 
 ;;; Code:
 
+(straight-use-package '(json-mode :type git :host github :repo "kiennq/json-mode"))
 (use-package json-mode
   :ensure t
-  :mode ("\\.json$" . json-mode)
-  :hook ((json-mode . flycheck-mode)))
+  :defer t
+  :mode ("\\.json$" . json-mode))
 
 (provide 'lang-json)
 ;;; lang-json.el ends here

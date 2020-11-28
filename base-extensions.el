@@ -37,7 +37,7 @@
 (straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
 (use-package avy
   :bind
-  ("M-s M-l" . avy-copy-line)
+  ("M-s l" . avy-copy-line)
   ("M-s j" . avy-goto-word-or-subword-1))
 
 (straight-use-package 'company)

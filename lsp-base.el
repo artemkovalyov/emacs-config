@@ -4,18 +4,6 @@
 ;;; Code:
 
 (straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
-(straight-use-package '(lsp-java :type git :host github :repo "emacs-lsp/lsp-java"))
-
-(setq
- lsp-eslint-server-command '("node" "/home/i531196/.emacs.d/emacs-config/lsp/eslint/server/out/eslintServer.js" "--stdio" )
-        lsp-eslint-enable t
-        lsp-eslint-package-manager "npm"
-        lsp-eslint-format t
-        lsp-eslint-auto-fix-on-save t
-        lsp-eslint-enable t
-        lsp-eslint-run "onType"
-        ;; lsp-eslint-trace-server "on" - can badly hit performance
-        lsp-eslint-quiet nil)
 
 ;;; activate LSP mode
 (use-package lsp-mode
@@ -25,15 +13,13 @@
         ;; lsp-log-io t ; enable debug log - can be a huge performance hit
         ;; lsp-disabled-clients '(eslint)
         lsp-treemacs-sync-mode 1
-        )
-
-  :commands (lsp lsp-deferred)
+        lsp-completion-provider :capf)
   :hook
-  ((js-mode typescript-mode go-mode) . lsp-deferred)
+  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode) . lsp-deferred)
+  :commands (lsp lsp-deferred)
   :bind
   (:map lsp-mode-map
-        ("C-c r"   . lsp-rename))
-  )
+        ("C-c r"   . lsp-rename)))
 
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
@@ -92,7 +78,6 @@
 (straight-use-package '(helm-lsp :type git :host github :repo "emacs-lsp/helm-lsp"))
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
-
 ;; (straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 ;; optionally if you want to use debugger
@@ -101,8 +86,6 @@
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode)) ;
 
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-
-
 
 (provide 'lsp-base)
 ;;; lsp-base.el ends here
