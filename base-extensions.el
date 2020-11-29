@@ -89,6 +89,7 @@
   (dashboard-setup-startup-hook))
 
 (use-package ediff
+  :defer t
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
 	ediff-diff-options "-w")
@@ -111,6 +112,7 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
+  :defer t
   :bind
   ("C-=" . er/expand-region))
 
@@ -127,6 +129,7 @@
               (window-height   . 0.21))))
 
 (use-package comment-dwim-2
+  :defer t
   :bind
     ("M-/" . comment-dwim-2))
 
@@ -154,7 +157,7 @@
          ("M-s s" . helm-projectile)
          ("s-a" . helm-ag)
 	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("C-b" . helm-mini)
+	 ("M-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
 	 ("C-i" . helm-select-action)
@@ -218,7 +221,8 @@
 
 (use-package smartparens
   :init
-  (setq sp-navigate-reindent-after-up-in-string nil)
+  (setq sp-navigate-reindent-after-up-in-string nil
+        sp-navigate-reindent-after-up nil)
   :bind
   ("M-s-i" . sp-backward-sexp)
   ("M-s-k" . sp-forward-sexp)
@@ -242,7 +246,7 @@
   :config
   (which-key-mode))
 
-(use-package wgrep)
+;; (use-package wgrep)
 
 (straight-use-package '(yasnippet :type git :host github :repo "joaotavora/yasnippet"))
 (use-package yasnippet
@@ -253,7 +257,6 @@
   :config
   (yas-reload-all)
   (yas-global-mode))
-
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
 
@@ -337,7 +340,7 @@
 (straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
 (use-package duplicate-thing
   :bind
-  ("s-d" . duplicate-thing))
+  ("M-d" . duplicate-thing))
 
 (straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
@@ -346,12 +349,19 @@
         switch-window-minibuffer-shortcut ?z)
   :bind
   ("s-w" . switch-window)
-  ("M-s-w" . switch-window-then-maximize))
+  ("C-w" . switch-window-then-maximize))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
   :defer
   :init
   (rg-enable-default-bindings))
+
+(straight-use-package '(deadgrep :type git :host github :repo "Wilfred/deadgrep"))
+(use-package deadgrep
+  :defer
+  :bind
+  ("M-s f" . deadgrep))
+
 
 (provide 'base-extensions)
