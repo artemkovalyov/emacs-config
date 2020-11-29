@@ -74,9 +74,7 @@
 ;; Change set mark command
 (global-set-key (kbd "s-SPC") 'set-mark-command)
 
-(global-set-key (kbd "M-q") 'kill-buffer-and-window)
-
-
+(global-set-key (kbd "M-q") 'kill-buffer)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

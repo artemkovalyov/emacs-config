@@ -38,7 +38,9 @@
 (use-package avy
   :bind
   ("M-s l" . avy-copy-line)
-  ("M-s j" . avy-goto-word-or-subword-1))
+  ("M-s M-l" . avy-move-line)
+  ("M-s j" . avy-goto-word-or-subword-1)
+  ("M-s M-j" . avy-goto-line))
 
 (straight-use-package 'company)
 (use-package company
@@ -155,7 +157,7 @@
   :bind (("M-x" . helm-M-x)
          ("C-o" . helm-find-files)
          ("M-s s" . helm-projectile)
-         ("s-a" . helm-ag)
+         ("M-o M-o" . helm-occur)
 	 ("M-s M-s" . helm-projectile-switch-project)
 	 ("M-b" . helm-mini)
          :map helm-map
@@ -163,12 +165,16 @@
 	 ("C-i" . helm-select-action)
 	 ("M-k" . helm-next-line)
 	 ("M-i" . helm-previous-line)
+         ("s-SPC" . helm-toggle-visible-mark-forward)
 	 :map helm-find-files-map
 	 ("M-i" . helm-previous-line)
 	 ("M-k" . helm-next-line)
+	 ("<tab>" . helm-ff-TAB)
+         ("s-SPC" . helm-toggle-visible-mark-forward)
 	 :map helm-generic-files-map
 	 ("M-i" . helm-previous-line)
-	 ("M-k" . helm-next-line)))
+	 ("M-k" . helm-next-line)
+         ("s-SPC" . helm-toggle-visible-mark-forward)))
 
 (use-package helm-ag)
 
@@ -305,8 +311,7 @@
 (use-package rainbow-mode
   :diminish
   :hook
-  (emacs-lisp-mode . rainbow-mode)
-  (js-mode . rainbow-mode))
+  (prog-mode . rainbow-mode))
 
 
 ;; volatile highlights - temporarily highlight changes from pasting etc
@@ -325,16 +330,19 @@
 
 ;; Gradle
 (use-package gradle-mode
+  :defer t
   :config
   (gradle-mode 1)
   :mode ("\\.gradle\\'"))
 
 ;;(require 'visual-regexp)
 (straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
-(define-key global-map (kbd "C-c r") 'vr/replace)
-(define-key global-map (kbd "C-c q") 'vr/query-replace)
-;; if you use multiple
-(define-key global-map (kbd "C-c m") 'vr/mc-mark)
+(use-package visual-regexp
+  :bind
+  ("C-c r" . 'vr/replace)
+  ("C-c q" . 'vr/query-replace)
+  ("C-c m" . 'vr/mc-mark))
+
 
 ;;duplicating lines and words
 (straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
@@ -348,8 +356,8 @@
   (setq switch-window-shortcut-style 'qwerty
         switch-window-minibuffer-shortcut ?z)
   :bind
-  ("s-w" . switch-window)
-  ("C-w" . switch-window-then-maximize))
+  ("M-RET" . switch-window)
+  ("M-o RET" . switch-window-then-maximize))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -363,5 +371,10 @@
   :bind
   ("M-s f" . deadgrep))
 
+(straight-use-package '(helm-rg :type git :host github :repo "cosmicexplorer/helm-rg"))
+(use-package helm-rg
+  :defer
+  :bind
+  ("M-f" . helm-rg))
 
 (provide 'base-extensions)
