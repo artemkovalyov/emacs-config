@@ -7,6 +7,7 @@
 
 ;;; activate LSP mode
 (use-package lsp-mode
+  :defer t
   :init
   (setq lsp-keymap-prefix "s-m"
         lsp-prefer-capf t
@@ -24,6 +25,7 @@
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
 (use-package lsp-ui
+  :defer t
   :commands
   lsp-ui-mode
   :custom

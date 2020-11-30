@@ -16,6 +16,7 @@
 (require 'base-extensions)
 (require 'treemacs-config)
 (require 'lsp-base)
+(require 'lang-rust)
 (require 'lang-json)
 (require 'lang-javascript)
 (require 'lang-java)
