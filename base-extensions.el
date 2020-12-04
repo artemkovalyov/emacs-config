@@ -356,8 +356,8 @@
   (setq switch-window-shortcut-style 'qwerty
         switch-window-minibuffer-shortcut ?z)
   :bind
-  ("M-RET" . switch-window)
-  ("M-o RET" . switch-window-then-maximize))
+  ("s-w" . switch-window)
+  ("H-w" . switch-window-then-delete))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg

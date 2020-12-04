@@ -19,12 +19,12 @@
 ;; (add-hook 'typescript-mode-hook (lambda () (add-hook 'before-save-hook (lambda()(lsp-eslint-apply-all-fixes)))))
 
  (defun art-js-mode-hook()
-  (add-hook 'before-save-hook 'lsp-eslint-fix-all nil t)) ; adds the hook so that it's local to the JS and TS buffers
+  (add-hook 'before-save-hook #'lsp-eslint-fix-all nil t)) ; adds the hook so that it's local to the JS and TS buffers
 
- ;; (remove-hook 'before-save-hook 'lsp-eslint-apply-all-fixes)
+ ;; (remove-hook 'before-save-hook '#lsp-eslint-apply-all-fixes)
 
-(add-hook 'js-mode-hook 'art-js-mode-hook)
-(add-hook 'typescript-mode-hook 'art-js-mode-hook)
+(add-hook 'js-mode-hook #'art-js-mode-hook)
+;; (add-hook 'typescript-mode-hook '#art-js-mode-hook)
 
 (setq js-indent-level 2)
 
