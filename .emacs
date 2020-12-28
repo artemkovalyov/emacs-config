@@ -23,6 +23,7 @@
 (require 'projectile-help-functions)
 ;; (require 'lang-lisp)
 (require 'base-theme)
+(require 'low-config-modes)
 (require 'base-global-keys)
 (provide '.emacs)
 

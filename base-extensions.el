@@ -37,10 +37,10 @@
 (straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
 (use-package avy
   :bind
-  ("M-s l" . avy-copy-line)
-  ("M-s M-l" . avy-move-line)
-  ("M-s j" . avy-goto-word-or-subword-1)
-  ("M-s M-j" . avy-goto-line))
+  ("A-s l" . avy-copy-line)
+  ("A-s A-l" . avy-move-line)
+  ("A-s j" . avy-goto-word-or-subword-1)
+  ("A-s A-j" . avy-goto-line))
 
 (straight-use-package 'company)
 (use-package company
@@ -52,18 +52,18 @@
   (after-init . global-company-mode)
   :bind
   (:map company-active-map
-	("M-k" . company-select-next-or-abort)
-	("M-i" . company-select-previous-or-abort)
-        ("M-s" . company-search-candidates)
-        ("M-f" . company-filter-candidates)
+	("A-k" . company-select-next-or-abort)
+	("A-i" . company-select-previous-or-abort)
+        ("A-s" . company-search-candidates)
+        ("A-f" . company-filter-candidates)
         ("<escape>" . company-abort)
         ("TAB" . company-complete)
         ("<tab>" . company-complete)
         ("<return>" . nil)
         ("RET" . nil))
   (:map company-search-map
-        ("M-k" . company-select-next)
-        ("M-i" . company-select-previous)))
+        ("A-k" . company-select-next)
+        ("A-i" . company-select-previous)))
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
@@ -75,8 +75,8 @@
   (setq centaur-tabs-style "bar"
         centaur-tabs-set-close-button nil)
   :bind
-  ("M-n" . centaur-tabs-backward)
-  ("M-m" . centaur-tabs-forward))
+  ("A-n" . centaur-tabs-backward)
+  ("A-m" . centaur-tabs-forward))
 
 (use-package dashboard
   :init
@@ -99,8 +99,8 @@
   (setq-default ediff-highlight-all-diffs 't)
   (defun artem-ediff-hook ()
     (ediff-setup-keymap)
-    (define-key ediff-mode-map (kbd "M-i") 'ediff-previous-difference)
-    (define-key ediff-mode-map (kbd "M-k") 'ediff-next-difference))
+    (define-key ediff-mode-map (kbd "A-i") 'ediff-previous-difference)
+    (define-key ediff-mode-map (kbd "A-k") 'ediff-next-difference))
   :hook (ediff-mode . artem-ediff-hook)
   )
 
@@ -116,7 +116,7 @@
 (use-package expand-region
   :defer t
   :bind
-  ("C-=" . er/expand-region))
+  ("A-=" . er/expand-region))
 
 (straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
 (use-package flycheck
@@ -133,7 +133,7 @@
 (use-package comment-dwim-2
   :defer t
   :bind
-    ("M-/" . comment-dwim-2))
+    ("A-/" . comment-dwim-2))
 
 (straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
 (use-package helm
@@ -154,42 +154,42 @@
 	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
 	  helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
     (helm-mode))
-  :bind (("M-x" . helm-M-x)
-         ("C-o" . helm-find-files)
-         ("M-s s" . helm-projectile)
-         ("M-o M-o" . helm-occur)
-	 ("M-s M-s" . helm-projectile-switch-project)
-	 ("M-b" . helm-mini)
+  :bind (("A-x" . helm-M-x)
+         ("A-o" . helm-find-files)
+         ("A-s s" . helm-projectile)
+	 ("A-s A-s" . helm-projectile-switch-project)
+         ("s-o" . helm-occur)
+	 ("A-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
 	 ("C-i" . helm-select-action)
-	 ("M-k" . helm-next-line)
-	 ("M-i" . helm-previous-line)
+	 ("A-k" . helm-next-line)
+	 ("A-i" . helm-previous-line)
          ("s-SPC" . helm-toggle-visible-mark-forward)
 	 :map helm-find-files-map
-	 ("M-i" . helm-previous-line)
-	 ("M-k" . helm-next-line)
+	 ("A-i" . helm-previous-line)
+	 ("A-k" . helm-next-line)
 	 ("<tab>" . helm-ff-TAB)
          ("s-SPC" . helm-toggle-visible-mark-forward)
 	 :map helm-generic-files-map
-	 ("M-i" . helm-previous-line)
-	 ("M-k" . helm-next-line)
+	 ("A-i" . helm-previous-line)
+	 ("A-k" . helm-next-line)
          ("s-SPC" . helm-toggle-visible-mark-forward)))
-
-(use-package helm-ag)
 
 (straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
 (use-package helm-projectile)
 
 (straight-use-package '(helm-swoop :type git :host github :repo "emacsorphanage/helm-swoop"))
-(use-package helm-swoop
-  :bind
-  ("s-z" . helm-swoop)
-  :config
-  (setq helm-swoop-split-with-multiple-windows t
-	helm-swoop-split-direction 'split-window-horizontally))
 
-(straight-use-package '(magit :type git :host github :repo "magit/magit"))
+;; (use-package helm-swoop
+;;   :bind
+;;   ("s-z" . helm-swoop)
+;;   :config
+;;   (setq helm-swoop-split-with-multiple-windows t
+;; 	helm-swoop-split-direction 'split-window-horizontally))
+
+;; (straight-use-package '(magit :type git :host github :repo "magit/magit"))
+
 (use-package magit
   :config
   (setq magit-refresh-status-buffer nil)
@@ -210,11 +210,11 @@
 
 (use-package multiple-cursors
   :bind
-  ("C-S-c C-S-c" . mc/edit-lines)
-  ("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
-  ("C-c C->" . mc/mark-all-like-this)
-  ("s-<mouse-1>" . mc/add-cursor-on-click))
+  ("H-m" . mc/edit-lines)
+  ("H-." . mc/mark-next-like-this)
+  ("H-," . mc/mark-previous-like-this)
+  ("C-n" . mc/mark-all-like-this)
+  ("A-<mouse-1>" . mc/add-cursor-on-click))
 
 (use-package projectile
   :ensure t
@@ -252,28 +252,20 @@
   :config
   (which-key-mode))
 
-;; (use-package wgrep)
-
 (straight-use-package '(yasnippet :type git :host github :repo "joaotavora/yasnippet"))
 (use-package yasnippet
-  :defer t
+  :ensure t
+  :init
+  (yas-global-mode)
   :bind
   (:map yas-minor-mode-map
-        ("M-s y" . yas-insert-snippet))
+        ("A-y" . yas-insert-snippet))
   :config
-  (yas-reload-all)
-  (yas-global-mode))
+  (yas-reload-all))
+
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
 
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.mdx\\'" . markdown-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
 
  (use-package dimmer
   :disabled
@@ -290,16 +282,6 @@
          ".*Ilist.*"))
   :config
   (dimmer-mode t))
-
-(use-package yaml-mode
-  :defer t
-  :mode ("\\.yaml\\'" "\\.yml\\'")
-  :custom-face
-  (font-lock-variable-name-face ((t (:foreground "violet")))))
-
-(use-package dockerfile-mode
-  :defer t
-  :mode "\\Dockerfile\\'")
 
 ;; (use-package nyan-mode
 
@@ -328,27 +310,21 @@
          ("C-h F" . 'helpful-function)
          ("C-h C" . 'helpful-command)))
 
-;; Gradle
-(use-package gradle-mode
-  :defer t
-  :config
-  (gradle-mode 1)
-  :mode ("\\.gradle\\'"))
 
 ;;(require 'visual-regexp)
 (straight-use-package '(visual-regexp :type git :host github :repo "benma/visual-regexp.el"))
 (use-package visual-regexp
   :bind
-  ("C-c r" . 'vr/replace)
-  ("C-c q" . 'vr/query-replace)
-  ("C-c m" . 'vr/mc-mark))
+  ("A-s r" . 'vr/replace)
+  ("A-s q" . 'vr/query-replace)
+  ("A-s m" . 'vr/mc-mark))
 
 
 ;;duplicating lines and words
 (straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
 (use-package duplicate-thing
   :bind
-  ("M-d" . duplicate-thing))
+  ("A-d" . duplicate-thing))
 
 (straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
@@ -356,25 +332,27 @@
   (setq switch-window-shortcut-style 'qwerty
         switch-window-minibuffer-shortcut ?z)
   :bind
-  ("s-w" . switch-window)
-  ("H-w" . switch-window-then-delete))
+  ("A-s w" . #'switch-window)
+  ("A-s A-w" . #'switch-window-then-maximize))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
   :defer
-  :init
-  (rg-enable-default-bindings))
+  :bind
+  ("H-f" . rg-menu))
 
 (straight-use-package '(deadgrep :type git :host github :repo "Wilfred/deadgrep"))
 (use-package deadgrep
   :defer
   :bind
-  ("M-s f" . deadgrep))
+  ("A-s f" . #'deadgrep))
 
 (straight-use-package '(helm-rg :type git :host github :repo "cosmicexplorer/helm-rg"))
 (use-package helm-rg
   :defer
   :bind
-  ("M-f" . helm-rg))
+  ("A-f" . helm-rg))
+
+(setq tramp-default-method "ssh")
 
 (provide 'base-extensions)

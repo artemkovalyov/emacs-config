@@ -10,10 +10,12 @@
   (kill-whole-line)
   (backward-char))
 
-(defun artem/kill-rest-of-line ()
+(defun artem/kill-line-backwards ()
   "delete everything till the end of line"
   (interactive)
-  (delete-region (point) (line-end-position)))
+  (if (= (current-column) 0)
+      (artem/kill-line-up)
+    (kill-line 0)))
 
 (defun artem/beginning-of-line (arg)
   "Move point back to beginning of visual line, then indentation, then beginning of logical line.

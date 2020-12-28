@@ -9,7 +9,7 @@
 (use-package lsp-mode
   :defer t
   :init
-  (setq lsp-keymap-prefix "s-m"
+  (setq lsp-keymap-prefix "s-,"
         lsp-prefer-capf t
         ;; lsp-log-io t ; enable debug log - can be a huge performance hit
         lsp-disabled-clients '(eslint)
@@ -20,7 +20,7 @@
   :commands (lsp lsp-deferred)
   :bind
   (:map lsp-mode-map
-        ("C-c r"   . lsp-rename)))
+        ("s-r"  . lsp-rename)))
 
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools

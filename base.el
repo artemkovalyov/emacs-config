@@ -174,5 +174,8 @@
     (toggle-frame-maximized)
   (toggle-frame-fullscreen))
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+
 (provide 'base)
 ;;; base ends here

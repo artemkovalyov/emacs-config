@@ -11,15 +11,6 @@
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
-(dolist (mode '(emacs-lisp-mode-hook
-                inferior-lisp-mode-hook
-                python-mode-hook
-                js-mode-hook
-                tyde-mode-hook))
-  (add-hook mode
-            '(lambda ()
-               (flyspell-prog-mode))))
-
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
@@ -31,6 +22,6 @@
   (interactive)
   (flyspell-goto-next-error)
   (ispell-word))
-(global-set-key (kbd "M-<f7>") 'flyspell-check-next-highlighted-word)
+(global-set-key (kbd "A-<f7>") 'flyspell-check-next-highlighted-word)
 (provide 'spelling)
 ;;; spelling ends here

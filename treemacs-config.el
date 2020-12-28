@@ -15,7 +15,7 @@
           treemacs-file-extension-regex          treemacs-last-period-regex-value
           treemacs-file-follow-delay             0.2
           treemacs-file-name-transformer         #'identity
-          treemacs-follow-after-init             t
+          treemacs-follow-after-init             nil
           treemacs-git-command-pipe              ""
           treemacs-goto-tag-strategy             'refetch-index
           treemacs-indentation                   2
@@ -44,14 +44,14 @@
           treemacs-tag-follow-delay              1.5
           treemacs-user-mode-line-format         nil
           treemacs-user-header-line-format       nil
-          treemacs-width                         35
+          treemacs-width                         37
 )
 
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
     ;;(treemacs-resize-icons 44)
 
-    (treemacs-follow-mode t)
+    ;; (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t)
     (pcase (cons (not (null (executable-find "git")))
@@ -62,7 +62,7 @@
        (treemacs-git-mode 'simple))))
   :bind
   (:map global-map
-        ("M-0"       . treemacs-select-window)
+        ("A-0"       . treemacs-select-window)
         ("C-x t 1"   . treemacs-delete-other-windows)
         ([f8]   . treemacs)
         ("C-x t B"   . treemacs-bookmark)
@@ -71,17 +71,13 @@
   (:map treemacs-mode-map
       ("i" . treemacs-previous-neighbour)
       ("k" . treemacs-next-neighbour)
-      ("M-K" . treemacs-next-line-other-window)
-      ("M-I" . treemacs-previous-line-other-window)
-      ("M-i"   . treemacs-previous-line)
-      ("M-k"   . treemacs-next-line))
+      ("A-K" . treemacs-next-line-other-window)
+      ("A-I" . treemacs-previous-line-other-window)
+      ("A-i"   . treemacs-previous-line)
+      ("A-k"   . treemacs-next-line))
   ;; :hook
   ;; (treemacs-mode . (lambda () (linum-mode -1)))
   )
-
-;(use-package treemacs-evil
-;  :after treemacs evil
-;  :ensure t)
 
 (use-package treemacs-projectile
   :after treemacs projectile
