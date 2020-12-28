@@ -195,14 +195,14 @@
   (setq magit-refresh-status-buffer nil)
   :bind
   ;; Magit
-  ("C-x g s" . magit-status)
-  ("C-x g x" . magit-checkout)
-  ("C-x g c" . magit-commit)
-  ("C-x g p" . magit-push)
-  ("C-x g u" . magit-pull)
-  ("C-x g e" . magit-ediff-resolve)
-  ("C-x g r" . magit-rebase-interactive)
-  ("C-x g b" . magit-blame)
+  ("A-g s" . magit-status)
+  ("A-g x" . magit-checkout)
+  ("A-g c" . magit-commit)
+  ("A-g p" . magit-push)
+  ("A-g u" . magit-pull)
+  ("A-g e" . magit-ediff-resolve)
+  ("A-g r" . magit-rebase-interactive)
+  ("A-g b" . magit-blame)
   (:map magit-mode-map
 	("<tab>" . magit-section-toggle)))
 
