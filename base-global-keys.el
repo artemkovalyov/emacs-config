@@ -64,25 +64,26 @@
 (global-set-key (kbd "M-c") 'kill-region)
 (global-set-key (kbd "M-v") 'helm-show-kill-ring)
 
-(global-set-key (kbd "s-w") 'fixup-whitespace)
 
 ;; Deleting chars, characters and lines
-(global-set-key (kbd "s-l") 'delete-char)
-(global-set-key (kbd "s-j") 'delete-backward-char)
-(global-set-key (kbd "A-s-l") 'kill-word)
-(global-set-key (kbd "A-s-j") 'backward-kill-word)
-(global-set-key (kbd "s-k") 'kill-whole-line)
-(global-set-key (kbd "s-i") 'artem/kill-line-up)
+(global-set-key (kbd "H-l") 'delete-char)
+(global-set-key (kbd "H-j") 'delete-backward-char)
+(global-set-key (kbd "A-H-l") 'kill-word)
+(global-set-key (kbd "A-H-j") 'backward-kill-word)
+(global-set-key (kbd "H-k") 'kill-whole-line)
+(global-set-key (kbd "H-i") 'artem/kill-line-up)
 (global-set-key (kbd "M-w") 'artem/kill-line-backwards)
 (global-set-key (kbd "M-e") 'kill-line)
-(global-set-key (kbd "M-d") 'delete-blank-lines)
-(global-set-key (kbd "A-u") 'delete-indentation)
+(global-set-key (kbd "M-u") 'delete-blank-lines)
+(global-set-key (kbd "H-u") 'delete-indentation)
+(global-set-key (kbd "A-u") 'fixup-whitespace)
+
 
 ;; Eval last sexp / eval defun
 (global-set-key (kbd "A-r") 'eval-last-sexp)
 
 ;; Change set mark command
-(global-set-key (kbd "s-SPC") 'set-mark-command)
+(global-set-key (kbd "A-h") 'set-mark-command)
 
 (global-set-key (kbd "A-q") 'kill-current-buffer)
 
