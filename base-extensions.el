@@ -230,11 +230,11 @@
   (setq sp-navigate-reindent-after-up-in-string nil
         sp-navigate-reindent-after-up nil)
   :bind
-  ("M-s-i" . sp-backward-sexp)
-  ("M-s-k" . sp-forward-sexp)
-  ("M-s-l" . sp-down-sexp)
-  ("M-s-j" . sp-up-sexp)
-  ("M-'" . sp-mark-sexp))
+  ("s-i" . sp-backward-sexp)
+  ("s-k" . sp-forward-sexp)
+  ("s-l" . sp-down-sexp)
+  ("s-j" . sp-up-sexp)
+  ("A-;" . sp-mark-sexp))
 
 (use-package undo-tree
   :bind
