@@ -4,20 +4,66 @@
 ;;    (do-something))
 ;;; Commentary:
 
+
+(defun mark-sexp-backwards (&optional arg allow-extend)
+  "Set mark ARG sexps from point.
+The place mark goes is the same place \\[forward-sexp] would
+move to with the same argument.
+Interactively, if this command is repeated
+or (in Transient Mark mode) if the mark is active,
+it marks the next ARG sexps after the ones already marked.
+This command assumes point is not in a string or comment."
+  (interactive "P\np")
+  (cond ((and allow-extend
+	      (or (and (eq last-command this-command) (mark t))
+		  (and transient-mark-mode mark-active)))
+	 (setq arg (if arg (prefix-numeric-value arg)
+		     (if (< (mark) (point)) -1 1)))
+	 (set-mark
+	  (save-excursion
+	    (goto-char (mark))
+            (condition-case error
+	        (forward-sexp arg)
+              (scan-error
+               (user-error (if (equal (cadr error)
+                                      "Containing expression ends prematurely")
+                               "No more sexp to select"
+                             (cadr error)))))
+	    (point))))
+	(t
+	 (push-mark
+	  (save-excursion
+            (condition-case error
+	        (backward-sexp (prefix-numeric-value arg))
+              (scan-error
+               (user-error (if (equal (cadr error)
+                                      "Containing expression ends prematurely")
+                               "No sexp to select"
+                             (cadr error)))))
+	    (point))
+	  nil t))))
+
+(defun artem/mark-sexp-backward ()
+  "Same as `mark-sexp' but backward"
+  (interactive "P")
+  (set-mark-command)
+  ;; (backward-sexp nil)
+  )
+
 (defun artem/kill-line-up ()
   "remove line and move one line up"
-  (interactive)
+  (interactive "P")
   (kill-whole-line)
   (backward-char))
 
 (defun artem/kill-line-backwards ()
   "delete everything till the end of line"
-  (interactive)
+  (interactive "P")
   (if (= (current-column) 0)
       (artem/kill-line-up)
     (kill-line 0)))
 
-(defun artem/beginning-of-line (arg)
+(defun artem/beginning-of-line ()
   "Move point back to beginning of visual line, then indentation, then beginning of logical line.
 
 Move point to the beginning of visual line, then to the first non-whitespace character on the logical line, then to the beginning of logical line.

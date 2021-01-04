@@ -230,11 +230,10 @@
   (setq sp-navigate-reindent-after-up-in-string nil
         sp-navigate-reindent-after-up nil)
   :bind
-  ("s-i" . sp-backward-sexp)
-  ("s-k" . sp-forward-sexp)
-  ("s-l" . sp-down-sexp)
-  ("s-j" . sp-up-sexp)
-  ("A-;" . sp-mark-sexp))
+  ("s-e" . sp-backward-sexp)
+  ("s-d" . sp-forward-sexp)
+  ("s-f" . sp-down-sexp)
+  ("s-s" . sp-up-sexp))
 
 (use-package undo-tree
   :bind
@@ -352,6 +351,18 @@
   :defer
   :bind
   ("A-f" . helm-rg))
+
+(straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
+(use-package emmet-mode
+  :bind
+  (:map emmet-mode-keymap
+        (("C-j" . nil)))
+  :hook
+  ((typescript-mode . emmet-mode)
+   (js-mode . emmet-mode)
+   (html-mode . emmet-mode)
+   (css-mode . emmet-mode)
+   (markdown-mode . emmet-mode)))
 
 (setq tramp-default-method "ssh")
 

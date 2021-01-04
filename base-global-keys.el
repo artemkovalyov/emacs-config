@@ -89,5 +89,11 @@
 
 (global-set-key (kbd "H-s") 'save-some-buffers)
 
+;; selecting sexps
+(global-set-key (kbd "A-,") 'mark-sexp-backwards)
+(global-set-key (kbd "A-.") 'mark-sexp)
+
+
+
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here
