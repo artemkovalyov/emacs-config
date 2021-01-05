@@ -43,20 +43,20 @@ This command assumes point is not in a string or comment."
 	    (point))
 	  nil t))))
 
-(defun artem/kill-line-up ()
+(defun artem/kill-line-up (arg)
   "remove line and move one line up"
-  (interactive)
+  (interactive "^p")
   (kill-whole-line)
   (backward-char))
 
-(defun artem/kill-line-backwards ()
+(defun artem/kill-line-backwards (arg)
   "delete everything till the end of line"
-  (interactive)
+  (interactive "^p")
   (if (= (current-column) 0)
       (artem/kill-line-up)
     (kill-line 0)))
 
-(defun artem/beginning-of-line ()
+(defun artem/beginning-of-line (arg)
   "Move point back to beginning of visual line, then indentation, then beginning of logical line.
 
 Move point to the beginning of visual line, then to the first non-whitespace character on the logical line, then to the beginning of logical line.
@@ -64,7 +64,8 @@ After beginning of logical line is reached toggle between the first non-whitespa
 
 If ARG is not nil or 1, move forward ARG - 1 lines first.  If
 point reaches the beginning or end of the buffer, stop there."
-  (interactives)
+  (interactive "^p")
+
   (setq arg (or arg 1))
 
   ;; Move lines first
