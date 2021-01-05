@@ -43,22 +43,15 @@ This command assumes point is not in a string or comment."
 	    (point))
 	  nil t))))
 
-(defun artem/mark-sexp-backward ()
-  "Same as `mark-sexp' but backward"
-  (interactive "P")
-  (set-mark-command)
-  ;; (backward-sexp nil)
-  )
-
 (defun artem/kill-line-up ()
   "remove line and move one line up"
-  (interactive "P")
+  (interactive)
   (kill-whole-line)
   (backward-char))
 
 (defun artem/kill-line-backwards ()
   "delete everything till the end of line"
-  (interactive "P")
+  (interactive)
   (if (= (current-column) 0)
       (artem/kill-line-up)
     (kill-line 0)))
@@ -71,7 +64,7 @@ After beginning of logical line is reached toggle between the first non-whitespa
 
 If ARG is not nil or 1, move forward ARG - 1 lines first.  If
 point reaches the beginning or end of the buffer, stop there."
-  (interactive "^p")
+  (interactives)
   (setq arg (or arg 1))
 
   ;; Move lines first
