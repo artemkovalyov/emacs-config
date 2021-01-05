@@ -43,20 +43,20 @@ This command assumes point is not in a string or comment."
 	    (point))
 	  nil t))))
 
-(defun artem/kill-line-up (arg)
+(defun artem/kill-line-up (&optional arg)
   "remove line and move one line up"
   (interactive "^p")
   (kill-whole-line)
   (backward-char))
 
-(defun artem/kill-line-backwards (arg)
+(defun artem/kill-line-backwards (&optional arg)
   "delete everything till the end of line"
   (interactive "^p")
   (if (= (current-column) 0)
       (artem/kill-line-up)
     (kill-line 0)))
 
-(defun artem/beginning-of-line (arg)
+(defun artem/beginning-of-line (&optional arg)
   "Move point back to beginning of visual line, then indentation, then beginning of logical line.
 
 Move point to the beginning of visual line, then to the first non-whitespace character on the logical line, then to the beginning of logical line.
