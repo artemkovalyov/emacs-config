@@ -46,8 +46,10 @@ This command assumes point is not in a string or comment."
 (defun artem/kill-line-up (&optional arg)
   "remove line and move one line up"
   (interactive "^p")
-  (kill-whole-line)
-  (backward-char))
+  (if (= (point) (point-max))
+      (backward-char)
+    (kill-whole-line)
+    (backward-char)))
 
 (defun artem/kill-line-backwards (&optional arg)
   "delete everything till the end of line"
