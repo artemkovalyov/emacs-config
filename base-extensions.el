@@ -364,6 +364,11 @@
    (css-mode . emmet-mode)
    (markdown-mode . emmet-mode)))
 
-(setq tramp-default-method "ssh")
+(straight-use-package '(restart-emacs :type git :host github :repo "raxod502/restart-emacs"))
+(straight-use-package '(ctrlf :type git :host github :repo "raxod502/ctrlf"))
+(use-package ctrlf
+  :config
+  (ctrlf-mode +1))
+
 
 (provide 'base-extensions)

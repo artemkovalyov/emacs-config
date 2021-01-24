@@ -106,6 +106,7 @@
  x-stretch-cursor                   t
  truncate-string-ellipsis           "…"
  ad-redefinition-action             'accept
+ tramp-default-method               "ssh"
  )
 
 ;; Bookmarks
