@@ -4,6 +4,12 @@
 ;;    (do-something))
 ;;; Commentary:
 
+(defun exchange-point-and-mark-no-activate ()
+  "Identical to \\[exchange-point-and-mark] but will not activate the region."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark nil))
+(define-key global-map (kbd "s-h") 'exchange-point-and-mark-no-activate)
 
 (defun mark-sexp-backwards (&optional arg allow-extend)
   "Set mark ARG sexps from point.
