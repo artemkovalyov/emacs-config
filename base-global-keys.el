@@ -28,7 +28,11 @@
                     (key-description (vector (car el))))))
               key-translation-map)
 
+;; Store and jump to registers
+(global-set-key (kbd "s-r") 'point-to-register)
+(global-set-key (kbd "s-t") 'jump-to-register)
 
+;; Change window size
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)
 (global-set-key (kbd "C-}") 'enlarge-window-horizontally)
 (global-set-key (kbd "<tab>") 'indent-for-tab-command)
