@@ -28,6 +28,9 @@
                     (key-description (vector (car el))))))
               key-translation-map)
 
+
+(global-set-key (kbd "M-s M-RET") 'delete-other-windows)
+
 ;; Store and jump to registers
 (global-set-key (kbd "s-r") 'point-to-register)
 (global-set-key (kbd "s-t") 'jump-to-register)

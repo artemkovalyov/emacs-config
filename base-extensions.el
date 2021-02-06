@@ -370,5 +370,9 @@
   :config
   (ctrlf-mode +1))
 
+(straight-use-package '(apheleia :host github :repo "raxod502/apheleia"))
+(use-package apheleia
+  :init
+  (apheleia-global-mode +1))
 
 (provide 'base-extensions)
