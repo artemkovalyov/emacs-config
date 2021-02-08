@@ -319,8 +319,8 @@
   ("A-s m" . 'vr/mc-mark))
 
 
-;;duplicating lines and words
-(straight-use-package '(duplicate-thing :type git :host github :repo "ongaeshi/duplicate-thing"))
+;;duplicating lines and
+(straight-use-package '(duplicate-thing :type git :host github :repo "artemkovalyov/duplicate-thing"))
 (use-package duplicate-thing
   :bind
   ("A-d" . duplicate-thing))

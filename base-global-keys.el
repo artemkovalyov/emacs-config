@@ -29,7 +29,7 @@
               key-translation-map)
 
 
-(global-set-key (kbd "M-s M-RET") 'delete-other-windows)
+;; (global-set-key (kbd "M-s RET") 'delete-other-windows)
 
 ;; Store and jump to registers
 (global-set-key (kbd "s-r") 'point-to-register)

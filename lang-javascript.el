@@ -1,6 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 ;; install emmet for HTML tags templates
 (straight-use-package '(typescript-mode :type git :host github :repo "emacs-typescript/typescript.el"))
+(straight-use-package '(js2-mode :type git :host github :repo "mooz/js2-mode"))
+
+(add-hook 'js-mode-hook 'js2-minor-mode)
 
 (setq
  ;; lsp-eslint-server-command '("node" "/home/artem/.emacs.d/emacs-config/lsp/eslint/server/out/eslintServer.js" "--stdio" )
