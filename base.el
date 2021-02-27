@@ -99,7 +99,7 @@
  fringes-outside-margins            t
  x-select-enable-clipboard          t
  use-package-always-ensure          t
- debug-on-error                     t
+ debug-on-error                     nil ; Activated debugging on any error in Emacs
  message-log-max                    t
  load-prefer-newer                  t
  window-combination-resize          t
