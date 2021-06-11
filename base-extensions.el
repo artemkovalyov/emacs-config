@@ -152,8 +152,12 @@
           helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
 	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
 	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	  helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
+	  helm-scroll-amount 8 ; scroll 8 lines other window using M-<next>/M-<prior>
+          helm-grep-ag-command "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s"
+          helm-grep-ag-pipe-cmd-switches '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")
+          )
     (helm-mode))
+
   :bind (("A-x" . helm-M-x)
          ("A-o" . helm-find-files)
          ("A-s s" . helm-projectile)
@@ -165,30 +169,27 @@
 	 ("C-i" . helm-select-action)
 	 ("A-k" . helm-next-line)
 	 ("A-i" . helm-previous-line)
-         ("s-SPC" . helm-toggle-visible-mark-forward)
+         ("A-h" . helm-toggle-visible-mark-forward)
 	 :map helm-find-files-map
 	 ("A-i" . helm-previous-line)
 	 ("A-k" . helm-next-line)
 	 ("<tab>" . helm-ff-TAB)
-         ("s-SPC" . helm-toggle-visible-mark-forward)
+         ("A-h" . helm-toggle-visible-mark-forward)
 	 :map helm-generic-files-map
 	 ("A-i" . helm-previous-line)
 	 ("A-k" . helm-next-line)
-         ("s-SPC" . helm-toggle-visible-mark-forward)))
+         ("A-h" . helm-toggle-visible-mark-forward)))
 
 (straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
 (use-package helm-projectile)
 
-(straight-use-package '(helm-swoop :type git :host github :repo "emacsorphanage/helm-swoop"))
+(straight-use-package '(wgrep :type git :host github :repo "mhayashi1120/Emacs-wgrep"))
+(use-package wgrep
+  :ensure t
+  :config (use-package wgrep-helm :ensure t))
 
-;; (use-package helm-swoop
-;;   :bind
-;;   ("s-z" . helm-swoop)
-;;   :config
-;;   (setq helm-swoop-split-with-multiple-windows t
-;; 	helm-swoop-split-direction 'split-window-horizontally))
 
-;; (straight-use-package '(magit :type git :host github :repo "magit/magit"))
+(straight-use-package '(magit :type git :host github :repo "magit/magit"))
 
 (use-package magit
   :config
