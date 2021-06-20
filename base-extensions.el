@@ -376,4 +376,9 @@
   :init
   (apheleia-global-mode +1))
 
+(straight-use-package '(nginx-mode :host github :repo "ajc/nginx-mode"))
+(use-package nginx-mode
+  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
+
+
 (provide 'base-extensions)
