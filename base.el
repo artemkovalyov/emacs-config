@@ -45,11 +45,11 @@
   :straight t)
 (setq straight-use-package-by-default t)
 
-(straight-use-package 'benchmark-init)
+;; (straight-use-package 'benchmark-init)
 
-(use-package benchmark-init
-  :demand t
-  :hook ((after-init . benchmark-init/deactivate)))
+;; (use-package benchmark-init
+;;   :demand t
+;;   :hook ((after-init . benchmark-init/deactivate)))
 
 (setq hscroll-margin                  7
       scroll-margin                   7
