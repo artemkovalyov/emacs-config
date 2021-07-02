@@ -69,12 +69,13 @@
 ;; UTF-8 please
 (set-charset-priority 'unicode)
 (global-visual-line-mode)
-(setq locale-coding-system   'utf-8)   ; pretty
-(set-terminal-coding-system  'utf-8)   ; pretty
-(set-keyboard-coding-system  'utf-8)   ; pretty
-(set-selection-coding-system 'utf-8)   ; please
-(prefer-coding-system        'utf-8)   ; with sugar on top
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+(setq locale-coding-system   'utf-8
+set-terminal-coding-system  'utf-8
+set-keyboard-coding-system  'utf-8
+set-selection-coding-system 'utf-8
+prefer-coding-system        'utf-8
+default-process-coding-system '(utf-8-unix . utf-8-unix)
+sentence-end-double-space nil)
 
 ;; Emacs customizations
 (setq-default
