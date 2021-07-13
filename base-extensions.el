@@ -207,7 +207,15 @@
   (:map magit-mode-map
 	("<tab>" . magit-section-toggle)))
 
-(use-package magit-popup)
+
+(straight-use-package '(magit-popup :type git :host github :repo "magit/magit-popup"))
+(use-package magit-popup
+  :after magit)
+
+(straight-use-package '(forge :type git :host github :repo "magit/forge"))
+(use-package forge
+  :after magit)
+
 
 (use-package multiple-cursors
   :bind
