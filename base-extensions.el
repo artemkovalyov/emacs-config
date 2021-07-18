@@ -59,11 +59,16 @@
         ("<escape>" . company-abort)
         ("TAB" . company-complete)
         ("<tab>" . company-complete)
-        ("<return>" . nil)
-        ("RET" . nil))
+        ;; ("TAB" . company-complete)
+        ;; ("<tab>" . company-complete)
+        ("<return>" . company-complete)
+        ("RET" . company-complete))
   (:map company-search-map
         ("A-k" . company-select-next)
         ("A-i" . company-select-previous)))
+
+
+
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
