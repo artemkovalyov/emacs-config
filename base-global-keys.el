@@ -32,8 +32,8 @@
 ;; (global-set-key (kbd "M-s RET") 'delete-other-windows)
 
 ;; Store and jump to registers
-(global-set-key (kbd "s-r") 'point-to-register)
-(global-set-key (kbd "s-t") 'jump-to-register)
+(global-set-key (kbd "s-g r") 'point-to-register)
+(global-set-key (kbd "s-g j") 'jump-to-register)
 
 ;; Change window size
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)
@@ -94,7 +94,8 @@
 
 (global-set-key (kbd "A-q") 'kill-current-buffer)
 
-(global-set-key (kbd "H-s") 'save-some-buffers)
+(global-set-key (kbd "s-s") 'save-buffer)
+(global-set-key (kbd "s-a") 'save-some-buffers)
 
 ;; selecting sexps
 (global-set-key (kbd "A-,") 'mark-sexp-backwards)

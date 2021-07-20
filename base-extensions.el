@@ -37,10 +37,10 @@
 (straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
 (use-package avy
   :bind
-  ("s-l" . avy-copy-line)
-  ("H-s-l" . avy-move-line)
-  ("s-j" . avy-goto-word-or-subword-1)
-  ("H-s-j" . avy-goto-line))
+  ("s-g s-c" . avy-copy-line)
+  ("s-g s-m" . avy-move-line)
+  ("s-g c" . avy-goto-word-or-subword-1)
+  ("s-g l" . avy-goto-line))
 
 (straight-use-package 'company)
 (use-package company
@@ -66,9 +66,6 @@
   (:map company-search-map
         ("A-k" . company-select-next)
         ("A-i" . company-select-previous)))
-
-
-
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs

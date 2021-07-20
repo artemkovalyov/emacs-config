@@ -178,6 +178,12 @@ sentence-end-double-space nil)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Create a keymaps and bind them to your key combination
+(setq super-g-map (make-sparse-keymap))
+(global-set-key (kbd "s-g") super-g-map)
+
+;; (setq super-k-map (make-sparse-keymap))
+;; (global-set-key (kbd "s-s") super-k-map)
 
 (provide 'base)
 ;;; base ends here
