@@ -227,6 +227,7 @@
   ("C-n" . mc/mark-all-like-this)
   ("A-<mouse-1>" . mc/add-cursor-on-click))
 
+
 (use-package projectile
   :ensure t
   :config
@@ -236,6 +237,7 @@
   (projectile-register-project-type 'yarn '("package.json"))
   (projectile-mode 1))
 
+(straight-use-package '(smartparens :host github :repo "Fuco1/smartparens"))
 (use-package smartparens
   :init
   (setq sp-navigate-reindent-after-up-in-string nil

@@ -9,18 +9,18 @@
 (use-package lsp-mode
   :defer t
   :init
-  (setq lsp-keymap-prefix "s-,"
-        lsp-prefer-capf t
+  (setq lsp-keymap-prefix "s-l")
         ;; lsp-log-io t ; enable debug log - can be a huge performance hit
-        lsp-disabled-clients '(eslint)
-        lsp-treemacs-sync-mode 1
-        lsp-completion-provider :capf)
+  :config
+  (lsp-treemacs-sync-mode 1)
   :hook
   ((js-mode typescript-mode go-mode java-mode rust-mode json-mode) . lsp-deferred)
-  :commands (lsp lsp-deferred)
   :bind
   (:map lsp-mode-map
-        ("s-r"  . lsp-rename)))
+        ("s-r"  . lsp-rename)
+        ([remap xref-apropos] . #'helm-lsp-global-workspace-symbol))
+
+  :commands (lsp lsp-deferred))
 
 (straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools

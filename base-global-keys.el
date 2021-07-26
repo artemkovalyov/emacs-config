@@ -97,9 +97,7 @@
 (global-set-key (kbd "s-s") 'save-buffer)
 (global-set-key (kbd "s-a") 'save-some-buffers)
 
-;; selecting sexps
-(global-set-key (kbd "A-,") 'mark-sexp-backwards)
-(global-set-key (kbd "A-.") 'mark-sexp)
+(global-set-key [escape] 'keyboard-escape-quit)
 
 
 
