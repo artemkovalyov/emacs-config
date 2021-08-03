@@ -24,6 +24,8 @@
 
 ;; straight.el package manager
 (defvar bootstrap-version)
+(setq straight-repository-branch "develop")
+
 
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -37,13 +39,15 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-
 (straight-use-package '(el-patch :type git :host github :repo "raxod502/el-patch"))
 (straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
 
 (use-package el-patch
   :straight t)
+
 (setq straight-use-package-by-default t)
+
+
 
 ;; (straight-use-package 'benchmark-init)
 
@@ -69,6 +73,7 @@
 ;; UTF-8 please
 (set-charset-priority 'unicode)
 (global-visual-line-mode)
+
 (setq locale-coding-system   'utf-8
 set-terminal-coding-system  'utf-8
 set-keyboard-coding-system  'utf-8
