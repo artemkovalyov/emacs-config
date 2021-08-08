@@ -61,7 +61,7 @@
         ("A-f" . company-filter-candidates)
         ([escape] . company-abort))
   (:map company-search-map
-        ("A-k" . company-select-next)
+("A-k" . company-select-next)
         ("A-i" . company-select-previous)))
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
@@ -74,7 +74,7 @@
   (setq centaur-tabs-style "bar"
         centaur-tabs-set-close-button nil)
   :bind
-  ("A-n" . centaur-tabs-backward)
+  ("A-n" . centaur-tabsq-backward)
   ("A-m" . centaur-tabs-forward))
 
 (use-package dashboard
@@ -158,11 +158,9 @@
           )
     (helm-mode))
 
-  :bind (("A-x" . helm-M-x)
-         ("A-o" . helm-find-files)
-         ("A-s s" . helm-projectile)
-	 ("A-s A-s" . helm-projectile-switch-project)
-         ("s-o" . helm-occur)
+  :bind (("M-f" . helm-find-files)
+         ("A-o" . helm-projectile)
+	 ("A-p" . helm-projectile-switch-project)
 	 ("A-b" . helm-mini)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
@@ -216,17 +214,15 @@
 (use-package forge
   :after magit)
 
-
 (use-package multiple-cursors
   :bind
-  ("s-m" . mc/edit-lines)
+  ("s-;" . mc/edit-lines)
   ("A-s-e" . mc/unmark-next-like-this)
   ("A-s-d" . mc/unmark-previous-like-this)
   ("s-d" . mc/mark-next-like-this)
   ("s-e" . mc/mark-previous-like-this)
   ("C-n" . mc/mark-all-like-this)
   ("A-<mouse-1>" . mc/add-cursor-on-click))
-
 
 (use-package projectile
   :ensure t
@@ -250,7 +246,9 @@
   ("H-j" . sp-up-sexp)
   :hook
   (text-mode . smartparens-mode)
-  (prog-mode . smartparens-mode))
+  (prog-mode . smartparens-mode)
+  :config
+  (require 'smartparens-config))
 
 (use-package undo-tree
   :bind
@@ -336,15 +334,17 @@
   :bind
   ("A-d" . duplicate-thing))
 
-(straight-use-package '(switch-window :type git :host github :repo "artemkovalyov/switch-window"))
+(straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
  :init
  (setq switch-window-shortcut-style 'qwerty
        switch-window-minibuffer-shortcut ?z)
  :bind
- ("M-<return>" . #'switch-window)
- ("A-M-<return>" . #'switch-window-then-maximize)
- ("A-M-k" . #'switch-window-then-delete))
+ ("s-SPC" . #'switch-window)
+ ("s-m" . #'switch-window-then-maximize)
+ ("s-q" . #'switch-window-then-delete)
+ ("s-h" . #'switch-window-then-split-horizontally)
+ ("s-v" . #'switch-window-then-split-vertically))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -384,6 +384,28 @@
 (straight-use-package '(nginx-mode :host github :repo "ajc/nginx-mode"))
 (use-package nginx-mode
   :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
+
+(straight-use-package 'selectrum)
+(use-package selectrum
+  :config
+  (selectrum-mode +1))
+
+(straight-use-package 'prescient)
+
+(straight-use-package 'company-prescient)
+(use-package company-prescient
+  :config
+  (company-prescient-mode +1))
+
+(straight-use-package 'selectrum-prescient)
+(use-package selectrum-prescient
+  :config
+  ;; to make sorting and filtering more intelligent
+  (selectrum-prescient-mode +1)
+
+  ;; to save your command history on disk, so the sorting gets more
+  ;; intelligent over time
+  (prescient-persist-mode +1))
 
 
 (provide 'base-extensions)

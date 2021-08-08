@@ -9,7 +9,7 @@
   (interactive)
   (exchange-point-and-mark)
   (deactivate-mark nil))
-(define-key global-map (kbd "s-h") 'exchange-point-and-mark-no-activate)
+(define-key global-map (kbd "A-s p") 'exchange-point-and-mark-no-activate)
 
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.

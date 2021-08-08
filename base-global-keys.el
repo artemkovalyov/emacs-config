@@ -28,7 +28,6 @@
                     (key-description (vector (car el))))))
               key-translation-map)
 
-
 ;; (global-set-key (kbd "M-s RET") 'delete-other-windows)
 
 ;; Store and jump to registers
@@ -81,8 +80,9 @@
 (global-set-key (kbd "A-H-i") 'artem/kill-line-up)
 (global-set-key (kbd "M-w") 'artem/kill-line-backwards)
 (global-set-key (kbd "M-e") 'kill-line)
+
 (global-set-key (kbd "M-u") 'delete-blank-lines)
-(global-set-key (kbd "H-u") 'delete-indentation)
+(global-set-key (kbd "A-M-u") 'delete-indentation)
 (global-set-key (kbd "A-u") 'fixup-whitespace)
 
 
@@ -94,8 +94,8 @@
 
 (global-set-key (kbd "A-q") 'kill-current-buffer)
 
-(global-set-key (kbd "s-s") 'save-buffer)
-(global-set-key (kbd "s-a") 'save-some-buffers)
+(global-set-key (kbd "A-s A-s") 'save-buffer)
+(global-set-key (kbd "A-s A-a") 'save-some-buffers)
 
 (global-set-key (kbd "A-s '") 'wrap-singe-quote)
 (global-set-key (kbd "A-s \"") 'wrap-double-quote)
@@ -103,6 +103,12 @@
 (global-set-key (kbd "A-s [") 'sp-wrap-square)
 (global-set-key (kbd "A-s {") 'sp-wrap-curly)
 (global-set-key (kbd "A-s (") 'sp-wrap-round)
+
+(global-set-key (kbd "A-x") 'execute-extended-command)
+
+(global-set-key (kbd "A-s A-p") 'exchange-point-and-mark)
+
+
 
 
 
