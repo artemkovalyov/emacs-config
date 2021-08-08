@@ -25,7 +25,9 @@
 ;;  (setq solaire-mode-auto-swap-bg nil)
 ;;  (solaire-global-mode +1))
 
- (use-package drag-stuff
+
+
+(use-package drag-stuff
    :config
    (drag-stuff-global-mode 1)
    :bind
@@ -51,18 +53,13 @@
   :hook
   (after-init . global-company-mode)
   :bind
+  ("s-c" . company-complete)
   (:map company-active-map
-	("A-k" . company-select-next-or-abort)
+        ("A-k" . company-select-next-or-abort)
 	("A-i" . company-select-previous-or-abort)
         ("A-s" . company-search-candidates)
         ("A-f" . company-filter-candidates)
-        ("<escape>" . company-abort)
-        ("TAB" . company-complete)
-        ("<tab>" . company-complete)
-        ;; ("TAB" . company-complete)
-        ;; ("<tab>" . company-complete)
-        ("<return>" . company-complete)
-        ("RET" . company-complete))
+        ([escape] . company-abort))
   (:map company-search-map
         ("A-k" . company-select-next)
         ("A-i" . company-select-previous)))
@@ -118,11 +115,12 @@
 (use-package expand-region
   :defer t
   :bind
-  ("A-=" . er/expand-region))
+  ("A-." . er/expand-region))
 
 (straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
 (use-package flycheck
   :defer t
+  :hook (lsp-mode . flycheck-mode)
   :config
   (add-to-list 'display-buffer-alist
              `(,(rx bos "*Flycheck errors*" eos)
@@ -221,9 +219,11 @@
 
 (use-package multiple-cursors
   :bind
-  ("H-m" . mc/edit-lines)
-  ("H-." . mc/mark-next-like-this)
-  ("H-," . mc/mark-previous-like-this)
+  ("s-m" . mc/edit-lines)
+  ("A-s-e" . mc/unmark-next-like-this)
+  ("A-s-d" . mc/unmark-previous-like-this)
+  ("s-d" . mc/mark-next-like-this)
+  ("s-e" . mc/mark-previous-like-this)
   ("C-n" . mc/mark-all-like-this)
   ("A-<mouse-1>" . mc/add-cursor-on-click))
 
@@ -238,6 +238,7 @@
   (projectile-mode 1))
 
 (straight-use-package '(smartparens :host github :repo "Fuco1/smartparens"))
+
 (use-package smartparens
   :init
   (setq sp-navigate-reindent-after-up-in-string nil
@@ -246,7 +247,10 @@
   ("H-i" . sp-backward-sexp)
   ("H-k" . sp-forward-sexp)
   ("H-l" . sp-down-sexp)
-  ("H-j" . sp-up-sexp))
+  ("H-j" . sp-up-sexp)
+  :hook
+  (text-mode . smartparens-mode)
+  (prog-mode . smartparens-mode))
 
 (use-package undo-tree
   :bind
@@ -295,12 +299,6 @@
   :config
   (dimmer-mode t))
 
-;; (use-package nyan-mode
-
-;;   :custom
-;;    (nyan-cat-face-number 4)
-;;    (nyan-animate-nyancat t)
-;;    (nyan-mode t))
 
 (use-package rainbow-mode
   :diminish
@@ -338,26 +336,21 @@
   :bind
   ("A-d" . duplicate-thing))
 
-(straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
+(straight-use-package '(switch-window :type git :host github :repo "artemkovalyov/switch-window"))
 (use-package switch-window
-  :init
-  (setq switch-window-shortcut-style 'qwerty
-        switch-window-minibuffer-shortcut ?z)
-  :bind
-  ("M-<return>" . #'switch-window)
-  ("H-<return>" . #'switch-window-then-maximize))
+ :init
+ (setq switch-window-shortcut-style 'qwerty
+       switch-window-minibuffer-shortcut ?z)
+ :bind
+ ("M-<return>" . #'switch-window)
+ ("A-M-<return>" . #'switch-window-then-maximize)
+ ("A-M-k" . #'switch-window-then-delete))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
   :defer
   :bind
-  ("H-f" . rg-menu))
-
-(straight-use-package '(deadgrep :type git :host github :repo "Wilfred/deadgrep"))
-(use-package deadgrep
-  :defer
-  :bind
-  ("A-s f" . #'deadgrep))
+  ("A-s f" . rg-menu))
 
 (straight-use-package '(helm-rg :type git :host github :repo "cosmicexplorer/helm-rg"))
 (use-package helm-rg

@@ -97,6 +97,15 @@
 (global-set-key (kbd "s-s") 'save-buffer)
 (global-set-key (kbd "s-a") 'save-some-buffers)
 
+(global-set-key (kbd "A-s '") 'wrap-singe-quote)
+(global-set-key (kbd "A-s \"") 'wrap-double-quote)
+(global-set-key (kbd "A-s `") 'wrap-back-quote)
+(global-set-key (kbd "A-s [") 'sp-wrap-square)
+(global-set-key (kbd "A-s {") 'sp-wrap-curly)
+(global-set-key (kbd "A-s (") 'sp-wrap-round)
+
+
+
 (global-set-key [escape] 'keyboard-escape-quit)
 
 

@@ -31,44 +31,6 @@ there's a region, all lines that region covers will be duplicated."
         (setq end (point)))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
-(defun mark-sexp-backwards (&optional arg allow-extend)
-  "Set mark ARG sexps from point.
-The place mark goes is the same place \\[forward-sexp] would
-move to with the same argument.
-Interactively, if this command is repeated
-or (in Transient Mark mode) if the mark is active,
-it marks the next ARG sexps after the ones already marked.
-This command assumes point is not in a string or comment."
-  (interactive "P\np")
-  (cond ((and allow-extend
-	      (or (and (eq last-command this-command) (mark t))
-		  (and transient-mark-mode mark-active)))
-	 (setq arg (if arg (prefix-numeric-value arg)
-		     (if (< (mark) (point)) -1 1)))
-	 (set-mark
-	  (save-excursion
-	    (goto-char (mark))
-            (condition-case error
-	        (forward-sexp arg)
-              (scan-error
-               (user-error (if (equal (cadr error)
-                                      "Containing expression ends prematurely")
-                               "No more sexp to select"
-                             (cadr error)))))
-	    (point))))
-	(t
-	 (push-mark
-	  (save-excursion
-            (condition-case error
-	        (backward-sexp (prefix-numeric-value arg))
-              (scan-error
-               (user-error (if (equal (cadr error)
-                                      "Containing expression ends prematurely")
-                               "No sexp to select"
-                             (cadr error)))))
-	    (point))
-	  nil t))))
-
 (defun artem/kill-line-up (&optional arg)
   "remove line and move one line up"
   (interactive "^p")
@@ -155,6 +117,20 @@ point reaches the beginning or end of the buffer, stop there."
     (kill-append "\n" nil)
     (beginning-of-line (or (and arg (1+ arg)) 2))
     (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
+
+(defun wrap-double-quote (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "\""))
+
+(defun wrap-back-quote (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "`"))
+
+(defun wrap-singe-quote (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "'"))
+
+
 
 (provide 'base-functions)
 ;;; .base-functions.el ends here

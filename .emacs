@@ -12,7 +12,6 @@
 
 (require 'base)
 (require 'spelling)
-(require 'base-functions)
 (require 'base-extensions)
 (require 'treemacs-config)
 (require 'lsp-base)
@@ -24,6 +23,7 @@
 ;; (require 'lang-lisp)
 (require 'base-theme)
 (require 'low-config-modes)
+(require 'base-functions)
 (require 'base-global-keys)
 (provide '.emacs)
 
