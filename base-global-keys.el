@@ -37,7 +37,7 @@
 ;; Change window size
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)
 (global-set-key (kbd "C-}") 'enlarge-window-horizontally)
-(global-set-key (kbd "<tab>") 'indent-for-tab-command)
+;; (global-set-key [tab] 'indent-for-tab-command)
 
 ;; Moving across text
 (global-set-key (kbd "A-k") 'next-line)
@@ -108,13 +108,7 @@
 
 (global-set-key (kbd "A-s A-p") 'exchange-point-and-mark)
 
-
-
-
-
-(global-set-key [escape] 'keyboard-escape-quit)
-
-
+(global-set-key [escape] 'keyboard-quit)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

@@ -44,25 +44,87 @@
   ("s-g c" . avy-goto-word-or-subword-1)
   ("s-g l" . avy-goto-line))
 
-(straight-use-package 'company)
-(use-package company
+;; (straight-use-package 'company)
+;; (use-package company
+;;   :init
+;;   (setq company-minimum-prefix-length 1
+;; 	company-idle-delay 0.0
+;;         company-backends '((company-capf company-files company-yasnippet)))
+;;   :hook
+;;   (after-init . global-company-mode)
+;;   :bind
+;;   ("s-c" . company-complete)
+;;   (:map company-active-map
+;;         ("A-k" . company-select-next-or-abort)
+;; 	("A-i" . company-select-previous-or-abort)
+;;         ("A-s" . company-search-candidates)
+;;         ("A-f" . company-filter-candidates)
+;;         ([escape] . company-abort))
+;;   (:map company-search-map
+;; ("A-k" . company-select-next)
+;; ("A-i" . company-select-previous)))
+
+(use-package consult
+  :straight
+  (consult :type git :host github :repo "minad/consult"))
+
+;; (use-package company-posframe :init (company-posframe-mode 1) :diminish)
+(use-package corfu
+  :straight
+  (corfu :type git :host github :repo "minad/corfu")
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 1)
+  (corfu-auto-delya 0.05)
+  ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
+  ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  ;; (corfu-quit-no-match t)        ;; Automatically quit if there is no match
+  ;; (corfu-echo-documentation nil) ;; Do not show documentation in the echo area
+
+  ;; Optionally use TAB for cycling, default is `corfu-complete'.
+  (:map corfu-map
+         ("TAB" . corfu-next)
+         ([tab] . corfu-next)
+         ("S-TAB" . corfu-previous)
+         ([backtab] . corfu-previous)
+         ([escape] . corfu-quit))
+
+  ;; You may want to enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since dabbrev can be used globally (M-/).
   :init
-  (setq company-minimum-prefix-length 1
-	company-idle-delay 0.0
-        company-backends '((company-capf company-files company-yasnippet)))
-  :hook
-  (after-init . global-company-mode)
-  :bind
-  ("s-c" . company-complete)
-  (:map company-active-map
-        ("A-k" . company-select-next-or-abort)
-	("A-i" . company-select-previous-or-abort)
-        ("A-s" . company-search-candidates)
-        ("A-f" . company-filter-candidates)
-        ([escape] . company-abort))
-  (:map company-search-map
-("A-k" . company-select-next)
-        ("A-i" . company-select-previous)))
+  (corfu-global-mode))
+
+;; Optionally use the `orderless' completion style.
+;; Enable `partial-completion' for files to allow path expansion.
+;; You may prefer to use `initials' instead of `partial-completion'.
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))))
+
+;; A few more useful configurations...
+(use-package emacs
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 5)
+
+  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete))
+
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
@@ -74,7 +136,7 @@
   (setq centaur-tabs-style "bar"
         centaur-tabs-set-close-button nil)
   :bind
-  ("A-n" . centaur-tabsq-backward)
+  ("A-n" . centaur-tabs-backward)
   ("A-m" . centaur-tabs-forward))
 
 (use-package dashboard
@@ -177,6 +239,7 @@
 	 ("A-i" . helm-previous-line)
 	 ("A-k" . helm-next-line)
          ("A-h" . helm-toggle-visible-mark-forward)))
+
 
 (straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
 (use-package helm-projectile)
@@ -387,15 +450,18 @@
 
 (straight-use-package 'selectrum)
 (use-package selectrum
+  :init
+  (setq selectrum-max-window-height 20)
+  (setq selectrum-display-action t)
+  ;; (setq selectrum-display-action
+  ;;       '(selectrum-display-full-frame))
+  :bind
+  (:map selectrum-minibuffer-map
+        ([tab] . selectrum-insert-current-candidate))
   :config
   (selectrum-mode +1))
 
 (straight-use-package 'prescient)
-
-(straight-use-package 'company-prescient)
-(use-package company-prescient
-  :config
-  (company-prescient-mode +1))
 
 (straight-use-package 'selectrum-prescient)
 (use-package selectrum-prescient
@@ -407,5 +473,32 @@
   ;; intelligent over time
   (prescient-persist-mode +1))
 
+;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
+
+;; (defun display-buffer-show-in-posframe (buffer _alist)
+;;   (frame-root-window
+;;    (posframe-show buffer
+;;                   :min-height 20
+;;                   :min-width (frame-width)
+;;                   :internal-border-width 1
+;;                   :left-fringe 8
+;;                   :right-fringe 8
+;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
+
+;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
+
+(use-package emacs
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 5)
+
+  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete))
 
 (provide 'base-extensions)
