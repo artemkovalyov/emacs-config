@@ -8,20 +8,20 @@
 
 ;; A more complex, more lazy-loaded config
 ;;(use-package solaire-mode
-  ;; Ensure solaire-mode is running in all solaire-mode buffers
+;; Ensure solaire-mode is running in all solaire-mode buffers
 ;;  :hook (change-major-mode . turn-on-solaire-mode)
-  ;; ...if you use auto-revert-mode, this prevents solaire-mode from turning
-  ;; itself off every time Emacs reverts the file
+;; ...if you use auto-revert-mode, this prevents solaire-mode from turning
+;; itself off every time Emacs reverts the file
 ;;  :hook (after-revert . turn-on-solaire-mode)
-  ;; To enable solaire-mode unconditionally for certain modes:
+;; To enable solaire-mode unconditionally for certain modes:
 ;;  :hook (ediff-prepare-buffer . solaire-mode)
-  ;; Highlight the minibuffer when it is activated:
+;; Highlight the minibuffer when it is activated:
 ;;  :hook (minibuffer-setup . solaire-mode-in-minibuffer)
 ;;  :config
-  ;; The bright and dark background colors are automatically swapped the first
-  ;; time solaire-mode is activated. Namely, the backgrounds of the `default` and
-  ;; `solaire-default-face` faces are swapped. This is done because the colors
-  ;; are usually the wrong way around. If you don't want this, you can disable it:
+;; The bright and dark background colors are automatically swapped the first
+;; time solaire-mode is activated. Namely, the backgrounds of the `default` and
+;; `solaire-default-face` faces are swapped. This is done because the colors
+;; are usually the wrong way around. If you don't want this, you can disable it:
 ;;  (setq solaire-mode-auto-swap-bg nil)
 ;;  (solaire-global-mode +1))
 
@@ -477,7 +477,7 @@
 
 ;; (defun display-buffer-show-in-posframe (buffer _alist)
 ;;   (frame-root-window
-;;    (posframe-show buffer
+;;    (posfraime-show buffer
 ;;                   :min-height 20
 ;;                   :min-width (frame-width)
 ;;                   :internal-border-width 1
@@ -500,5 +500,10 @@
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
   (setq tab-always-indent 'complete))
+
+(use-package highlight-indent-guides
+  :straight (highlight-indent-guides :host github :repo "DarthFennec/highlight-indent-guides")
+  :custom (highlight-indent-guides-method 'character)
+  :hook (prog-mode . highlight-indent-guides-mode))
 
 (provide 'base-extensions)
