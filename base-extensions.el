@@ -25,16 +25,15 @@
 ;;  (setq solaire-mode-auto-swap-bg nil)
 ;;  (solaire-global-mode +1))
 
-
-
 (use-package drag-stuff
+  :straight (drag-stuff :type git :host github :repo "rejeep/drag-stuff.el")
    :config
    (drag-stuff-global-mode 1)
    :bind
-   ("C-j" . drag-stuff-left)
-   ("C-l" . drag-stuff-right)
-   ("C-i" . drag-stuff-up)
-   ("C-k" . drag-stuff-down))
+   ("A-M-j" . drag-stuff-left)
+   ("A-M-l" . drag-stuff-right)
+   ("A-M-i" . drag-stuff-up)
+   ("A-M-k" . drag-stuff-down))
 
 (straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
 (use-package avy
@@ -76,11 +75,11 @@
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-prefix 1)
-  (corfu-auto-delya 0.05)
+  (corfu-auto-prefix 3)
+  (corfu-auto-delya 0.2)
   ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
   ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
-  ;; (corfu-quit-no-match t)        ;; Automatically quit if there is no match
+  (corfu-quit-no-match t)        ;; Automatically quit if there is no match
   ;; (corfu-echo-documentation nil) ;; Do not show documentation in the echo area
 
   ;; Optionally use TAB for cycling, default is `corfu-complete'.

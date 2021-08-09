@@ -1,18 +1,17 @@
 ;; -*- lexical-binding: t; -*-
-(straight-use-package '(emojify :type git :host github :repo "iqbalansari/emacs-emojify"))
-(use-package emojify  :hook (after-init . global-emojify-mode))
+(use-package emojify
+  :straight (emojify :type git :host github :repo "iqbalansari/emacs-emojify")
+  :hook (after-init . global-emojify-mode))
 
-(straight-use-package '(all-the-icons :type git :host github :repo "domtronn/all-the-icons.el"))
-(use-package all-the-icons)
-
-(straight-use-package 'doom-themes)
+(use-package all-the-icons
+  :straight (all-the-icons :type git :host github :repo "domtronn/all-the-icons.el"))
 
 (use-package doom-themes
+  :straight (doom-themes :type git :host github :repo "hlissner/emacs-doom-themes")
   :after (all-the-icons)
-  :config                               ;
+  :config
   ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (setq doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-one t)
 
   ;; Enable flashing mode-line on errors
