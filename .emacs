@@ -21,10 +21,9 @@
 (require 'lang-java)
 (require 'projectile-help-functions)
 ;; (require 'lang-lisp)
-(require 'base-theme)
 (require 'low-config-modes)
 (require 'base-functions)
 (require 'base-global-keys)
+(require 'base-theme)
 (provide '.emacs)
-
 ;;; .emacs ends here
