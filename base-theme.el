@@ -27,7 +27,7 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
-
+;; custom colors for prescian (selectrum)
 (let ((class '((class color) (min-colors 89))))
   (custom-set-faces
    `(selectrum-current-candidate
@@ -35,8 +35,8 @@
                            :weight bold
                            :foreground ,(doom-color 'base8)))))
    `(selectrum-prescient-primary-highlight
-   ((,class (:foreground ,(doom-color 'orange)))))
+   ((,class (:foreground ,(doom-color 'blue)))))
    `(selectrum-prescient-secondary-highlight
-   ((,class (:foreground ,(doom-color 'green)))))))
+   ((,class (:foreground ,(doom-color 'orange)))))))
 
 (provide 'base-theme)
