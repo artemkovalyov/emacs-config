@@ -65,7 +65,11 @@
 
 (use-package consult
   :straight
-  (consult :type git :host github :repo "minad/consult"))
+  (consult :type git :host github :repo "minad/consult")
+  :bind
+  ("A-b" . consult-buffer)
+  ("A-f" . consult-ripgrep)
+  ("s-b" . consult-bookmark))
 
 ;; (use-package company-posframe :init (company-posframe-mode 1) :diminish)
 (use-package corfu
@@ -196,57 +200,8 @@
   :bind
     ("A-/" . comment-dwim-2))
 
-(straight-use-package '(helm :type git :host github :repo "emacs-helm/helm"))
-(use-package helm
-  :init
-  (progn
-    (require 'helm-config)
-    ;; (setq helm-candidate-number-limit 100)
-    ;; From https://gist.github.com/antifuchs/9238468
-    (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-	  helm-input-idle-delay 0.01  ; this actually updates things
-					; reeeelatively quickly.
-	  helm-yas-display-key-on-candidate t
-	  helm-quick-update t
-	  helm-M-x-requires-pattern nil
-	  helm-ff-skip-boring-files t
-          helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
-	  helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
-	  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	  helm-scroll-amount 8 ; scroll 8 lines other window using M-<next>/M-<prior>
-          helm-grep-ag-command "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s"
-          helm-grep-ag-pipe-cmd-switches '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")
-          )
-    (helm-mode))
-
-  :bind (("M-f" . helm-find-files)
-         ("A-o" . helm-projectile)
-	 ("A-p" . helm-projectile-switch-project)
-	 ("A-b" . helm-mini)
-         :map helm-map
-         ("<tab>" . helm-execute-persistent-action)
-	 ("C-i" . helm-select-action)
-	 ("A-k" . helm-next-line)
-	 ("A-i" . helm-previous-line)
-         ("A-h" . helm-toggle-visible-mark-forward)
-	 :map helm-find-files-map
-	 ("A-i" . helm-previous-line)
-	 ("A-k" . helm-next-line)
-	 ("<tab>" . helm-ff-TAB)
-         ("A-h" . helm-toggle-visible-mark-forward)
-	 :map helm-generic-files-map
-	 ("A-i" . helm-previous-line)
-	 ("A-k" . helm-next-line)
-         ("A-h" . helm-toggle-visible-mark-forward)))
-
-
-(straight-use-package '(helm-projectile :type git :host github :repo "bbatsov/helm-projectile"))
-(use-package helm-projectile)
-
 (straight-use-package '(wgrep :type git :host github :repo "mhayashi1120/Emacs-wgrep"))
-(use-package wgrep
-  :ensure t
-  :config (use-package wgrep-helm :ensure t))
+(use-package wgrep)
 
 
 (straight-use-package '(magit :type git :host github :repo "magit/magit"))
@@ -291,7 +246,7 @@
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-p") 'projectile-command-map)
   (projectile-register-project-type 'yarn '("package.json"))
   (projectile-mode 1))
 
@@ -315,8 +270,8 @@
 (use-package undo-tree
   :bind
   ;;"C-x u" - visualize undo tree
-  ("C-z" . undo-tree-undo)
-  ("C-y" . undo-tree-redo)
+  ("M-z" . undo-tree-undo)
+  ("M-y" . undo-tree-redo)
   ;; Remember undo history
   :config
   (setq
@@ -413,12 +368,6 @@
   :defer
   :bind
   ("A-s f" . rg-menu))
-
-(straight-use-package '(helm-rg :type git :host github :repo "cosmicexplorer/helm-rg"))
-(use-package helm-rg
-  :defer
-  :bind
-  ("A-f" . helm-rg))
 
 (straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
 (use-package emmet-mode

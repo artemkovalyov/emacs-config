@@ -68,8 +68,7 @@
 (global-set-key (kbd "A-c") 'kill-ring-save)
 (global-set-key (kbd "A-v") 'yank)
 (global-set-key (kbd "M-c") 'kill-region)
-(global-set-key (kbd "M-v") 'helm-show-kill-ring)
-
+(global-set-key (kbd "M-v") 'consult-yank-from-kill-ring)
 
 ;; Deleting chars, characters and lines
 (global-set-key (kbd "A-H-l") 'delete-char)
@@ -82,7 +81,7 @@
 (global-set-key (kbd "M-e") 'kill-line)
 
 (global-set-key (kbd "M-u") 'delete-blank-lines)
-(global-set-key (kbd "A-M-u") 'delete-indentation)
+(global-set-key (kbd "A-s u") 'delete-indentation)
 (global-set-key (kbd "A-u") 'fixup-whitespace)
 
 
@@ -108,7 +107,14 @@
 
 (global-set-key (kbd "A-s A-p") 'exchange-point-and-mark)
 
+(global-set-key (kbd "A-o") 'project-find-file)
+(global-set-key (kbd "A-p") 'project-switch-project)
+(global-set-key (kbd "A-s-o") 'find-file)
+
+
 (global-set-key [escape] 'keyboard-quit)
+
+
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

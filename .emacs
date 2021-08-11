@@ -20,7 +20,6 @@
 (require 'lang-javascript)
 (require 'lang-java)
 (require 'projectile-help-functions)
-;; (require 'lang-lisp)
 (require 'low-config-modes)
 (require 'base-functions)
 (require 'base-global-keys)

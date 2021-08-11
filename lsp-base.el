@@ -17,8 +17,7 @@
   ((js-mode typescript-mode go-mode java-mode rust-mode json-mode) . lsp-deferred)
   :bind
   (:map lsp-mode-map
-        ("s-r"  . lsp-rename)
-        ([remap xref-apropos] . #'helm-lsp-global-workspace-symbol))
+        ("s-r"  . lsp-rename))
 
   :commands (lsp lsp-deferred))
 
@@ -76,9 +75,6 @@
 	("C-c d"   . toggle-lsp-ui-doc))
   :hook
   (lsp-mode . lsp-ui-mode))
-
-(straight-use-package '(helm-lsp :type git :host github :repo "emacs-lsp/helm-lsp"))
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;; (straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
