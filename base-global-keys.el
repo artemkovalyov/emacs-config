@@ -109,7 +109,7 @@
 
 (global-set-key (kbd "A-o") 'project-find-file)
 (global-set-key (kbd "A-p") 'project-switch-project)
-(global-set-key (kbd "A-s-o") 'find-file)
+(global-set-key (kbd "A-s o") 'find-file)
 
 
 (global-set-key [escape] 'keyboard-quit)
