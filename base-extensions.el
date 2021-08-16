@@ -182,18 +182,18 @@
   :bind
   ("A-." . er/expand-region))
 
-(straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
-(use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode)
-  :config
-  (add-to-list 'display-buffer-alist
-             `(,(rx bos "*Flycheck errors*" eos)
-              (display-buffer-reuse-window
-               display-buffer-in-side-window)
-              (side            . bottom)
-              (reusable-frames . visible)
-              (window-height   . 0.21))))
+;; (straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
+;; (use-package flycheck
+;;   :defer t
+;;   :hook (lsp-mode . flycheck-mode)
+;;   :config
+;;   (add-to-list 'display-buffer-alist
+;;              `(,(rx bos "*Flycheck errors*" eos)
+;;               (display-buffer-reuse-window
+;;                display-buffer-in-side-window)
+;;               (side            . bottom)
+;;               (reusable-frames . visible)
+;;               (window-height   . 0.21))))
 
 (use-package comment-dwim-2
   :defer t
@@ -270,8 +270,8 @@
 (use-package undo-tree
   :bind
   ;;"C-x u" - visualize undo tree
-  ("M-z" . undo-tree-undo)
-  ("M-y" . undo-tree-redo)
+  ("C-z" . undo-tree-undo)
+  ("C-y" . undo-tree-redo)
   ;; Remember undo history
   :config
   (setq
@@ -326,8 +326,8 @@
   :config
   (volatile-highlights-mode t))
 
-(straight-use-package 'helpful)
 (use-package helpful
+  :straight (helpful :type git :host github :repo "Wilfred/helpful")
   :bind (("C-c C-d" . helpful-at-point)
          ("C-h f" . 'helpful-callable)
          ("C-h v" . 'helpful-variable)
