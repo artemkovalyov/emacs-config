@@ -1,10 +1,15 @@
 ;; -*- lexical-binding: t; -*-
-;;; package --- my spelling config
+;;; package --- my spellings config
 
 
 ;;; Commentary:
 
 ;;; Code:
+
+(use-package flyspell-correct
+  :straight (flyspell-correct :type git :host github :repo "d12frosted/flyspell-correct")
+  :after flyspell
+  :bind (:map flyspell-mode-map ("A-;" . flyspell-correct-wrapper)))
 
 (setq ispell-choices-win-default-height 3)
 (setq flyspell-use-meta-tab nil)
@@ -15,13 +20,5 @@
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
 
-(global-set-key (kbd "<f7>") 'ispell-word)
-
-(defun flyspell-check-next-highlighted-word ()
-  "Custom function to spell check next highlighted word."
-  (interactive)
-  (flyspell-goto-next-error)
-  (ispell-word))
-(global-set-key (kbd "A-<f7>") 'flyspell-check-next-highlighted-word)
 (provide 'spelling)
 ;;; spelling ends here

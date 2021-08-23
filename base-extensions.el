@@ -182,18 +182,18 @@
   :bind
   ("A-." . er/expand-region))
 
-;; (straight-use-package '(flycheck :type git :host github :repo "flycheck/flycheck"))
-;; (use-package flycheck
-;;   :defer t
-;;   :hook (lsp-mode . flycheck-mode)
-;;   :config
-;;   (add-to-list 'display-buffer-alist
-;;              `(,(rx bos "*Flycheck errors*" eos)
-;;               (display-buffer-reuse-window
-;;                display-buffer-in-side-window)
-;;               (side            . bottom)
-;;               (reusable-frames . visible)
-;;               (window-height   . 0.21))))
+(use-package flycheck
+  :straight (flycheck :type git :host github :repo "flycheck/flycheck")
+  :hook (lsp-mode . flycheck-mode)
+  ;; :config
+  ;; (add-to-list 'display-buffer-alist
+  ;;            `(,(rx bos "*Flycheck errors*" eos)
+  ;;             (display-buffer-reuse-window
+  ;;              display-buffer-in-side-window)
+  ;;             (side            . bottom)
+  ;;             (reusable-frames . visible)
+  ;;             (window-height   . 0.21)))
+  )
 
 (use-package comment-dwim-2
   :defer t
