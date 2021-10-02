@@ -69,7 +69,8 @@
   :bind
   ("A-b" . consult-buffer)
   ("A-f" . consult-ripgrep)
-  ("s-b" . consult-bookmark))
+  ("s-b" . consult-bookmark)
+  ("A-s l" . consult-line))
 
 ;; (use-package company-posframe :init (company-posframe-mode 1) :diminish)
 (use-package corfu
