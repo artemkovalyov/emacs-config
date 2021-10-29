@@ -355,8 +355,10 @@
 (straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
  :init
- (setq switch-window-shortcut-style 'qwerty
-       switch-window-minibuffer-shortcut ?z)
+ (setq
+  switch-window-input-style 'read-event
+  switch-window-shortcut-style 'qwerty
+  switch-window-minibuffer-shortcut ?z)
  :bind
  ("s-SPC" . #'switch-window)
  ("s-m" . #'switch-window-then-maximize)
