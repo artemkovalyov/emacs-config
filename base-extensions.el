@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
@@ -43,26 +43,6 @@
   ("s-g c" . avy-goto-word-or-subword-1)
   ("s-g l" . avy-goto-line))
 
-;; (straight-use-package 'company)
-;; (use-package company
-;;   :init
-;;   (setq company-minimum-prefix-length 1
-;; 	company-idle-delay 0.0
-;;         company-backends '((company-capf company-files company-yasnippet)))
-;;   :hook
-;;   (after-init . global-company-mode)
-;;   :bind
-;;   ("s-c" . company-complete)
-;;   (:map company-active-map
-;;         ("A-k" . company-select-next-or-abort)
-;; 	("A-i" . company-select-previous-or-abort)
-;;         ("A-s" . company-search-candidates)
-;;         ("A-f" . company-filter-candidates)
-;;         ([escape] . company-abort))
-;;   (:map company-search-map
-;; ("A-k" . company-select-next)
-;; ("A-i" . company-select-previous)))
-
 (use-package consult
   :straight
   (consult :type git :host github :repo "minad/consult")
@@ -72,7 +52,8 @@
   ("s-b" . consult-bookmark)
   ("A-s l" . consult-line))
 
-;; (use-package company-posframe :init (company-posframe-mode 1) :diminish)
+(use-package cape)
+
 (use-package corfu
   :straight
   (corfu :type git :host github :repo "minad/corfu")
@@ -80,7 +61,7 @@
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-prefix 3)
+  (corfu-auto-prefix 2)
   (corfu-auto-delya 0.2)
   ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
   ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
@@ -88,12 +69,13 @@
   ;; (corfu-echo-documentation nil) ;; Do not show documentation in the echo area
 
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
-  (:map corfu-map
-         ("TAB" . corfu-next)
-         ([tab] . corfu-next)
-         ("S-TAB" . corfu-previous)
-         ([backtab] . corfu-previous)
-         ([escape] . corfu-quit))
+  ;; :bind
+  ;; (:map corfu-map
+  ;;        ("TAB" . corfu-next)
+  ;;        ([tab] . corfu-next)
+  ;;        ("S-TAB" . corfu-previous)
+  ;;        ([backtab] . corfu-previous)
+  ;;        ([escape] . corfu-quit))
 
   ;; You may want to enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
@@ -110,15 +92,15 @@
 ;; You may prefer to use `initials' instead of `partial-completion'.
 (use-package orderless
   :init
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless partial-completion)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles . (partial-completion))))))
+        completion-category-overrides nil))
 
 ;; A few more useful configurations...
 (use-package emacs
   :init
   ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 5)
+  (setq completion-cycle-threshold 3)
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
   ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
@@ -437,20 +419,6 @@
 ;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
 
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
-
-(use-package emacs
-  :init
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 5)
-
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete))
 
 (use-package highlight-indent-guides
   :straight (highlight-indent-guides :host github :repo "DarthFennec/highlight-indent-guides")

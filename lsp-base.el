@@ -8,13 +8,30 @@
 ;;; activate LSP mode
 (use-package lsp-mode
   :defer t
+  :custom
+  (lsp-completion-provider :none) ;; corfu is used
   :init
   (setq lsp-keymap-prefix "s-l")
-        ;; lsp-log-io t ; enable debug log - can be a huge performance hit
+  ;; lsp-log-io t ; enable debug log - can be a huge performance hit
+  (defun my/orderless-dispatch-flex-first (_pattern index _total)
+    (and (eq index 0) 'orderless-flex))
+
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless)))
+
+  ;; Optionally configure the first word as flex filtered.
+  (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
+
+  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+
   :config
   (lsp-treemacs-sync-mode 1)
+
   :hook
   ((js-mode typescript-mode go-mode java-mode rust-mode json-mode) . lsp-deferred)
+  (lsp-completion-mode . my/lsp-mode-setup-completion)
+
   :bind
   (:map lsp-mode-map
         ("s-r"  . lsp-rename))
