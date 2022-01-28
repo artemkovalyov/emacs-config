@@ -38,10 +38,11 @@
   :bind
   ("s-g s-c" . avy-copy-line)
   ("s-g s-m" . avy-move-line)
-  ("s-g c" . avy-goto-word-or-subword-1)
-  ("s-g l" . avy-goto-line))
+  ("s-g w" . avy-goto-word-or-subword-1)
+  ("s-g l" . avy-goto-line)
+  ("s-g c" . avy-goto-char))
 
-(use-package consult
+(USE-package consult
   :straight
   (consult :type git :host github :repo "minad/consult")
   :bind
