@@ -4,8 +4,6 @@
 
 ;;;Code:
 
-(setq flyspell-use-meta-tab nil)
-
 ;; A more complex, more lazy-loaded config
 ;;(use-package solaire-mode
 ;; Ensure solaire-mode is running in all solaire-mode buffers
@@ -52,32 +50,30 @@
   ("s-b" . consult-bookmark)
   ("A-s l" . consult-line))
 
-(use-package cape
-  :straight
-  (cape :type git :host github :repo "minad/cape"))
-
 (use-package corfu
   :straight
   (corfu :type git :host github :repo "minad/corfu")
   ;; Optional customizations
   :custom
+  ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
+  ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  (corfu-preselect-first nil)    ;; Disable candidate preselection
+  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 2)
-  (corfu-auto-delya 0.2)
-  ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
-  ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  (corfu-auto-delya nil)
   (corfu-quit-no-match t)        ;; Automatically quit if there is no match
-  ;; (corfu-echo-documentation nil) ;; Do not show documentation in the echo area
-
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
   ;; :bind
-  ;; (:map corfu-map
-  ;;        ("TAB" . corfu-next)
-  ;;        ([tab] . corfu-next)
-  ;;        ("S-TAB" . corfu-previous)
-  ;;        ([backtab] . corfu-previous)
-  ;;        ([escape] . corfu-quit))
+  (:map corfu-map
+         ("TAB" . corfu-next)
+         ([tab] . corfu-next)
+         ("S-TAB" . corfu-previous)
+         ([backtab] . corfu-previous)
+         ([escape] . corfu-quit))
 
   ;; You may want to enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
@@ -88,6 +84,25 @@
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
   (corfu-global-mode))
+
+(use-package cape
+  :straight
+  (cape :type git :host github :repo "minad/cape")
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+)
+
 
 ;; Optionally use the `orderless' completion style.
 ;; Enable `partial-completion' for files to allow path expansion.
