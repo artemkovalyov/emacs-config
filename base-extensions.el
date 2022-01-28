@@ -52,7 +52,9 @@
   ("s-b" . consult-bookmark)
   ("A-s l" . consult-line))
 
-(use-package cape)
+(use-package cape
+  :straight
+  (cape :type git :host github :repo "minad/cape"))
 
 (use-package corfu
   :straight
