@@ -42,7 +42,7 @@
   ("s-g l" . avy-goto-line)
   ("s-g c" . avy-goto-char))
 
-(USE-package consult
+(use-package consult
   :straight
   (consult :type git :host github :repo "minad/consult")
   :bind
