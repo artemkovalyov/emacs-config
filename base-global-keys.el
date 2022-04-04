@@ -108,6 +108,8 @@
 (global-set-key (kbd "A-s A-p") 'exchange-point-and-mark)
 
 (global-set-key (kbd "A-o") 'project-find-file)
+(global-set-key (kbd "A-o") 'project-find-file)
+(global-set-key (kbd "A-o") 'project-find-file)
 (global-set-key (kbd "A-p") 'project-switch-project)
 (global-set-key (kbd "A-s o") 'find-file)
 
