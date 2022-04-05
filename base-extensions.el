@@ -399,6 +399,12 @@
 (use-package nginx-mode
   :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
 
+(use-package javascript-mode
+  :init (setq js-indent-level 2)
+  :mode
+  ("\\.tsx\\'" . js-mode)
+  ("\\.ts\\'" . js-mode))
+
 (straight-use-package 'selectrum)
 (use-package selectrum
   :init

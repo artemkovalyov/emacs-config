@@ -17,7 +17,6 @@
 (require 'lsp-base)
 (require 'lang-rust)
 (require 'lang-json)
-(require 'lang-javascript)
 (require 'lang-java)
 (require 'projectile-help-functions)
 (require 'low-config-modes)
