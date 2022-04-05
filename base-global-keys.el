@@ -114,7 +114,5 @@
 
 (global-set-key [escape] 'keyboard-quit)
 
-
-
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

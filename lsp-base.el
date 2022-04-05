@@ -12,7 +12,7 @@
   (lsp-completion-provider :none) ;; corfu is used
   :init
   (setq lsp-keymap-prefix "s-l")
-  ;; lsp-log-io t ; enable debug log - can be a huge performance hit
+  ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
   (defun my/orderless-dispatch-flex-first (_pattern index _total)
     (and (eq index 0) 'orderless-flex))
 
@@ -29,7 +29,7 @@
   (lsp-treemacs-sync-mode 1)
 
   :hook
-  ((js-mode go-mode java-mode rust-mode json-mode) . lsp-deferred)
+  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode html-mode css-mode) . lsp-deferred)
   (lsp-completion-mode . my/lsp-mode-setup-completion)
 
   :bind
@@ -101,6 +101,14 @@
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode)) ;
 
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+(straight-use-package '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss"))
+
+(use-package lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t)
+  :config
+  (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode js-mode typescript-mode)))
 
 (provide 'lsp-base)
 ;;; lsp-base.el ends here

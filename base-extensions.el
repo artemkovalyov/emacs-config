@@ -51,11 +51,17 @@
   ("s-b" . consult-bookmark)
   ("A-s l" . consult-line))
 
+(use-package cape)
+
 (use-package corfu
   :straight
   (corfu :type git :host github :repo "minad/corfu")
   ;; Optional customizations
   :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delya 0.2)
   ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
   ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
@@ -69,12 +75,12 @@
   (corfu-quit-no-match t)        ;; Automatically quit if there is no match
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
   ;; :bind
-  (:map corfu-map
-         ("TAB" . corfu-next)
-         ([tab] . corfu-next)
-         ("S-TAB" . corfu-previous)
-         ([backtab] . corfu-previous)
-         ([escape] . corfu-quit))
+  ;; (:map corfu-map
+  ;;        ("TAB" . corfu-next)
+  ;;        ([tab] . corfu-next)
+  ;;        ("S-TAB" . corfu-previous)
+  ;;        ([backtab] . corfu-previous)
+  ;;        ([escape] . corfu-quit))
 
   ;; You may want to enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
