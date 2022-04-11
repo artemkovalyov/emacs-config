@@ -63,7 +63,7 @@
   (corfu-auto-prefix 2)
   (corfu-auto-delya 0.2)
   ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
-  ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  (corfu-quit-at-boundary nil)     ;; Automatically quit at word boundary
   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
   (corfu-preselect-first nil)    ;; Disable candidate preselection
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
@@ -74,13 +74,13 @@
   (corfu-auto-delya nil)
   (corfu-quit-no-match t)        ;; Automatically quit if there is no match
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
-  ;; :bind
-  ;; (:map corfu-map
-  ;;        ("TAB" . corfu-next)
-  ;;        ([tab] . corfu-next)
-  ;;        ("S-TAB" . corfu-previous)
-  ;;        ([backtab] . corfu-previous)
-  ;;        ([escape] . corfu-quit))
+  :bind
+  (:map corfu-map
+         ("TAB" . corfu-next)
+         ([tab] . corfu-next)
+         ("S-TAB" . corfu-previous)
+         ([backtab] . corfu-previous)
+         ([escape] . corfu-quit))
 
   ;; You may want to enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
@@ -91,6 +91,9 @@
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
   (corfu-global-mode))
+
+
+
 
 (use-package cape
   :straight

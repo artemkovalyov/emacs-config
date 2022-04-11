@@ -27,4 +27,11 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; Svelte mode
+(straight-use-package '(svelte-mode :type git :host github :repo "leafOfTree/svelte-mode"))
+(use-package svelte-mode
+  :mode ("\\.svelte\\'" . svelte-mode)
+  :custom
+  (svelte-basic-offset 2))
+
 (provide 'low-config-modes)
