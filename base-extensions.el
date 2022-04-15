@@ -93,7 +93,7 @@
   (add-to-list 'completion-at-point-functions #'cape-tex)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
   ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
   ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
   ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
@@ -380,7 +380,8 @@
    (js-mode . emmet-mode)
    (html-mode . emmet-mode)
    (css-mode . emmet-mode)
-   (markdown-mode . emmet-mode)))
+   (markdown-mode . emmet-mode)
+   (svelte-mode . emmet-mode)))
 
 (straight-use-package '(restart-emacs :type git :host github :repo "raxod502/restart-emacs"))
 (straight-use-package '(ctrlf :type git :host github :repo "raxod502/ctrlf"))
