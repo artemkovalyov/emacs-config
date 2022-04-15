@@ -356,11 +356,8 @@
   switch-window-shortcut-style 'qwerty
   switch-window-minibuffer-shortcut ?z)
  :bind
- ("s-SPC" . #'switch-window)
- ("s-m" . #'switch-window-then-maximize)
- ("s-q" . #'switch-window-then-delete)
- ("s-h" . #'switch-window-then-split-horizontally)
- ("s-v" . #'switch-window-then-split-vertically))
+ ("s-s" . #'switch-window)
+ )
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -450,16 +447,18 @@
 (use-package windmove
   :bind
   ("s-o" . other-window)
-  ("s-j" . move-left)
+  ("s-j" . windmove-left)
   ("s-l" . windmove-right)
   ("s-k" . windmove-down)
   ("s-i" . windmove-up)
-  ("A-s w" . delete-other-windows)
-  ("A-H-w " . delete-window)
+  ("s-w" . delete-other-windows)
+  ("s-q " . delete-window)
   ("A-s-i" . enlarge-window)
   ("A-s-k" . shrink-window)
   ("A-s-j" . shrink-window-horizontally)
   ("A-s-l" . enlarge-window-horizontally)
+  ("s-h" . split-window-horizontally)
+  ("s-v" . split-window-vertically)
 )
 
 
