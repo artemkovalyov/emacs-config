@@ -52,12 +52,6 @@
   ("A-s l" . consult-line))
 
 (use-package cape)
-
-(use-package corfu
-  :straight
-  (corfu :type git :host github :repo "minad/corfu")
-  ;; Optional customizations
-  :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 2)
@@ -81,11 +75,6 @@
          ("S-TAB" . corfu-previous)
          ([backtab] . corfu-previous)
          ([escape] . corfu-quit))
-
-  ;; You may want to enable Corfu only for certain modes.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
 
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since dabbrev can be used globally (M-/).
