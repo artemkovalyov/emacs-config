@@ -29,7 +29,7 @@
   (lsp-treemacs-sync-mode 1)
 
   :hook
-  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode html-mode css-mode) . lsp-deferred)
+  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode html-mode css-mode svelte-mode) . lsp-deferred)
   (lsp-completion-mode . my/lsp-mode-setup-completion)
 
   :bind

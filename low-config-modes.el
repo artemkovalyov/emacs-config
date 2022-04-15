@@ -32,6 +32,29 @@
 (use-package svelte-mode
   :mode ("\\.svelte\\'" . svelte-mode)
   :custom
-  (svelte-basic-offset 2))
+  (svelte-basic-offset 2)
+  :config
+  (defun svelte-mode-sgml-empty-tag-p-advice (old-function tag-name)
+    "Advice function intended to wrap around `sgml-empty-tag-p
+Makes case significant when checking whether tags need to be
+closed or not, to not confuse elements with Svelte components."
+    (if (eq major-mode 'svelte-mode)
+        (assoc-string tag-name sgml-empty-tags)
+      (funcall old-function tag-name)))
+
+  (defun svelte-mode-sgml-unclosed-tag-p-advice (old-function tag-name)
+    "Advice function intended to wrap around `sgml-unclosed-tag-p
+Makes case significant when checking whether tags need to be
+closed or not, to not confuse elements with Svelte components."
+    (if (eq major-mode 'svelte-mode)
+        (assoc-string tag-name sgml-unclosed-tags)
+      (funcall old-function tag-name)))
+
+  (advice-add 'sgml-empty-tag-p :around 'svelte-mode-sgml-empty-tag-p-advice)
+  (advice-add 'sgml-unclosed-tag-p :around 'svelte-mode-sgml-unclosed-tag-p-advice)
+  )
+
+(use-package javascript-mode
+  :mode ("\\.cjs\\'" . js-mode))
 
 (provide 'low-config-modes)
