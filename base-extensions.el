@@ -47,7 +47,7 @@
   (consult :type git :host github :repo "minad/consult")
   :bind
   ("A-b" . consult-buffer)
-  ("s-f" . consult-ripgrep)
+  ("M-f" . consult-ripgrep)
   ("s-b" . consult-bookmark)
   ("s-g b" . bookmark-delete)
   ("A-f" . consult-line))
@@ -364,7 +364,7 @@
 (use-package rg
   :defer
   :bind
-  ("C-f" . rg-menu))
+  ("s-f" . rg-menu))
 
 (straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
 (use-package emmet-mode
