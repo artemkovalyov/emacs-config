@@ -47,9 +47,10 @@
   (consult :type git :host github :repo "minad/consult")
   :bind
   ("A-b" . consult-buffer)
-  ("A-f" . consult-ripgrep)
+  ("s-f" . consult-ripgrep)
   ("s-b" . consult-bookmark)
-  ("A-s l" . consult-line))
+  ("s-g b" . bookmark-delete)
+  ("A-f" . consult-line))
 
 (use-package corfu
   ;; Optional customizations
@@ -58,7 +59,7 @@
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-separator ?\s)          ;; Orderless field separator
   (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  (corfu-quit-no-match t)      ;; Never quit, even if there is no match
   (corfu-preview-current t)    ;; Disable current candidate preview
   (corfu-preselect-first t)    ;; Disable candidate preselection
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
@@ -363,7 +364,7 @@
 (use-package rg
   :defer
   :bind
-  ("A-s f" . rg-menu))
+  ("C-f" . rg-menu))
 
 (straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
 (use-package emmet-mode
@@ -439,7 +440,7 @@
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
 (use-package highlight-indent-guides
-  :straight (highlight-indent-guides :host github :repo "DarthFennec/highlight-indent-guides")
+  :straight (highlight-indent-guides :type git :host github :repo "DarthFennec/highlight-indent-guides")
   :custom (highlight-indent-guides-method 'character)
   :hook (prog-mode . highlight-indent-guides-mode))
 
@@ -459,7 +460,41 @@
   ("A-s-l" . enlarge-window-horizontally)
   ("s-h" . split-window-horizontally)
   ("s-v" . split-window-vertically)
-)
+  )
+
+(use-package pulsar
+  :straight (pulsar :type git :host github :repo "protesilaos/pulsar")
+  :init
+  (setq pulsar-pulse-functions
+      ;; NOTE 2022-04-09: The commented out functions are from before
+      ;; the introduction of `pulsar-pulse-on-window-change'.  Try that
+      ;; instead.
+      '(recenter-top-bottom
+        move-to-window-line-top-bottom
+        reposition-window
+        bookmark-jump
+        forward-page
+        backward-page
+        scroll-up-command
+        scroll-down-command
+        org-next-visible-heading
+        org-previous-visible-heading
+        org-forward-heading-same-level
+        org-backward-heading-same-level
+        outline-backward-same-level
+        outline-forward-same-level
+        outline-next-visible-heading
+        outline-previous-visible-heading
+        outline-up-heading))
+(setq pulsar-pulse-on-window-change t)
+(setq pulsar-pulse t)
+(setq pulsar-delay 0.055)
+(setq pulsar-iterations 10)
+(setq pulsar-face 'pulsar-magenta)
+(setq pulsar-highlight-face 'pulsar-yellow)
+:bind ("A-s l" . #'pulsar-pulse-line)
+:config
+(pulsar-global-mode 1))
 
 
 (provide 'base-extensions)
