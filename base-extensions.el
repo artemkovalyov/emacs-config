@@ -266,6 +266,7 @@
   (require 'smartparens-config))
 
 (use-package undo-tree
+  :straight (undo-tree :type git :host gitlab :repo "tsc25/undo-tree")
   :bind
   ;;"C-x u" - visualize undo tree
   ("C-z" . undo-tree-undo)
@@ -275,7 +276,7 @@
   (setq
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode))
 
 (use-package which-key
   :config
@@ -357,8 +358,7 @@
   switch-window-shortcut-style 'qwerty
   switch-window-minibuffer-shortcut ?z)
  :bind
- ("s-s" . #'switch-window)
- )
+ ("s-s" . #'switch-window))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -459,8 +459,7 @@
   ("A-s-j" . shrink-window-horizontally)
   ("A-s-l" . enlarge-window-horizontally)
   ("s-h" . split-window-horizontally)
-  ("s-v" . split-window-vertically)
-  )
+  ("s-v" . split-window-vertically))
 
 (use-package pulsar
   :straight (pulsar :type git :host github :repo "protesilaos/pulsar")
@@ -496,5 +495,7 @@
 :config
 (pulsar-global-mode 1))
 
+(use-package uuidgen
+  :straight (uuidgen :type git :host github :repo "kanru/uuidgen-el"))
 
 (provide 'base-extensions)

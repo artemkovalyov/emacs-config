@@ -131,6 +131,43 @@ point reaches the beginning or end of the buffer, stop there."
   (sp-wrap-with-pair "'"))
 
 
+(defun insert-timestamp-default ()
+  "Insert the current timestamp"
+  (interactive)
+  (insert (current-time-string)))
+(defalias 'its 'insert-timestamp-default)
+
+(defun insert-timestamp-htmlcomment ()
+  "Insert the current timestamp (HTML comment)"
+  (interactive)
+  (insert
+   (concat
+    "<!-- "
+    (format-time-string "%Y-%m-%d %T ")
+    ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
+     (format-time-string "%z"))
+    " -->\n")))
+(defalias 'itsh 'insert-timestamp-htmlcomment)
+
+(defun insert-timestamp-unixtime ()
+  "Insert the current Unix time"
+  (interactive)
+  (let ((time (current-time)))
+    (let ((time1 (car time))
+          (time2 (car (cdr time))))
+      (insert (format "%d" (+ (* 65536 time1) time2))))))
+(defalias 'itsu 'insert-timestamp-unixtime)
+
+(defun insert-timestamp-iso ()
+  "Insert the current timestamp (ISO 8601 format)"
+  (interactive)
+  (insert
+   (concat
+    (format-time-string "%Y-%m-%dT%T")
+    ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
+     (format-time-string "%z")))))
+(defalias 'itsi 'insert-timestamp-iso)
+(defalias 'itsiso 'insert-timestamp-iso)
 
 (provide 'base-functions)
 ;;; .base-functions.el ends here
