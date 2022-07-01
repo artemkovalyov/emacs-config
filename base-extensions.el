@@ -82,7 +82,7 @@
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
-  (corfu-global-mode))
+  (global-corfu-mode))
 
 (use-package cape
   :straight
@@ -95,12 +95,12 @@
   (add-to-list 'completion-at-point-functions #'cape-keyword)
   (add-to-list 'completion-at-point-functions #'cape-sgml)
   ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
   ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
-)
+  ;; (add-to-list 'completion-at-point-functions #'cape-dict)
+  ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;; (add-to-list 'completion-at-point-functions #'cape-line)
+  )
 
 
 ;; Optionally use the `orderless' completion style.
