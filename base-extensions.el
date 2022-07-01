@@ -52,6 +52,7 @@
   ("s-g b" . bookmark-delete)
   ("A-f" . consult-line))
 
+(straight-use-package '(corfu :type git :host github :repo "minad/corfu"))
 (use-package corfu
   ;; Optional customizations
   :custom

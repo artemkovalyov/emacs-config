@@ -57,4 +57,8 @@ closed or not, to not confuse elements with Svelte components."
 (use-package javascript-mode
   :mode ("\\.cjs\\'" . js-mode))
 
+;; (use-package typescript-mode
+;;   :straight (typescript-mode :type git :host github :repo "emacs-typescript/typescript.el")
+;;   )
+
 (provide 'low-config-modes)
