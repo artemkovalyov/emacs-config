@@ -11,7 +11,9 @@
   :custom
   (lsp-completion-provider :none) ;; corfu is used
   :init
-  (setq lsp-keymap-prefix "s-SPC")
+  (setq lsp-keymap-prefix "s-SPC"
+        lsp-use-plists t)
+
   ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
   (defun my/orderless-dispatch-flex-first (_pattern index _total)
     (and (eq index 0) 'orderless-flex))
