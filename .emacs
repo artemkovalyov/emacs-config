@@ -4,9 +4,9 @@
 ;;; Commentary:
 
 ;;; Code:
-(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
-      gc-cons-percentage 0.6
-      art-gc-cons-threshold 16777216)
+;; (setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
+      ;; gc-cons-percentage 0.6
+      ;; art-gc-cons-threshold 16777216)
 
 (add-to-list 'load-path (concat user-emacs-directory "emacs-config"))
 
@@ -23,5 +23,8 @@
 (require 'base-functions)
 (require 'base-global-keys)
 (require 'base-theme)
+(require 'artem-tree-sitter)
+
 (provide '.emacs)
 ;;; .emacs ends here
+(put 'narrow-to-region 'disabled nil)

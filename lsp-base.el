@@ -13,7 +13,6 @@
   :init
   (setq lsp-keymap-prefix "s-SPC"
         lsp-use-plists t)
-
   ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
   (defun my/orderless-dispatch-flex-first (_pattern index _total)
     (and (eq index 0) 'orderless-flex))
@@ -28,10 +27,11 @@
   (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
 
   :config
+  (add-to-list 'lsp-language-id-configuration '(svelte-mode . "svelte"))
   (lsp-treemacs-sync-mode 1)
 
   :hook
-  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode html-mode css-mode svelte-mode) . lsp-deferred)
+  ((js-mode typescript-mode go-mode java-mode rust-mode json-mode html-mode css-mode svelte-mode web-mode) . lsp-deferred)
   (lsp-completion-mode . my/lsp-mode-setup-completion)
 
   :bind

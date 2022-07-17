@@ -25,16 +25,17 @@
 
 (use-package drag-stuff
   :straight (drag-stuff :type git :host github :repo "rejeep/drag-stuff.el")
-   :config
-   (drag-stuff-global-mode 1)
-   :bind
-   ("A-M-j" . drag-stuff-left)
-   ("A-M-l" . drag-stuff-right)
-   ("A-M-i" . drag-stuff-up)
-   ("A-M-k" . drag-stuff-down))
+  :config
+  (drag-stuff-global-mode 1)
+  :bind
+  ("A-M-j" . drag-stuff-left)
+  ("A-M-l" . drag-stuff-right)
+  ("A-M-i" . drag-stuff-up)
+  ("A-M-k" . drag-stuff-down))
 
-(straight-use-package '(avy :type git :host github :repo "abo-abo/avy"))
+
 (use-package avy
+  :straight (avy :type git :host github :repo "abo-abo/avy")
   :bind
   ("s-g s-c" . avy-copy-line)
   ("s-g s-m" . avy-move-line)
@@ -43,8 +44,7 @@
   ("s-g c" . avy-goto-char))
 
 (use-package consult
-  :straight
-  (consult :type git :host github :repo "minad/consult")
+  :straight (consult :type git :host github :repo "minad/consult")
   :bind
   ("A-b" . consult-buffer)
   ("M-f" . consult-ripgrep)
@@ -66,19 +66,15 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-
-
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 2)
   (corfu-auto-delya 0.2)
   (corfu-auto-prefix 2)
   (corfu-auto-delya nil)
-
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
   :bind
   (:map corfu-map
          ([escape] . corfu-quit))
-
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
@@ -131,7 +127,6 @@
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
   :demand
-  ;; :defer t
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-headline-match)
@@ -154,44 +149,35 @@
   (dashboard-setup-startup-hook))
 
 (use-package ediff
-  :defer t
+  :bind
+  (:map ediff-mode-map
+        ("A-i" . ediff-previous-difference)
+        ("A-k" . ediff-next-difference))
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
 	ediff-diff-options "-w")
   (setq-default ediff-forward-word-function 'forward-char)
-  (setq-default ediff-highlight-all-diffs 't)
-  (defun artem-ediff-hook ()
-    (ediff-setup-keymap)
-    (define-key ediff-mode-map (kbd "A-i") 'ediff-previous-difference)
-    (define-key ediff-mode-map (kbd "A-k") 'ediff-next-difference))
-  :hook (ediff-mode . artem-ediff-hook)
-  )
+  (setq-default ediff-highlight-all-diffs 't))
 
-(use-package exec-path-from-shell
-  :config
-  ;; Add GOPATH to shell
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-copy-env "GOPATH")
-    (exec-path-from-shell-copy-env "PYTHONPATH")
-    (exec-path-from-shell-copy-env "PATH")
-    (exec-path-from-shell-initialize)))
+;; (use-package exec-path-from-shell
+;;   :config
+;;   ;; Add GOPATH to shell
+;;   (when (memq window-system '(mac ns x))
+;;     (exec-path-from-shell-copy-env "GOPATH")
+;;     (exec-path-from-shell-copy-env "PYTHONPATH")
+;;     (exec-path-from-shell-copy-env "PATH")
+;;     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
-  :defer t
+  :config
+  (message "This is evaluated when AVY is loaded")
+
   :bind
   ("A-." . er/expand-region))
 
 (use-package flycheck
   :straight (flycheck :type git :host github :repo "flycheck/flycheck")
   :hook (lsp-mode . flycheck-mode)
-  ;; :config
-  ;; (add-to-list 'display-buffer-alist
-  ;;            `(,(rx bos "*Flycheck errors*" eos)
-  ;;             (display-buffer-reuse-window
-  ;;              display-buffer-in-side-window)
-  ;;             (side            . bottom)
-  ;;             (reusable-frames . visible)
-  ;;             (window-height   . 0.21)))
   )
 
 (use-package comment-dwim-2
@@ -199,13 +185,12 @@
   :bind
     ("A-/" . comment-dwim-2))
 
-(straight-use-package '(wgrep :type git :host github :repo "mhayashi1120/Emacs-wgrep"))
-(use-package wgrep)
+(use-package wgrep
+  :straight (wgrep :type git :host github :repo "mhayashi1120/Emacs-wgrep"))
 
-
-(straight-use-package '(magit :type git :host github :repo "magit/magit"))
 
 (use-package magit
+  :straight (magit :type git :host github :repo "magit/magit")
   :config
   (setq magit-refresh-status-buffer nil)
   :bind
@@ -222,12 +207,12 @@
 	("<tab>" . magit-section-toggle)))
 
 
-(straight-use-package '(magit-popup :type git :host github :repo "magit/magit-popup"))
 (use-package magit-popup
+  :straight (magit-popup :type git :host github :repo "magit/magit-popup")
   :after magit)
 
-(straight-use-package '(forge :type git :host github :repo "magit/forge"))
 (use-package forge
+  :straight (forge :type git :host github :repo "magit/forge")
   :after magit)
 
 (use-package multiple-cursors
@@ -238,7 +223,7 @@
   ("s-d" . mc/mark-next-like-this)
   ("s-e" . mc/mark-previous-like-this)
   ("C-n" . mc/mark-all-like-this)
-  ("A-<mouse-1>" . mc/add-cursor-on-click))
+  ("s-<mouse-1>" . mc/add-cursor-on-click))
 
 (use-package projectile
   :ensure t
@@ -249,9 +234,8 @@
   (projectile-register-project-type 'yarn '("package.json"))
   (projectile-mode 1))
 
-(straight-use-package '(smartparens :host github :repo "Fuco1/smartparens"))
-
-(use-package smartparens
+(use-package smartparen
+  :straight (smartparens :host github :repo "Fuco1/smartparens")
   :init
   (setq sp-navigate-reindent-after-up-in-string nil
         sp-navigate-reindent-after-up nil)
@@ -268,12 +252,13 @@
 
 (use-package undo-tree
   :straight (undo-tree :type git :host gitlab :repo "tsc25/undo-tree")
+  :demand t
   :bind
   ;;"C-x u" - visualize undo tree
   ("C-z" . undo-tree-undo)
   ("C-y" . undo-tree-redo)
   ;; Remember undo history
-  :config
+  :init
   (setq
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
@@ -283,8 +268,8 @@
   :config
   (which-key-mode))
 
-(straight-use-package '(yasnippet :type git :host github :repo "joaotavora/yasnippet"))
 (use-package yasnippet
+  :straight (yasnippet :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :init
   (yas-global-mode)
@@ -296,24 +281,6 @@
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 (straight-use-package 'react-snippets)
-
-
- (use-package dimmer
-  :disabled
-  :custom
-  (dimmer-fraction 0.3)
-  (dimmer-exclusion-regexp-list
-       '(".*Minibuf.*"
-         ".*which-key.*"
-         ".*NeoTree.*"
-         ".*Messages.*"
-         ".*Async.*"
-         ".*Warnings.*"
-         ".*LV.*"
-         ".*Ilist.*"))
-  :config
-  (dimmer-mode t))
-
 
 (use-package rainbow-mode
   :diminish
@@ -346,20 +313,20 @@
 
 
 ;;duplicating lines and
-(straight-use-package '(duplicate-thing :type git :host github :repo "artemkovalyov/duplicate-thing"))
 (use-package duplicate-thing
+  :straight (duplicate-thing :type git :host github :repo "artemkovalyov/duplicate-thing")
   :bind
   ("A-d" . duplicate-thing))
 
-(straight-use-package '(switch-window :type git :host github :repo "dimitri/switch-window"))
 (use-package switch-window
- :init
- (setq
-  switch-window-input-style 'read-event
-  switch-window-shortcut-style 'qwerty
-  switch-window-minibuffer-shortcut ?z)
- :bind
- ("s-s" . #'switch-window))
+  :straight (switch-window :type git :host github :repo "dimitri/switch-window")
+  :init
+  (setq
+   switch-window-input-style 'read-event
+   switch-window-shortcut-style 'qwerty
+   switch-window-minibuffer-shortcut ?z)
+  :bind
+  ("s-s" . #'switch-window))
 
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -367,8 +334,8 @@
   :bind
   ("s-f" . rg-menu))
 
-(straight-use-package '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
 (use-package emmet-mode
+  :straight (emmet-mode :type git :host github :repo "smihica/emmet-mode")
   :bind
   (:map emmet-mode-keymap
         (("C-j" . nil)))
@@ -378,30 +345,22 @@
    (html-mode . emmet-mode)
    (css-mode . emmet-mode)
    (markdown-mode . emmet-mode)
-   (svelte-mode . emmet-mode)))
+   (svelte-mode . emmet-mode)
+   (web-mode . emmet-mode)))
 
-(straight-use-package '(restart-emacs :type git :host github :repo "raxod502/restart-emacs"))
-(straight-use-package '(ctrlf :type git :host github :repo "raxod502/ctrlf"))
+(use-package restart-emacs
+  :straight (restart-emacs :type git :host github :repo "raxod502/restart-emacs"))
+
 (use-package ctrlf
+  :straight (ctrlf :type git :host github :repo "raxod502/ctrlf")
   :config
   (ctrlf-mode +1))
 
-(straight-use-package '(apheleia :host github :repo "raxod502/apheleia"))
 (use-package apheleia
+  :straight (apheleia :host github :repo "raxod502/apheleia")
   :init
   (apheleia-global-mode +1))
 
-(straight-use-package '(nginx-mode :host github :repo "ajc/nginx-mode"))
-(use-package nginx-mode
-  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
-
-(use-package javascript-mode
-  :init (setq js-indent-level 2)
-  :mode
-  ("\\.tsx\\'" . js-mode)
-  ("\\.ts\\'" . js-mode))
-
-(straight-use-package 'selectrum)
 (use-package selectrum
   :init
   (setq selectrum-max-window-height 20)

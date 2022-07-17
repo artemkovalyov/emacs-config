@@ -4,28 +4,30 @@
 ;;; Code:
 ;; (package-initialize)
 
+;; Go back to normal GC behavior after init
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (setq     gc-cons-threshold    art-gc-cons-threshold ;;most-positive-fixnum
-                      gc-cons-percentage   0.1
-                      read-process-output-max           (* 1024 1024 1024))))
+            (setq gc-cons-threshold (* 16 1024 1024) ; 16mb
+                  gc-cons-percentage 0.1
+                  read-process-output-max  (* 1024 1024)))) ; 1 mb read buffer for LSP
 
-(defun defer-garbage-collection-h ()
+;; Don't do GC when the minibuffer is being used (lag during minibuffer usage is frustrating)
+(defun doom-defer-garbage-collection-h ()
+  "Disable garbage collection."
   (setq gc-cons-threshold most-positive-fixnum))
 
-(defun restore-garbage-collection-h ()
-  ;; Defer it so that commands launched immediately after will enjoy the
-  ;; benefits.
+(defun doom-restore-garbage-collection-h ()
+  "Restore garbage collection."
   (run-at-time
-   1 nil (lambda () (setq gc-cons-threshold art-gc-cons-threshold))))
+   1 nil (lambda () (setq gc-cons-threshold 16777216))))
 
-(add-hook 'minibuffer-setup-hook #'defer-garbage-collection-h)
-(add-hook 'minibuffer-exit-hook #'restore-garbage-collection-h)
+(add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
+(add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
+;; GCMH (literally Garbage Collector Magic Hack) optimizes GC calls?
 
 ;; straight.el package manager
 (defvar bootstrap-version)
 (setq straight-repository-branch "develop")
-
 
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -39,21 +41,22 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; Disable package.el in favor of straight.el
+(setq package-enable-at-startup nil)
+;; Configure use-package to use straight.el by default
+(setq straight-use-package-by-default t)
+
 (straight-use-package '(el-patch :type git :host github :repo "raxod502/el-patch"))
 (straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
 
-(use-package el-patch
-  :straight t)
+;; Always defer package load unless demanded
+;; (setq use-package-always-defer t)
 
-(setq straight-use-package-by-default t)
-
-
-
-;; (straight-use-package 'benchmark-init)
-
-;; (use-package benchmark-init
-;;   :demand t
-;;   :hook ((after-init . benchmark-init/deactivate)))
+(use-package gcmh ; improved garbage collecion for emacs
+  :init
+  (setq gcmh-idle-delay 5)
+  (setq gcmh-high-cons-threshold (* 16 1024 1024)) ; 16mb
+  (gcmh-mode))
 
 (setq hscroll-margin                  7
       scroll-margin                   7
@@ -112,8 +115,7 @@ sentence-end-double-space nil)
  x-stretch-cursor                   t
  truncate-string-ellipsis           "…"
  ad-redefinition-action             'accept
- tramp-default-method               "ssh"
- )
+ tramp-default-method               "ssh")
 
 ;; Bookmarks
 (setq
@@ -145,7 +147,6 @@ sentence-end-double-space nil)
 (electric-pair-mode t)
 (global-subword-mode t)
 
-
 ;; Show column number in status bar
 (column-number-mode)
 
@@ -172,11 +173,6 @@ sentence-end-double-space nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
-;; change default size of diff region from a word to a char
-(setq-default ediff-forward-word-function 'forward-char)
-(setq-default ediff-highlight-all-diffs t)
-
-
 (if (eq initial-window-system 'x)                 ; if started by emacs command or desktop file
     (toggle-frame-maximized)
   (toggle-frame-fullscreen))
@@ -186,9 +182,6 @@ sentence-end-double-space nil)
 ;; Create a keymaps and bind them to your key combination
 (setq super-g-map (make-sparse-keymap))
 (global-set-key (kbd "s-g") super-g-map)
-
-;; (setq super-k-map (make-sparse-keymap))
-;; (global-set-key (kbd "s-s") super-k-map)
 
 (provide 'base)
 ;;; base ends here
