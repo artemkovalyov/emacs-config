@@ -55,9 +55,7 @@
   :after spell-fu
   :config
   (ispell-set-spellchecker-params)  ;; Initializes important ispell parameters (like 'ispell-dictionary-alist)
-  :bind ("A-;" . flyspell-correct-wrapper)
-  ("C-." . flyspell-correct-at-point)
-  )
+  :bind ("A-;" . flyspell-correct-at-point))
 
 
 (provide 'spelling)
