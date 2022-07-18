@@ -159,14 +159,14 @@
   (setq-default ediff-forward-word-function 'forward-char)
   (setq-default ediff-highlight-all-diffs 't))
 
-;; (use-package exec-path-from-shell
-;;   :config
-;;   ;; Add GOPATH to shell
-;;   (when (memq window-system '(mac ns x))
-;;     (exec-path-from-shell-copy-env "GOPATH")
-;;     (exec-path-from-shell-copy-env "PYTHONPATH")
-;;     (exec-path-from-shell-copy-env "PATH")
-;;     (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :config
+  ;; Add GOPATH to shell
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-copy-env "GOPATH")
+    (exec-path-from-shell-copy-env "PYTHONPATH")
+    (exec-path-from-shell-copy-env "PATH")
+    (exec-path-from-shell-initialize)))
 
 (use-package expand-region
   :config
