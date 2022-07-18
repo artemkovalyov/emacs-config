@@ -52,8 +52,8 @@
   ("s-g b" . bookmark-delete)
   ("A-f" . consult-line))
 
-(straight-use-package '(corfu :type git :host github :repo "minad/corfu"))
 (use-package corfu
+  :straight (corfu :type git :host github :repo "minad/corfu")
   ;; Optional customizations
   :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
@@ -159,14 +159,14 @@
   (setq-default ediff-forward-word-function 'forward-char)
   (setq-default ediff-highlight-all-diffs 't))
 
-;; (use-package exec-path-from-shell
-;;   :config
-;;   ;; Add GOPATH to shell
-;;   (when (memq window-system '(mac ns x))
-;;     (exec-path-from-shell-copy-env "GOPATH")
-;;     (exec-path-from-shell-copy-env "PYTHONPATH")
-;;     (exec-path-from-shell-copy-env "PATH")
-;;     (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :config
+  ;; Add GOPATH to shell
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-copy-env "GOPATH")
+    (exec-path-from-shell-copy-env "PYTHONPATH")
+    (exec-path-from-shell-copy-env "PATH")
+    (exec-path-from-shell-initialize)))
 
 (use-package expand-region
   :config
