@@ -161,7 +161,6 @@
 
 (use-package exec-path-from-shell
   :config
-  ;; Add GOPATH to shell
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-copy-env "GOPATH")
     (exec-path-from-shell-copy-env "PYTHONPATH")
@@ -169,9 +168,6 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
-  :config
-  (message "This is evaluated when AVY is loaded")
-
   :bind
   ("A-." . er/expand-region))
 
@@ -325,6 +321,7 @@
    switch-window-input-style 'read-event
    switch-window-shortcut-style 'qwerty
    switch-window-minibuffer-shortcut ?z)
+
   :bind
   ("s-s" . #'switch-window))
 

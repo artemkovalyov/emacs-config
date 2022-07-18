@@ -3,16 +3,18 @@
 ;;; Commentary: LSP configuration
 ;;; Code:
 
-(straight-use-package '(lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode"))
 
 ;;; activate LSP mode
 (use-package lsp-mode
+  :straight (lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode")
   :defer t
   :custom
   (lsp-completion-provider :none) ;; corfu is used
   :init
   (setq lsp-keymap-prefix "s-SPC"
-        lsp-use-plists t)
+        ;; This cause my LSP setup to crash
+        lsp-use-plists t
+        )
   ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
   (defun my/orderless-dispatch-flex-first (_pattern index _total)
     (and (eq index 0) 'orderless-flex))
@@ -40,9 +42,9 @@
 
   :commands (lsp lsp-deferred))
 
-(straight-use-package '(lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui"))
 ;; LSP UI tools
 (use-package lsp-ui
+  :straight (lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui")
   :defer t
   :commands
   lsp-ui-mode

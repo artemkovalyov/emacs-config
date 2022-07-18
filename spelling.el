@@ -1,8 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 ;;; package --- my spellings config
 
-;; abc crudee
-
 ;;; Commentary:
 
 ;;; Code:

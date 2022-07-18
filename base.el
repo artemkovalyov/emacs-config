@@ -27,7 +27,7 @@
 
 ;; straight.el package manager
 (defvar bootstrap-version)
-(setq straight-repository-branch "develop")
+;; (setq straight-repository-branch "master")
 
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -43,6 +43,7 @@
 
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
+
 ;; Configure use-package to use straight.el by default
 (setq straight-use-package-by-default t)
 
