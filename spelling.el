@@ -35,7 +35,7 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
-;; To make it work you'll have to install aspell dictionaries, it doesn't work with other dictionaries while can use hunspell as a backend
+;; To make it work you'll have to install aspell dictionaries, it doesn't work with other dictionaries while can use hunspell as a back-end
 (use-package spell-fu
   :demand t
   :config
