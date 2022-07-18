@@ -1,4 +1,7 @@
 
+
+
+
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
@@ -243,19 +246,26 @@
   :config
   (require 'smartparens-config))
 
-(use-package undo-tree
-  :straight (undo-tree :type git :host gitlab :repo "tsc25/undo-tree")
-  :demand t
+;; (use-package undo-tree
+;;   :straight (undo-tree :type git :host gitlab :repo "tsc25/undo-tree")
+;;   :demand t
+;;   :bind
+;;   ;;"C-x u" - visualize undo tree
+;;   ;; Remember undo history
+;;   :init
+;;   (setq
+;;    undo-tree-auto-save-history nil
+;;    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
+;;   (global-undo-tree-mode))
+
+(use-package undo-fu
+  :config
+  (setq undo-limit 6710886400) ;; 64mb.
+  (setq undo-strong-limit 100663296) ;; 96mb.
+  (setq undo-outer-limit 1006632960) ;; 960mb.
   :bind
-  ;;"C-x u" - visualize undo tree
-  ("C-z" . undo-tree-undo)
-  ("C-y" . undo-tree-redo)
-  ;; Remember undo history
-  :init
-  (setq
-   undo-tree-auto-save-history nil
-   undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
-  (global-undo-tree-mode))
+   ("C-z" . undo-fu-only-undo)
+   ("C-y" . undo-fu-only-redo))
 
 (use-package which-key
   :config
