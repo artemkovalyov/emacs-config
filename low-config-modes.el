@@ -33,12 +33,12 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package web-mode
-  :straight t
+  :after tree-sitter
   :commands (web-mode)
   :bind
   (:map web-mode-map
    ("H-f" . web-mode-fold-or-unfold))
-  :config
+  :init
   (define-derived-mode svelte-mode web-mode "Svelte")
   (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . svelte-mode))
   (add-to-list 'tree-sitter-major-mode-language-alist '(svelte-mode . html))
@@ -91,16 +91,7 @@
   ;; (add-to-list 'tree-sitter-major-mode-language-alist '(ts-svelte-mode . typescript))
   )
 
-(use-package tsi
-  :after tree-sitter
-  :straight (tsi :type git :host github :repo "orzechowskid/tsi.el")
-  ;; define autoload definitions which when actually invoked will cause package to be loaded
-  :commands (tsi-typescript-mode tsi-json-mode tsi-css-mode)
-  :init
-  (add-hook 'typescript-mode-hook (lambda () (tsi-typescript-mode 1)))
-  (add-hook 'json-mode-hook (lambda () (tsi-json-mode 1)))
-  (add-hook 'css-mode-hook (lambda () (tsi-css-mode 1)))
-  (add-hook 'scss-mode-hook (lambda () (tsi-scss-mode 1))))
+
 
 
 (provide 'low-config-modes)

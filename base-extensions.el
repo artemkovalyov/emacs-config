@@ -58,6 +58,8 @@
   :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0)
   (corfu-separator ?\s)          ;; Orderless field separator
   (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   (corfu-quit-no-match t)      ;; Never quit, even if there is no match
@@ -66,12 +68,6 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-prefix 2)
-  (corfu-auto-delya 0.2)
-  (corfu-auto-prefix 2)
-  (corfu-auto-delya nil)
-  ;; Optionally use TAB for cycling, default is `corfu-complete'.
   :bind
   (:map corfu-map
          ([escape] . corfu-quit))
@@ -165,6 +161,7 @@
     (exec-path-from-shell-copy-env "GOPATH")
     (exec-path-from-shell-copy-env "PYTHONPATH")
     (exec-path-from-shell-copy-env "PATH")
+    (exec-path-from-shell-copy-env "LSP_USE_PLISTS")
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region

@@ -106,12 +106,12 @@
 
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-(straight-use-package '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss"))
-
 (use-package lsp-tailwindcss
+  :straight (lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
   :init
   (setq lsp-tailwindcss-add-on-mode t)
   :config
+  (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save)
   (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode js-mode typescript-mode)))
 
 (provide 'lsp-base)
