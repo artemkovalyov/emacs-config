@@ -55,7 +55,17 @@
   :after spell-fu
   :config
   (ispell-set-spellchecker-params)  ;; Initializes important ispell parameters (like 'ispell-dictionary-alist)
-  :bind ("A-;" . flyspell-correct-at-point))
+  :bind
+  ("A-;" . flyspell-auto-correct-word)
+  ("A-s ;" . flyspell-correct-at-point))
+
+(defun ispell-word-immediate ()
+  "Run `ispell-word', using the first suggestion."
+  (interactive)
+  (cl-letf
+      (((symbol-function 'ispell-command-loop)
+        (lambda (miss _guess _word _start _end) (car miss))))
+    (ispell-word)))
 
 
 (provide 'spelling)
