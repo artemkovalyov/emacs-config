@@ -1,7 +1,3 @@
-
-
-
-
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
@@ -362,6 +358,10 @@
 
 (use-package apheleia
   :straight (apheleia :host github :repo "raxod502/apheleia")
+  :config
+  (add-to-list 'apheleia-formatters '(rustywind "rustywind" "--stdin"))
+  (setf (alist-get 'svelte-mode apheleia-mode-alist)
+      '(prettier rustywind))
   :init
   (apheleia-global-mode +1))
 

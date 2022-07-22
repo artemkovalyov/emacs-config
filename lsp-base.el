@@ -111,7 +111,7 @@
   :init
   (setq lsp-tailwindcss-add-on-mode t)
   :config
-  (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save)
+  ;; (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save nil t)
   (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode js-mode typescript-mode)))
 
 (provide 'lsp-base)
