@@ -360,8 +360,12 @@
   :straight (apheleia :host github :repo "raxod502/apheleia")
   :config
   (add-to-list 'apheleia-formatters '(rustywind "rustywind" "--stdin"))
-  (setf (alist-get 'svelte-mode apheleia-mode-alist)
-      '(prettier rustywind))
+  (add-to-list 'apheleia-mode-alist '(js-mode . (prettier rustywind)))
+  (add-to-list 'apheleia-mode-alist '(svelte-mode . (prettier rustywind)))
+  (add-to-list 'apheleia-mode-alist '(typescript-mode . (prettier rustywind)))
+  (add-to-list 'apheleia-mode-alist '(web-mode . (prettier rustywind)))
+  (add-to-list 'apheleia-mode-alist '(css-mode . (prettier rustywind)))
+  (add-to-list 'apheleia-mode-alist '(web-mode . (prettier rustywind)))
   :init
   (apheleia-global-mode +1))
 
