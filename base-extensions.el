@@ -357,15 +357,28 @@
   (ctrlf-mode +1))
 
 (use-package apheleia
-  :straight (apheleia :host github :repo "raxod502/apheleia")
+  :straight (apheleia :host github :repo "raxod502/apheleia" :build (:not compile))
   :config
-  (add-to-list 'apheleia-formatters '(rustywind "rustywind" "--stdin"))
-  (add-to-list 'apheleia-mode-alist '(js-mode . (prettier rustywind)))
-  (add-to-list 'apheleia-mode-alist '(svelte-mode . (prettier rustywind)))
-  (add-to-list 'apheleia-mode-alist '(typescript-mode . (prettier rustywind)))
-  (add-to-list 'apheleia-mode-alist '(web-mode . (prettier rustywind)))
-  (add-to-list 'apheleia-mode-alist '(css-mode . (prettier rustywind)))
-  (add-to-list 'apheleia-mode-alist '(web-mode . (prettier rustywind)))
+  ;; (setq apheleia-log-only-errors nil)
+  ;; (add-to-list 'apheleia-formatters '(prettier-css . (npx "prettier" "--stdin-filepath" filepath "--parser=css"))) ;
+  ;; (add-to-list 'apheleia-formatters '(prettier-html . (npx "prettier" "--stdin-filepath" filepath "--parser=html")))
+  ;; (add-to-list 'apheleia-formatters '(prettier-javascript . (npx "prettier" "--stdin-filepath" filepath "--parser=babel-flow")))
+  ;; (add-to-list 'apheleia-formatters '(prettier-json . (npx "prettier" "--stdin-filepath" filepath "--parser=json")))
+  ;; ;; (add-to-list 'apheleia-formatters '(prettier-typescript . (npx "prettier" "--stdin-filepath" filepath "--parser=typescript")))
+  ;; (add-to-list 'apheleia-formatters '(prettier-typescript . (npx "prettier" filepath)))
+  ;; (add-to-list 'apheleia-formatters '(prettier-svelte . (npx "prettier" "--stdin-filepath" filepath "--parser=svelte")))
+  ;; (add-to-list 'apheleia-formatters '(prettier-yaml . (npx "prettier" "--stdin-filepath" filepath "--parser=yaml")))
+  ;; (add-to-list 'apheleia-formatters '(rustywind "rustywind" "--stdin"))
+(setf (alist-get 'prettier apheleia-formatters)
+      '("/home/artem/art.sh" filepath))
+  ;; (add-to-list 'apheleia-formatters '(prettier . ("prettier" file)))
+  ;; (setf  (alist-get 'js-mode apheleia-mode-alist) '(prettier-js rustywind))
+  ;; (setf  (alist-get 'typescript-mode apheleia-mode-alist) '(prettier-typescript))
+  ;; (setf  (alist-get 'web-mode apheleia-mode-alist) '(prettier-html rustywind))
+  ;; (setf  (alist-get 'svelte-mode apheleia-mode-alist) '(prettier-svelte rustywind))
+  ;; (setf  (alist-get 'yaml-mode apheleia-mode-alist) '(prettier-yaml rustywind))
+  ;; (setf  (alist-get 'css-mode apheleia-mode-alist) '(prettier-css rustywind))
+  ;; (add-to-list 'apheleia-mode-alist '(svelte-mode . (prettier-svelte rustywind)))
   :init
   (apheleia-global-mode +1))
 
