@@ -88,10 +88,10 @@
       (lsp-ui-doc-mode 1)))
   :bind
   (:map lsp-mode-map
-	("C-c C-r" . lsp-ui-peek-find-references)
-	("C-c C-j" . lsp-ui-peek-find-definitions)
-	("C-c i"   . lsp-ui-peek-find-implementation)
-	("C-c m"   . lsp-ui-imenu)
+	("H-r" . lsp-find-references)
+	("H-d" . lsp-find-definition)
+	("H-o"   . lsp-find-implementation)
+	("H-m"   . lsp-ui-imenu)
 	("C-c s"   . lsp-ui-sideline-mode)
 	("C-c d"   . toggle-lsp-ui-doc))
   :hook
