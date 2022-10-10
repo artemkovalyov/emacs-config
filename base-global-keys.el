@@ -73,8 +73,8 @@
 ;; Deleting chars, characters and lines
 (global-set-key (kbd "A-H-l") 'delete-char)
 (global-set-key (kbd "A-H-j") 'delete-backward-char)
-(global-set-key (kbd "M-H-l") 'kill-word)
-(global-set-key (kbd "M-H-j") 'backward-kill-word)
+(global-set-key (kbd "M-H-l") 'sp-delete-word)
+(global-set-key (kbd "M-H-j") 'sp-backward-delete-word)
 (global-set-key (kbd "A-H-k") 'kill-whole-line)
 (global-set-key (kbd "A-H-i") 'artem/kill-line-up)
 (global-set-key (kbd "M-w") 'artem/kill-line-backwards)
