@@ -42,6 +42,7 @@
   ("s-g l" . avy-goto-line)
   ("s-g c" . avy-goto-char))
 
+;; https://github.com/minad/consult
 (use-package consult
   :straight (consult :type git :host github :repo "minad/consult")
   :bind
@@ -64,7 +65,7 @@
   (corfu-quit-no-match t)      ;; Never quit, even if there is no match
   (corfu-preview-current t)    ;; Disable current candidate preview
   (corfu-preselect-first t)    ;; Disable candidate preselection
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind
@@ -74,6 +75,71 @@
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
   (global-corfu-mode))
+
+;; Enable rich annotations using the Marginalia package
+(use-package marginalia
+  ;; Either bind `marginalia-cycle' globally or only in the minibuffer
+  :bind (("M-A" . marginalia-cycle)
+         :map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
+
+  ;; Must be in the :init section of use-package such that the mode gets
+  ;; enabled right away. Note that this forces loading the package.
+  (marginalia-mode))
+
+;; Enable vertico
+(use-package vertico
+  :straight (vertico :type git :host github :repo "minad/vertico" :files ("vertico.el" "extensions/vertico-buffer.el"))
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  (setq vertico-count 17)
+
+   ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
+  )
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
+;; A few more useful configurations...
+(use-package emacs
+  :init
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+  (defun crm-indicator (args)
+    (cons (format "[CRM%s] %s"
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+  ;; Vertico commands are hidden in normal buffers.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable recursive minibuffers
+  (setq enable-recursive-minibuffers t))
 
 (use-package cape
   :straight
@@ -99,7 +165,7 @@
 ;; You may prefer to use `initials' instead of `partial-completion'.
 (use-package orderless
   :init
-  (setq completion-styles '(orderless partial-completion)
+  (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
         completion-category-overrides nil))
 
@@ -177,6 +243,7 @@
   :bind
     ("A-/" . comment-dwim-2))
 
+;; https://github.com/mhayashi1120/Emacs-wgrep
 (use-package wgrep
   :straight (wgrep :type git :host github :repo "mhayashi1120/Emacs-wgrep"))
 
@@ -328,6 +395,7 @@
   :bind
   ("s-s" . #'switch-window))
 
+;; https://github.com/dajva/rg.el
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
   :defer
@@ -369,44 +437,6 @@
   (setf  (alist-get 'web-mode apheleia-mode-alist) '(prettier))
   :init
   (apheleia-global-mode +1))
-
-(use-package selectrum
-  :init
-  (setq selectrum-max-window-height 20)
-  (setq selectrum-display-action t)
-  ;; (setq selectrum-display-action
-  ;;       '(selectrum-display-full-frame))
-  :bind
-  (:map selectrum-minibuffer-map
-        ([tab] . selectrum-insert-current-candidate))
-  :config
-  (selectrum-mode +1))
-
-(straight-use-package 'prescient)
-
-(straight-use-package 'selectrum-prescient)
-(use-package selectrum-prescient
-  :config
-  ;; to make sorting and filtering more intelligent
-  (selectrum-prescient-mode +1)
-
-  ;; to save your command history on disk, so the sorting gets more
-  ;; intelligent over time
-  (prescient-persist-mode +1))
-
-;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
-
-;; (defun display-buffer-show-in-posframe (buffer _alist)
-;;   (frame-root-window
-;;    (posfraime-show buffer
-;;                   :min-height 20
-;;                   :min-width (frame-width)
-;;                   :internal-border-width 1
-;;                   :left-fringe 8
-;;                   :right-fringe 8
-;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
-
-;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
 
 (use-package highlight-indent-guides
   :straight (highlight-indent-guides :type git :host github :repo "DarthFennec/highlight-indent-guides")
