@@ -44,13 +44,13 @@ there's a region, all lines that region covers will be duplicated."
   (delete-forward-char 1)
   )
 
-(defun artem/delete-untill-end-of-the-line (&optional arg)
-  "delete everything untill the end of line"
+(defun artem/delete-until-end-of-the-line (&optional arg)
+  ;; "delete everything until the end of line"
   (interactive "^p")
   (delete-region (point) (line-end-position)))
 
-(defun artem/delete-untill-beginning-of-the-line (&optional arg)
-  "delete everything untill the end of line"
+(defun artem/delete-until-beginning-of-the-line (&optional arg)
+  "delete everything until the end of line"
   (interactive "^p")
   (delete-region (point) (line-beginning-position)))
 

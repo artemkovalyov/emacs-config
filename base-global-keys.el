@@ -77,8 +77,8 @@
 (global-set-key (kbd "M-H-j") 'sp-backward-delete-word)
 (global-set-key (kbd "A-H-k") 'artem/delete-line-and-move-down)
 (global-set-key (kbd "A-H-i") 'artem/delete-line-and-move-up)
-(global-set-key (kbd "M-w") 'artem/delete-untill-beginning-of-the-line)
-(global-set-key (kbd "M-e") 'artem/delete-untill-end-of-the-line)
+(global-set-key (kbd "M-w") 'artem/delete-until-beginning-of-the-line)
+(global-set-key (kbd "M-e") 'artem/delete-until-end-of-the-line)
 
 (global-set-key (kbd "A-s A-u") 'delete-blank-lines)
 (global-set-key (kbd "A-s u") 'delete-indentation)
