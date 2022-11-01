@@ -31,20 +31,28 @@ there's a region, all lines that region covers will be duplicated."
         (setq end (point)))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
-(defun artem/kill-line-up (&optional arg)
+(defun artem/delete-line-and-move-up (&optional arg)
   "remove line and move one line up"
-  (interactive "^p")
-  (if (= (point) (point-max))
-      (backward-char)
-    (kill-whole-line)
-    (backward-char)))
+(interactive)
+  (delete-region (line-beginning-position) (line-end-position))
+  (delete-backward-char 1))
 
-(defun artem/kill-line-backwards (&optional arg)
-  "delete everything till the end of line"
+(defun artem/delete-line-and-move-down (&optional arg)
+  "remove line and move one line up"
+  (interactive)
+  (delete-region (line-beginning-position) (line-end-position))
+  (delete-forward-char 1)
+  )
+
+(defun artem/delete-until-end-of-the-line (&optional arg)
+  ;; "delete everything until the end of line"
   (interactive "^p")
-  (if (= (current-column) 0)
-      (artem/kill-line-up)
-    (kill-line 0)))
+  (delete-region (point) (line-end-position)))
+
+(defun artem/delete-until-beginning-of-the-line (&optional arg)
+  "delete everything until the end of line"
+  (interactive "^p")
+  (delete-region (point) (line-beginning-position)))
 
 (defun artem/beginning-of-line (&optional arg)
   "Move point back to beginning of visual line, then indentation, then beginning of logical line.
