@@ -113,6 +113,7 @@
 (global-set-key (kbd "s-g t") 'insert-timestamp-default)
 (global-set-key (kbd "s-g i") 'insert-timestamp-iso)
 (global-set-key (kbd "A-s h") 'rectangle-mark-mode)
+(global-set-key (kbd "A-s d") 'dired)
 
 
 (global-set-key [escape] 'keyboard-quit)
