@@ -84,7 +84,8 @@ set-keyboard-coding-system  'utf-8
 set-selection-coding-system 'utf-8
 prefer-coding-system        'utf-8
 default-process-coding-system '(utf-8-unix . utf-8-unix)
-sentence-end-double-space nil)
+sentence-end-double-space nil
+dired-kill-when-opening-new-dired-buffer t)
 
 ;; Emacs customizations
 (setq-default
