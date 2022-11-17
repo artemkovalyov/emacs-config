@@ -90,7 +90,7 @@
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
 
-;; Enable vertico
+;; Enable vertico, use M-RET to chose non-existing candidates
 (use-package vertico
   :straight (vertico :type git :host github :repo "minad/vertico" :files ("vertico.el" "extensions/vertico-buffer.el"))
   :init
