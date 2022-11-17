@@ -20,7 +20,7 @@
 (require 'base-functions)
 (require 'base-global-keys)
 (require 'base-theme)
-(require 'artem-tree-sitter)
+;; (require 'artem-tree-sitter)
 
 (provide '.emacs)
 ;;; .emacs ends here
