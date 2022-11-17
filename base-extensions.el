@@ -435,6 +435,7 @@
   (setf  (alist-get 'html-mode apheleia-mode-alist) '(prettier))
   (setf  (alist-get 'js-mode apheleia-mode-alist) '(prettier))
   (setf  (alist-get 'web-mode apheleia-mode-alist) '(prettier))
+  (setf  (alist-get 'markdown-mode apheleia-mode-alist) '(prettier))
   :init
   (apheleia-global-mode +1))
 
