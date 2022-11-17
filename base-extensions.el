@@ -335,6 +335,7 @@
   (which-key-mode))
 
 (use-package yasnippet
+  :after warnings                       ; this is required for bogus yasnippet warnings suppression
   :straight (yasnippet :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :init
@@ -343,10 +344,10 @@
   (:map yas-minor-mode-map
         ("A-y" . yas-insert-snippet))
   :config
-  (yas-reload-all))
+  (yas-reload-all)
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
-(straight-use-package 'react-snippets)
 
 (use-package rainbow-mode
   :diminish
@@ -428,7 +429,6 @@
   :straight (apheleia :host github :repo "raxod502/apheleia" :build (:not compile))
   :config
   ;; (setq apheleia-log-only-errors nil)
-  (add-to-list 'apheleia-formatters '( "rustywind" "--stdin"))
   (add-to-list 'apheleia-formatters '(prettier-svelte . (npx "prettier" "--stdin-filepath" filepath "--parser=svelte")))
   (setf  (alist-get 'svelte-mode apheleia-mode-alist) '(prettier-svelte))
   (setf  (alist-get 'typescript-mode apheleia-mode-alist) '(prettier))
@@ -438,10 +438,10 @@
   :init
   (apheleia-global-mode +1))
 
-(use-package highlight-indent-guides
-  :straight (highlight-indent-guides :type git :host github :repo "DarthFennec/highlight-indent-guides")
-  :custom (highlight-indent-guides-method 'character)
-  :hook (prog-mode . highlight-indent-guides-mode))
+;; (use-package highlight-indent-guides
+;;   :straight (highlight-indent-guides :type git :host github :repo "DarthFennec/highlight-indent-guides")
+;;   :custom (highlight-indent-guides-method 'character)
+;;   :hook (prog-mode . highlight-indent-guides-mode))
 
 
 (use-package windmove
