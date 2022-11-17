@@ -33,7 +33,7 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package web-mode
-  :after tree-sitter
+  ;; :after tree-sitter
   :commands (web-mode)
   :bind
   (:map web-mode-map
@@ -41,7 +41,8 @@
   :init
   (define-derived-mode svelte-mode web-mode "Svelte")
   (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . svelte-mode))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(svelte-mode . html))
+  ;; Checking if tree-sitter make sintax highlight slow
+  ;; (add-to-list 'tree-sitter-major-mode-language-alist '(svelte-mode . html))
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
@@ -84,9 +85,10 @@
 
 (use-package typescript-mode
   :straight (typescript-mode :type git :host github :repo "emacs-typescript/typescript.el")
-  :after tree-sitter :mode (
-         ("\\.tsx\\'" . typescript-mode))
-  ;; :config
+  ;; :after tree-sitter
+  :mode (("\\.tsx\\'" . typescript-mode))
+  :config
+  (setq typescript-indent-level 2)
   ;; (define-derived-mode ts-svelte-mode typescript-mode "Typescript Svelte")
   ;; use our derived mode for tsx files
   ;; (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . ts-svelte-mode))
