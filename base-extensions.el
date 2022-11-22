@@ -90,6 +90,36 @@
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
 
+(use-package embark
+  :ensure t
+
+  :bind
+  (("M-a" . embark-act)         ;; pick some comfortable binding
+   ("M-d" . embark-dwim)        ;; good alternative: M-.
+   ("M-s b" . embark-bindings)) ;; alternative for `describe-bindings'
+
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :config
+  ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-occur)
+  (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-lines-to-grep)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 ;; Enable vertico, use M-RET to chose non-existing candidates
 (use-package vertico
   :straight (vertico :type git :host github :repo "minad/vertico" :files ("vertico.el" "extensions/vertico-buffer.el"))

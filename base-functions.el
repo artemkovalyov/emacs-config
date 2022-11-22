@@ -177,5 +177,36 @@ point reaches the beginning or end of the buffer, stop there."
 (defalias 'itsi 'insert-timestamp-iso)
 (defalias 'itsiso 'insert-timestamp-iso)
 
+(defun embark-consult-export-lines-to-grep (lines)
+  "Create a grep mode buffer listing LINES as alternative to occur.
+This enables use of `wgrep' for editing of results including multi-line editing.
+Because `consult-line' produces grep-like results, the use of `wgrep' helps to
+increase uniformity of user experience when editing the results.
+The elements of LINES are assumed to be values of category `consult-line'."
+  (let ((buf (generate-new-buffer "*Embark Export Grep*"))
+        last-buf)
+    (with-current-buffer buf
+      (dolist (line lines)
+        (pcase-let*
+            ((`(,loc . ,num) (consult--get-location line))
+             (lineno (propertize (format "%d:" num)))
+             (contents (propertize (embark-consult--strip line)))
+             (this-buf (marker-buffer loc)))
+          (unless (eq this-buf last-buf)
+            (insert (propertize "Exported grep results:\n\n" 'wgrep-header t))
+            (setq last-buf this-buf))
+          (insert (concat (file-name-nondirectory (buffer-file-name this-buf)) ":" lineno contents "\n"))))
+      (goto-char (point-min))
+      (grep-mode)
+      (setq next-error-last-buffer buf)
+      ;; Set up keymap before possible wgrep-setup, so that wgrep
+      ;; restores our binding too when the user finishes editing.
+      (use-local-map (make-composed-keymap
+                      embark-consult-revert-map
+                      (current-local-map)))
+      (setq-local wgrep-header/footer-parser #'ignore)
+      (when (fboundp 'wgrep-setup) (wgrep-setup)))
+    (pop-to-buffer buf)))
+
 (provide 'base-functions)
 ;;; .base-functions.el ends here
