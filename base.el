@@ -66,7 +66,8 @@
       scroll-conservatively           100000
       scroll-preserve-screen-position t
       mac-mouse-wheel-smooth-scroll    nil
-      scroll-error-top-bottom          t)
+      scroll-error-top-bottom          t
+      default-global-text-scale (face-attribute 'default :height))
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
