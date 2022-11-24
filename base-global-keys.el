@@ -123,7 +123,7 @@
                 (lambda ()
                   (interactive)
                   (let ((old-face-attribute (face-attribute 'default :height)))
-                    (set-face-attribute 'default nil :height (+ old-face-attribute 5)))))
+                        (set-face-attribute 'default nil :height (+ old-face-attribute 5)))))
 
 (global-set-key (kbd "A--")
                 (lambda ()
