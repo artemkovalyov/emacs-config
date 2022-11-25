@@ -118,5 +118,29 @@
 
 (global-set-key [escape] 'keyboard-quit)
 
+;; font sizes
+(global-set-key (kbd "A-=")
+                (lambda ()
+                  (interactive)
+                  (let ((old-face-attribute (face-attribute 'default :height)))
+                        (set-face-attribute 'default nil :height (+ old-face-attribute 5)))))
+
+(global-set-key (kbd "A--")
+                (lambda ()
+                  (interactive)
+                  (let ((old-face-attribute (face-attribute 'default :height)))
+                    (set-face-attribute 'default nil :height (- old-face-attribute 5)))))
+
+(global-set-key (kbd "A-0")
+                (lambda ()
+                  (interactive)
+                    (set-face-attribute 'default nil :height default-global-text-scale)))
+
+(global-set-key (kbd "H-0")
+                (lambda ()
+                  (interactive)
+                    (set-face-attribute 'default nil :height 200)))
+
+
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here
