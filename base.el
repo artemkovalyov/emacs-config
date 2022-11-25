@@ -117,7 +117,8 @@ dired-kill-when-opening-new-dired-buffer t)
  x-stretch-cursor                   t
  truncate-string-ellipsis           "…"
  ad-redefinition-action             'accept
- tramp-default-method               "ssh")
+ tramp-default-method               "ssh"
+ warning-suppress-types (quote ((yasnippet backquote-change))))
 
 ;; Bookmarks
 (setq

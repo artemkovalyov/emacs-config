@@ -365,7 +365,6 @@
   (which-key-mode))
 
 (use-package yasnippet
-  :after warnings                       ; this is required for bogus yasnippet warnings suppression
   :straight (yasnippet :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :init
@@ -374,8 +373,7 @@
   (:map yas-minor-mode-map
         ("A-y" . yas-insert-snippet))
   :config
-  (yas-reload-all)
-  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+  (yas-reload-all))
 
 (straight-use-package '(yasnippet-snippets :type git :host github :repo "artemkovalyov/yasnippet-snippets"))
 
