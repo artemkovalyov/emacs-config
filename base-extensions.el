@@ -52,6 +52,32 @@
   ("s-g b" . bookmark-delete)
   ("A-f" . consult-line))
 
+(use-package consult-dir
+  :straight (consult-dir :type git :host github :repo "karthink/consult-dir")
+  :bind (("C-d" . consult-dir)
+         :map minibuffer-local-completion-map
+         ("C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file))
+  :config
+  ;; A function that returns a list of directories
+  (defun consult-dir--fasd-dirs ()
+    "Return list of fasd dirs."
+    (split-string (shell-command-to-string "fasd -ld") "\n" t))
+
+  ;; A consult source that calls this function
+  (defvar consult-dir--source-fasd
+    `(:name     "Fasd dirs"
+                :narrow   ?f
+                :category file
+                :face     consult-file
+                :history  file-name-history
+                :enabled  ,(lambda () (executable-find "fasd"))
+                :items    ,#'consult-dir--fasd-dirs)
+    "Fasd directory source for `consult-dir'.")
+
+  ;; Adding to the list of consult-dir sources
+  (add-to-list 'consult-dir-sources 'consult-dir--source-fasd t))
+
 (use-package corfu
   :straight (corfu :type git :host github :repo "minad/corfu")
   ;; Optional customizations
@@ -70,7 +96,7 @@
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind
   (:map corfu-map
-         ([escape] . corfu-quit))
+        ([escape] . corfu-quit))
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since dabbrev can be used globally (M-/).
   :init
@@ -132,7 +158,7 @@
   ;; Show more candidates
   (setq vertico-count 17)
 
-   ;; Grow and shrink the Vertico minibuffer
+  ;; Grow and shrink the Vertico minibuffer
   ;; (setq vertico-resize t)
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
@@ -230,10 +256,10 @@
 (use-package dashboard
   :init
   (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
-                        (projects . 5)
-                        (agenda . 5)
-                        (registers . 5))
+                          (bookmarks . 5)
+                          (projects . 5)
+                          (agenda . 5)
+                          (registers . 5))
 	dashboard-banner-logo-title "Life's Awesome!"
 	dashboard-startup-banner nil)
   :config
@@ -271,7 +297,7 @@
 (use-package comment-dwim-2
   :defer t
   :bind
-    ("A-/" . comment-dwim-2))
+  ("A-/" . comment-dwim-2))
 
 ;; https://github.com/mhayashi1120/Emacs-wgrep
 (use-package wgrep
@@ -357,8 +383,8 @@
   (setq undo-strong-limit 100663296) ;; 96mb.
   (setq undo-outer-limit 1006632960) ;; 960mb.
   :bind
-   ("C-z" . undo-fu-only-undo)
-   ("C-y" . undo-fu-only-redo))
+  ("C-z" . undo-fu-only-undo)
+  ("C-y" . undo-fu-only-redo))
 
 (use-package which-key
   :config
@@ -493,35 +519,35 @@
   :straight (pulsar :type git :host github :repo "protesilaos/pulsar")
   :init
   (setq pulsar-pulse-functions
-      ;; NOTE 2022-04-09: The commented out functions are from before
-      ;; the introduction of `pulsar-pulse-on-window-change'.  Try that
-      ;; instead.
-      '(recenter-top-bottom
-        move-to-window-line-top-bottom
-        reposition-window
-        bookmark-jump
-        forward-page
-        backward-page
-        scroll-up-command
-        scroll-down-command
-        org-next-visible-heading
-        org-previous-visible-heading
-        org-forward-heading-same-level
-        org-backward-heading-same-level
-        outline-backward-same-level
-        outline-forward-same-level
-        outline-next-visible-heading
-        outline-previous-visible-heading
-        outline-up-heading))
-(setq pulsar-pulse-on-window-change t)
-(setq pulsar-pulse t)
-(setq pulsar-delay 0.055)
-(setq pulsar-iterations 10)
-(setq pulsar-face 'pulsar-magenta)
-(setq pulsar-highlight-face 'pulsar-yellow)
-:bind ("A-s l" . #'pulsar-pulse-line)
-:config
-(pulsar-global-mode 1))
+        ;; NOTE 2022-04-09: The commented out functions are from before
+        ;; the introduction of `pulsar-pulse-on-window-change'.  Try that
+        ;; instead.
+        '(recenter-top-bottom
+          move-to-window-line-top-bottom
+          reposition-window
+          bookmark-jump
+          forward-page
+          backward-page
+          scroll-up-command
+          scroll-down-command
+          org-next-visible-heading
+          org-previous-visible-heading
+          org-forward-heading-same-level
+          org-backward-heading-same-level
+          outline-backward-same-level
+          outline-forward-same-level
+          outline-next-visible-heading
+          outline-previous-visible-heading
+          outline-up-heading))
+  (setq pulsar-pulse-on-window-change t)
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+  :bind ("A-s l" . #'pulsar-pulse-line)
+  :config
+  (pulsar-global-mode 1))
 
 (use-package uuidgen
   :straight (uuidgen :type git :host github :repo "kanru/uuidgen-el"))
