@@ -33,7 +33,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (defun artem/delete-line-and-move-up (&optional arg)
   "remove line and move one line up"
-(interactive)
+  (interactive)
   (delete-region (line-beginning-position) (line-end-position))
   (delete-backward-char 1))
 
@@ -184,18 +184,27 @@ Because `consult-line' produces grep-like results, the use of `wgrep' helps to
 increase uniformity of user experience when editing the results.
 The elements of LINES are assumed to be values of category `consult-line'."
   (let ((buf (generate-new-buffer "*Embark Export Grep*"))
-        last-buf)
+        last-buf
+        filename)
     (with-current-buffer buf
+      (insert (propertize "Exported results:\n" 'wgrep-header t 'font-lock-face '(:weight bold)))
       (dolist (line lines)
         (pcase-let*
             ((`(,loc . ,num) (consult--get-location line))
-             (lineno (propertize (format "%d:" num)))
-             (contents (propertize (embark-consult--strip line)))
+             (lineno (format "%d" num))
+             (contents (embark-consult--strip line))
              (this-buf (marker-buffer loc)))
-          (unless (eq this-buf last-buf)
-            (insert (propertize "Exported grep results:\n\n" 'wgrep-header t))
-            (setq last-buf this-buf))
-          (insert (concat (file-name-nondirectory (buffer-file-name this-buf)) ":" lineno contents "\n"))))
+          (when (buffer-file-name this-buf)
+            (unless (eq this-buf last-buf)
+              (setq last-buf this-buf)
+              (setq filename (file-name-nondirectory (buffer-file-name this-buf)))
+              (insert "\n" (propertize (concat "file: " filename) 'wgrep-ignore t 'font-lock-face '(:inherit compilation-info :underline t)) "\n"))
+            (insert (propertize
+                     (concat filename ":")
+                     'invisible t)
+                    lineno
+                    ":"
+                    contents "\n" ))))
       (goto-char (point-min))
       (grep-mode)
       (setq next-error-last-buffer buf)
