@@ -142,7 +142,8 @@
   :ensure t ; only need to install it, embark loads it after consult if found
   :config
   ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-occur)
-  (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-lines-to-grep)
+  (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
+  ;; (setf  (alist-get 'consult-grep  embark-exporters-alist) #'art-export-grep)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 

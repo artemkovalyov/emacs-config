@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 ;;; package ---  Add your custom functions
-;; (defun something
+;;; (defun something
 ;;    (do-something))
 ;;; Commentary:
 
@@ -177,7 +177,7 @@ point reaches the beginning or end of the buffer, stop there."
 (defalias 'itsi 'insert-timestamp-iso)
 (defalias 'itsiso 'insert-timestamp-iso)
 
-(defun embark-consult-export-lines-to-grep (lines)
+(defun artem/embark-consult-export-lines-to-grep (lines)
   "Create a grep mode buffer listing LINES as alternative to occur.
 This enables use of `wgrep' for editing of results including multi-line editing.
 Because `consult-line' produces grep-like results, the use of `wgrep' helps to
@@ -187,24 +187,27 @@ The elements of LINES are assumed to be values of category `consult-line'."
         last-buf
         filename)
     (with-current-buffer buf
-      (insert (propertize "Exported results:\n" 'wgrep-header t 'font-lock-face '(:weight bold)))
-      (dolist (line lines)
-        (pcase-let*
-            ((`(,loc . ,num) (consult--get-location line))
-             (lineno (format "%d" num))
-             (contents (embark-consult--strip line))
-             (this-buf (marker-buffer loc)))
-          (when (buffer-file-name this-buf)
-            (unless (eq this-buf last-buf)
-              (setq last-buf this-buf)
-              (setq filename (file-name-nondirectory (buffer-file-name this-buf)))
-              (insert "\n" (propertize (concat "file: " filename) 'wgrep-ignore t 'font-lock-face '(:inherit compilation-info :underline t)) "\n"))
-            (insert (propertize
-                     (concat filename ":")
-                     'invisible t)
-                    lineno
-                    ":"
-                    contents "\n" ))))
+      (insert (propertize "Caution:" 'wgrep-header t 'font-lock-face '(:inherit 'compilation-warning :underline t))
+            (propertize " only buffers backed by a file are exported to grep-mode.\n" 'wgrep-header t 'font-lock-face '(:inherit 'compilation-warning)))
+    (insert (propertize "Hint:" 'font-lock-face '(:inherit 'compilation-info :underline t))
+            (propertize " use wgrep for editing of the results in place and saving them to respective files\n" 'font-lock-face '(:inherit 'compilation-info)))
+    (dolist (line lines)
+      (pcase-let*
+          ((`(,loc . ,num) (consult--get-location line))
+           (lineno (format "%d" num))
+           (contents (embark-consult--strip line))
+           (this-buf (marker-buffer loc)))
+        (when (buffer-file-name this-buf)
+          (unless (eq this-buf last-buf)
+            (setq last-buf this-buf)
+            (setq filename (file-name-nondirectory (buffer-file-name this-buf)))
+            (insert "\n" (propertize (concat "file: " filename) 'wgrep-ignore t 'font-lock-face '(:inherit compilation-info :underline t)) "\n"))
+          (insert (propertize
+                   (concat filename ":")
+                   'invisible t)
+                  lineno
+                  ":"
+                  contents "\n" ))))
       (goto-char (point-min))
       (grep-mode)
       (setq next-error-last-buffer buf)
