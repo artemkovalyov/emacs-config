@@ -50,7 +50,8 @@
   ("M-f" . consult-ripgrep)
   ("s-b" . consult-bookmark)
   ("s-g b" . bookmark-delete)
-  ("A-f" . consult-line))
+  ("A-f" . consult-line)
+  ("M-o" . consult-outline))
 
 (use-package consult-dir
   :straight (consult-dir :type git :host github :repo "karthink/consult-dir")
