@@ -119,7 +119,7 @@
 
 (use-package embark
   :ensure t
-
+  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
   :bind
   (("M-a" . embark-act)         ;; pick some comfortable binding
    ("M-d" . embark-dwim)        ;; good alternative: M-.
@@ -141,6 +141,7 @@
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
+  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
   :config
   ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-occur)
   (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
