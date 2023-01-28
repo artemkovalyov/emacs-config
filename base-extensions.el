@@ -79,6 +79,20 @@
   ;; Adding to the list of consult-dir sources
   (add-to-list 'consult-dir-sources 'consult-dir--source-fasd t))
 
+(use-package consult-flycheck
+  :straight (consult-flycheck :type git :host github :repo "minad/consult-flycheck")
+  :bind ("s-g e" . consult-flycheck))
+
+(use-package consult-lsp
+  :straight (consult-lsp :type git :host github :repo "gagbo/consult-lsp")
+  ;; :bind ("s-g e" . consult-flycheck)
+  )
+
+(use-package pcre2el
+  :straight (pcre2el :type git :host github :repo "joddie/pcre2el"))
+
+
+
 (use-package corfu
   :straight (corfu :type git :host github :repo "minad/corfu")
   ;; Optional customizations
@@ -144,7 +158,7 @@
   :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
   :config
   ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-occur)
-  (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
+  ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
   ;; (setf  (alist-get 'consult-grep  embark-exporters-alist) #'art-export-grep)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
@@ -246,7 +260,7 @@
 
 (straight-use-package '(centaur-tabs :type git :host github :repo "ema2159/centaur-tabs"))
 (use-package centaur-tabs
-  :demand
+  :demand t
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-headline-match)
@@ -279,14 +293,15 @@
   (setq-default ediff-forward-word-function 'forward-char)
   (setq-default ediff-highlight-all-diffs 't))
 
-(use-package exec-path-from-shell
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-copy-env "GOPATH")
-    (exec-path-from-shell-copy-env "PYTHONPATH")
-    (exec-path-from-shell-copy-env "PATH")
-    (exec-path-from-shell-copy-env "LSP_USE_PLISTS")
-    (exec-path-from-shell-initialize)))
+;; (use-package exec-path-from-shell
+;;   :ensure t
+;;   :config
+;;   (when (memq window-system '(mac ns x))
+;;     (exec-path-from-shell-copy-env "GOPATH")
+;;     (exec-path-from-shell-copy-env "PYTHONPATH")
+;;     (exec-path-from-shell-copy-env "PATH")
+;;     (exec-path-from-shell-copy-env "LSP_USE_PLISTS")
+;;     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
   :bind
@@ -294,8 +309,7 @@
 
 (use-package flycheck
   :straight (flycheck :type git :host github :repo "flycheck/flycheck")
-  :hook (lsp-mode . flycheck-mode)
-  )
+  :hook (lsp-mode . flycheck-mode))
 
 (use-package comment-dwim-2
   :defer t
@@ -503,6 +517,9 @@
 
 
 (use-package windmove
+  :after (lsp-mode)
+  ;; :config
+  ;; (global-unset-key (kbd "s-l"))
   :bind
   ("s-o" . other-window)
   ("s-j" . windmove-left)

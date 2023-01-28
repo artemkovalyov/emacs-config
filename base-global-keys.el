@@ -48,7 +48,6 @@
 ;; Moving over words right and left
 (global-set-key (kbd "M-l") 'forward-word)
 (global-set-key (kbd "M-j") 'backward-word)
-
 ;; Scroll up/down
 (global-set-key (kbd "M-k") 'scroll-up-command)
 (global-set-key (kbd "M-i") 'scroll-down-command)
@@ -114,6 +113,7 @@
 (global-set-key (kbd "s-g i") 'insert-timestamp-iso)
 (global-set-key (kbd "A-s h") 'rectangle-mark-mode)
 (global-set-key (kbd "A-s d") 'dired)
+(global-set-key (kbd "A-s w") 'emmet-wrap-with-markup)
 
 
 (global-set-key [escape] 'keyboard-quit)

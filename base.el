@@ -7,7 +7,7 @@
 ;; Go back to normal GC behavior after init
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (setq gc-cons-threshold (* 16 1024 1024) ; 16mb
+            (setq gc-cons-threshold (* 16 1024 1024 1024 ) ; 16mb
                   gc-cons-percentage 0.1
                   read-process-output-max  (* 1024 1024)))) ; 1 mb read buffer for LSP
 

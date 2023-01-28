@@ -86,7 +86,12 @@
 (use-package typescript-mode
   :straight (typescript-mode :type git :host github :repo "emacs-typescript/typescript.el")
   ;; :after tree-sitter
-  :mode (("\\.tsx\\'" . typescript-mode))
+  :mode (("\\.tsx\\'" . typescript-mode)
+         ;; ("\\.js\\'" . typescript-mode)
+         ;; ("\\.ts\\'" . typescript-mode)
+         ;; ("\\.cjs\\'" . typescript-mode)
+         ;; ("\\.jsx\\'" . typescript-mode)
+         )
   :config
   (setq typescript-indent-level 2)
   ;; (define-derived-mode ts-svelte-mode typescript-mode "Typescript Svelte")
