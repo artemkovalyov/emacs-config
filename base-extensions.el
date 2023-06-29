@@ -157,7 +157,7 @@
   :ensure t ; only need to install it, embark loads it after consult if found
   :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
   :config
-  ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-occur)
+  (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-location-grep)
   ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
   ;; (setf  (alist-get 'consult-grep  embark-exporters-alist) #'art-export-grep)
   :hook
@@ -284,14 +284,16 @@
 
 (use-package ediff
   :bind
-  (:map ediff-mode-map
-        ("A-i" . ediff-previous-difference)
-        ("A-k" . ediff-next-difference))
+  ;; (:map diff-mode-menu
+  :hook (ediff-keymap-setup . (lambda()
+                                (define-key ediff-mode-map (kbd "A-i") #'ediff-previous-difference)
+                                (define-key ediff-mode-map (kbd "A-k") #'ediff-next-difference)))
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
 	ediff-diff-options "-w")
   (setq-default ediff-forward-word-function 'forward-char)
   (setq-default ediff-highlight-all-diffs 't))
+
 
 ;; (use-package exec-path-from-shell
 ;;   :ensure t
@@ -569,7 +571,9 @@
   :config
   (pulsar-global-mode 1))
 
-(use-package uuidgen
-  :straight (uuidgen :type git :host github :repo "kanru/uuidgen-el"))
+(use-package uuidgen :straight (uuidgen :type git :host github :repo "kanru/uuidgen-el"))
+
+(use-package sudo-edit :straight (sudo-edit :type git :host github :repo "nflath/sudo-edit"))
+
 
 (provide 'base-extensions)

@@ -10,8 +10,8 @@
   :custom
   (lsp-completion-provider :none) ;; corfu is used
   :init
-  (setq lsp-keymap-prefix "s-SPC"
-        lsp-enable-indentation nil)
+  (setq lsp-keymap-prefix "s-SPC")
+        ;; lsp-enable-indentation t)
   (setq lsp-use-plists t);; This cause my LSP setup to crash
   ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
   (defun my/orderless-dispatch-flex-first (_pattern index _total)
