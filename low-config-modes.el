@@ -103,6 +103,8 @@
   )
 
 
+(use-package d2-mode
+  :straight (d2-mode :type git :host github :repo "andorsk/d2-mode"))
 
 
 (provide 'low-config-modes)
