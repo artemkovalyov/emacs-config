@@ -85,7 +85,8 @@
 
 (global-set-key (kbd "A-s A-u") 'delete-blank-lines)
 (global-set-key (kbd "A-s u") 'delete-indentation)
-(global-set-key (kbd "A-u") 'fixup-whitespace)
+;; (global-set-key (kbd "A-u") 'fixup-whitespace)
+(global-set-key (kbd "A-u") 'cycle-spacing)
 
 
 ;; Eval last sexp / eval defun
