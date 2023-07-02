@@ -63,6 +63,10 @@
 (global-set-key (kbd "A-s k") 'end-of-buffer)
 (global-set-key (kbd "A-s i") 'beginning-of-buffer)
 
+;; Move by sentence
+(global-set-key (kbd "A-s l") 'forward-sentence)
+(global-set-key (kbd "A-s j") 'backward-sentence)
+
 ;; Copy & pasting
 (global-set-key (kbd "A-c") 'kill-ring-save)
 (global-set-key (kbd "A-v") 'yank)

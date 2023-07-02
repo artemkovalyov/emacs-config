@@ -567,7 +567,7 @@
   (setq pulsar-iterations 10)
   (setq pulsar-face 'pulsar-magenta)
   (setq pulsar-highlight-face 'pulsar-yellow)
-  :bind ("A-s l" . #'pulsar-pulse-line)
+  :bind ("M-p" . #'pulsar-pulse-line)
   :config
   (pulsar-global-mode 1))
 
