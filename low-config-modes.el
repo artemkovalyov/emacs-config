@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;; Gradle
 (use-package gradle-mode
   :defer t
@@ -37,7 +39,7 @@
   :commands (web-mode)
   :bind
   (:map web-mode-map
-   ("H-f" . web-mode-fold-or-unfold))
+        ("H-f" . web-mode-fold-or-unfold))
   :init
   (define-derived-mode svelte-mode web-mode "Svelte")
   (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . svelte-mode))

@@ -4,10 +4,20 @@
   :hook (after-init . global-emojify-mode))
 
 (use-package all-the-icons
-  :straight (all-the-icons :type git :host github :repo "domtronn/all-the-icons.el"))
+  :straight (all-the-icons :type git :host github :repo "domtronn/all-the-icons.el")
+  :if (display-graphic-p))
+
+(use-package nerd-icons
+  ;; :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
 
 (use-package doom-themes
   :straight (doom-themes :type git :host github :repo "hlissner/emacs-doom-themes")
+  :ensure t
   :after (all-the-icons)
   :config
   ;; Global settings (defaults)
@@ -35,8 +45,8 @@
                            :weight bold
                            :foreground ,(doom-color 'base8)))))
    `(selectrum-prescient-primary-highlight
-   ((,class (:foreground ,(doom-color 'blue)))))
+     ((,class (:foreground ,(doom-color 'blue)))))
    `(selectrum-prescient-secondary-highlight
-   ((,class (:foreground ,(doom-color 'orange)))))))
+     ((,class (:foreground ,(doom-color 'orange)))))))
 
 (provide 'base-theme)

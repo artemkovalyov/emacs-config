@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;; Tue Nov  8 06:10:41 2022 - switched off in in .emacs
 (straight-use-package 'tree-sitter)
 (use-package tree-sitter

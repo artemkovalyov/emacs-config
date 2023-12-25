@@ -47,6 +47,7 @@
 ;; Configure use-package to use straight.el by default
 (setq straight-use-package-by-default t)
 
+(straight-use-package '(compat :type git :host github :repo "emacs-compat/compat"))
 (straight-use-package '(el-patch :type git :host github :repo "raxod502/el-patch"))
 (straight-use-package '(use-package :type git :host github :repo "jwiegley/use-package"))
 
@@ -58,6 +59,7 @@
   (setq gcmh-idle-delay 5)
   (setq gcmh-high-cons-threshold (* 16 1024 1024)) ; 16mb
   (gcmh-mode))
+
 
 (setq hscroll-margin                  7
       scroll-margin                   7
@@ -80,13 +82,13 @@
 (global-visual-line-mode)
 
 (setq locale-coding-system   'utf-8
-set-terminal-coding-system  'utf-8
-set-keyboard-coding-system  'utf-8
-set-selection-coding-system 'utf-8
-prefer-coding-system        'utf-8
-default-process-coding-system '(utf-8-unix . utf-8-unix)
-sentence-end-double-space nil
-dired-kill-when-opening-new-dired-buffer t)
+      set-terminal-coding-system  'utf-8
+      set-keyboard-coding-system  'utf-8
+      set-selection-coding-system 'utf-8
+      prefer-coding-system        'utf-8
+      default-process-coding-system '(utf-8-unix . utf-8-unix)
+      sentence-end-double-space nil
+      dired-kill-when-opening-new-dired-buffer t)
 
 ;; Emacs customizations
 (setq-default
@@ -140,7 +142,7 @@ dired-kill-when-opening-new-dired-buffer t)
  auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
 
 (unless (file-exists-p (concat temp-dir "/auto-save-list"))
-		       (make-directory (concat temp-dir "/auto-save-list") :parents))
+  (make-directory (concat temp-dir "/auto-save-list") :parents))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

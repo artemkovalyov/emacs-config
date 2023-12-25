@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;;; package --- base-extensions.el
 ;;; Commentary:
 
@@ -45,6 +46,8 @@
 ;; https://github.com/minad/consult
 (use-package consult
   :straight (consult :type git :host github :repo "minad/consult")
+  :config
+  (setq consult-preview-key nil)
   :bind
   ("A-b" . consult-buffer)
   ("M-f" . consult-ripgrep)
@@ -502,7 +505,7 @@
   :straight (apheleia :host github :repo "raxod502/apheleia" :build (:not compile))
   :config
   ;; (setq apheleia-log-only-errors nil)
-  (add-to-list 'apheleia-formatters '(prettier-svelte . (npx "prettier" "--stdin-filepath" filepath "--parser=svelte")))
+  (add-to-list 'apheleia-formatters '(prettier-svelte . ("prettier" "--stdin-filepath" filepath "--parser=svelte")))
   (setf  (alist-get 'svelte-mode apheleia-mode-alist) '(prettier-svelte))
   (setf  (alist-get 'typescript-mode apheleia-mode-alist) '(prettier))
   (setf  (alist-get 'html-mode apheleia-mode-alist) '(prettier))
@@ -575,5 +578,12 @@
 
 (use-package sudo-edit :straight (sudo-edit :type git :host github :repo "nflath/sudo-edit"))
 
+(use-package dirvish
+  :straight (dirvish :type git :host github :repo "alexluigit/dirvish")
+  :bind
+  (:map dirvish-mode-map
+        ("TAB" . dirvish-subtree-toggle))
+  :init
+  (dirvish-override-dired-mode))
 
 (provide 'base-extensions)
