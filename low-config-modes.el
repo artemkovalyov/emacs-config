@@ -35,7 +35,6 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package web-mode
-  ;; :after tree-sitter
   :commands (web-mode)
   :bind
   (:map web-mode-map
@@ -43,8 +42,6 @@
   :init
   (define-derived-mode svelte-mode web-mode "Svelte")
   (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . svelte-mode))
-  ;; Checking if tree-sitter make sintax highlight slow
-  ;; (add-to-list 'tree-sitter-major-mode-language-alist '(svelte-mode . html))
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
@@ -52,33 +49,6 @@
   (web-mode-attr-indent-offset t)
   (web-mode-javascript-indentation 2)
   (web-mode-script-padding 2))
-
-;; ;; Svelte mode
-;; (straight-use-package '(svelte-mode :type git :host github :repo "leafOfTree/svelte-mode"))
-;; (use-package svelte-mode
-;;   :mode ("\\.svelte\\'" . svelte-mode)
-;;   :custom
-;;   (svelte-basic-offset 2)
-;;   :config
-;;   (defun svelte-mode-sgml-empty-tag-p-advice (old-function tag-name)
-;;     "Advice function intended to wrap around `sgml-empty-tag-p
-;; Makes case significant when checking whether tags need to be
-;; closed or not, to not confuse elements with Svelte components."
-;;     (if (eq major-mode 'svelte-mode)
-;;         (assoc-string tag-name sgml-empty-tags)
-;;       (funcall old-function tag-name)))
-
-;;   (defun svelte-mode-sgml-unclosed-tag-p-advice (old-function tag-name)
-;;     "Advice function intended to wrap around `sgml-unclosed-tag-p
-;; Makes case significant when checking whether tags need to be
-;; closed or not, to not confuse elements with Svelte components."
-;;     (if (eq major-mode 'svelte-mode)
-;;         (assoc-string tag-name sgml-unclosed-tags)
-;;       (funcall old-function tag-name)))
-
-;;   (advice-add 'sgml-empty-tag-p :around 'svelte-mode-sgml-empty-tag-p-advice)
-;;   (advice-add 'sgml-unclosed-tag-p :around 'svelte-mode-sgml-unclosed-tag-p-advice)
-;;   )
 
 (use-package javascript-mode
   :init (setq js-indent-level 2)
@@ -89,20 +59,9 @@
 
 (use-package typescript-mode
   :straight (typescript-mode :type git :host github :repo "emacs-typescript/typescript.el")
-  ;; :after tree-sitter
-  :mode (("\\.tsx\\'" . typescript-mode)
-         ;; ("\\.js\\'" . typescript-mode)
-         ;; ("\\.ts\\'" . typescript-mode)
-         ;; ("\\.cjs\\'" . typescript-mode)
-         ;; ("\\.jsx\\'" . typescript-mode)
-         )
+  :mode (("\\.tsx\\'" . typescript-mode))
   :config
-  (setq typescript-indent-level 2)
-  ;; (define-derived-mode ts-svelte-mode typescript-mode "Typescript Svelte")
-  ;; use our derived mode for tsx files
-  ;; (add-to-list 'auto-mode-alist '("\\.svelte?\\'" . ts-svelte-mode))
-  ;; (add-to-list 'tree-sitter-major-mode-language-alist '(ts-svelte-mode . typescript))
-  )
+  (setq typescript-indent-level 2))
 
 
 (use-package d2-mode

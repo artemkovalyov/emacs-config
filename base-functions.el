@@ -95,9 +95,9 @@ point reaches the beginning or end of the buffer, stop there."
       (end-of-line))))
 
 (defun insert-current-date () (interactive)
-    (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+       (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
 
-;;toggle hide/shoe block for hs-minor-mode
+;;toggle hide/show block for hs-minor-mode
 (defun hs-toggle ()
   (interactive)
   (let ((saved-point (point)))
@@ -105,26 +105,26 @@ point reaches the beginning or end of the buffer, stop there."
     (hs-toggle-hiding)
     (goto-char saved-point)))
 
- (defun copy-line (arg)
-    "Copy lines (as many as prefix argument) in the kill ring.
+(defun copy-line (arg)
+  "Copy lines (as many as prefix argument) in the kill ring.
       Ease of use features:
       - Move to start of next line.
       - Appends the copy on sequential calls.
       - Use newline as last char even on the last line of the buffer.
       - If region is active, copy its lines."
-    (interactive "p")
-    (let ((beg (line-beginning-position))
-          (end (line-end-position arg)))
-      (when mark-active
-        (if (> (point) (mark))
-            (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
-          (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
-      (if (eq last-command 'copy-line)
-          (kill-append (buffer-substring beg end) (< end beg))
-        (kill-ring-save beg end)))
-    (kill-append "\n" nil)
-    (beginning-of-line (or (and arg (1+ arg)) 2))
-    (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
+  (interactive "p")
+  (let ((beg (line-beginning-position))
+        (end (line-end-position arg)))
+    (when mark-active
+      (if (> (point) (mark))
+          (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
+        (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
+    (if (eq last-command 'copy-line)
+        (kill-append (buffer-substring beg end) (< end beg))
+      (kill-ring-save beg end)))
+  (kill-append "\n" nil)
+  (beginning-of-line (or (and arg (1+ arg)) 2))
+  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
 
 (defun wrap-double-quote (&optional arg)
   (interactive "P")
@@ -188,26 +188,26 @@ The elements of LINES are assumed to be values of category `consult-line'."
         filename)
     (with-current-buffer buf
       (insert (propertize "Caution:" 'wgrep-header t 'font-lock-face '(:inherit 'compilation-warning :underline t))
-            (propertize " only buffers backed by a file are exported to grep-mode.\n" 'wgrep-header t 'font-lock-face '(:inherit 'compilation-warning)))
-    (insert (propertize "Hint:" 'font-lock-face '(:inherit 'compilation-info :underline t))
-            (propertize " use wgrep for editing of the results in place and saving them to respective files\n" 'font-lock-face '(:inherit 'compilation-info)))
-    (dolist (line lines)
-      (pcase-let*
-          ((`(,loc . ,num) (consult--get-location line))
-           (lineno (format "%d" num))
-           (contents (embark-consult--strip line))
-           (this-buf (marker-buffer loc)))
-        (when (buffer-file-name this-buf)
-          (unless (eq this-buf last-buf)
-            (setq last-buf this-buf)
-            (setq filename (file-name-nondirectory (buffer-file-name this-buf)))
-            (insert "\n" (propertize (concat "file: " filename) 'wgrep-ignore t 'font-lock-face '(:inherit compilation-info :underline t)) "\n"))
-          (insert (propertize
-                   (concat filename ":")
-                   'invisible t)
-                  lineno
-                  ":"
-                  contents "\n" ))))
+              (propertize " only buffers backed by a file are exported to grep-mode.\n" 'wgrep-header t 'font-lock-face '(:inherit 'compilation-warning)))
+      (insert (propertize "Hint:" 'font-lock-face '(:inherit 'compilation-info :underline t))
+              (propertize " use wgrep for editing of the results in place and saving them to respective files\n" 'font-lock-face '(:inherit 'compilation-info)))
+      (dolist (line lines)
+        (pcase-let*
+            ((`(,loc . ,num) (consult--get-location line))
+             (lineno (format "%d" num))
+             (contents (embark-consult--strip line))
+             (this-buf (marker-buffer loc)))
+          (when (buffer-file-name this-buf)
+            (unless (eq this-buf last-buf)
+              (setq last-buf this-buf)
+              (setq filename (file-name-nondirectory (buffer-file-name this-buf)))
+              (insert "\n" (propertize (concat "file: " filename) 'wgrep-ignore t 'font-lock-face '(:inherit compilation-info :underline t)) "\n"))
+            (insert (propertize
+                     (concat filename ":")
+                     'invisible t)
+                    lineno
+                    ":"
+                    contents "\n" ))))
       (goto-char (point-min))
       (grep-mode)
       (setq next-error-last-buffer buf)

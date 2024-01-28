@@ -45,7 +45,7 @@
           treemacs-user-mode-line-format         nil
           treemacs-user-header-line-format       nil
           treemacs-width                         37
-)
+          )
 
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
@@ -69,19 +69,19 @@
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag))
   (:map treemacs-mode-map
-      ("i" . treemacs-previous-neighbour)
-      ("k" . treemacs-next-neighbour)
-      ("A-K" . treemacs-next-line-other-window)
-      ("A-I" . treemacs-previous-line-other-window)
-      ("A-i"   . treemacs-previous-line)
-      ("A-k"   . treemacs-next-line))
+        ("i" . treemacs-previous-neighbour)
+        ("k" . treemacs-next-neighbour)
+        ("A-K" . treemacs-next-line-other-window)
+        ("A-I" . treemacs-previous-line-other-window)
+        ("A-i"   . treemacs-previous-line)
+        ("A-k"   . treemacs-next-line))
   ;; :hook
   ;; (treemacs-mode . (lambda () (linum-mode -1)))
   )
 
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+;; (use-package treemacs-projectile
+;;   :after treemacs projectile
+;;   :ensure t)
 
 (use-package treemacs-icons-dired
   :after treemacs dired

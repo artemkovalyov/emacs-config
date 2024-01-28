@@ -82,18 +82,17 @@
   ;; Adding to the list of consult-dir sources
   (add-to-list 'consult-dir-sources 'consult-dir--source-fasd t))
 
-(use-package consult-flycheck
-  :straight (consult-flycheck :type git :host github :repo "minad/consult-flycheck")
-  :bind ("s-g e" . consult-flycheck))
+;; (use-package consult-flycheck
+;;   :straight (consult-flycheck :type git :host github :repo "minad/consult-flycheck")
+;;   :bind ("s-g e" . consult-flycheck))
 
-(use-package consult-lsp
-  :straight (consult-lsp :type git :host github :repo "gagbo/consult-lsp")
-  ;; :bind ("s-g e" . consult-flycheck)
-  )
+;; (use-package consult-lsp
+;;   :straight (consult-lsp :type git :host github :repo "gagbo/consult-lsp")
+;;   ;; :bind ("s-g e" . consult-flycheck)
+;;   )
 
 (use-package pcre2el
   :straight (pcre2el :type git :host github :repo "joddie/pcre2el"))
-
 
 
 (use-package corfu
@@ -277,8 +276,6 @@
   :init
   (setq dashboard-items '((recents  . 5)
                           (bookmarks . 5)
-                          (projects . 5)
-                          (agenda . 5)
                           (registers . 5))
 	dashboard-banner-logo-title "Life's Awesome!"
 	dashboard-startup-banner nil)
@@ -298,23 +295,9 @@
   (setq-default ediff-highlight-all-diffs 't))
 
 
-;; (use-package exec-path-from-shell
-;;   :ensure t
-;;   :config
-;;   (when (memq window-system '(mac ns x))
-;;     (exec-path-from-shell-copy-env "GOPATH")
-;;     (exec-path-from-shell-copy-env "PYTHONPATH")
-;;     (exec-path-from-shell-copy-env "PATH")
-;;     (exec-path-from-shell-copy-env "LSP_USE_PLISTS")
-;;     (exec-path-from-shell-initialize)))
-
 (use-package expand-region
   :bind
   ("A-." . er/expand-region))
-
-(use-package flycheck
-  :straight (flycheck :type git :host github :repo "flycheck/flycheck")
-  :hook (lsp-mode . flycheck-mode))
 
 (use-package comment-dwim-2
   :defer t
@@ -362,15 +345,6 @@
   ("C-n" . mc/mark-all-like-this)
   ("s-<mouse-1>" . mc/add-cursor-on-click))
 
-(use-package projectile
-  :ensure t
-  :config
-  (setq projectile-known-projects-file
-        (expand-file-name "projectile-bookmarks.eld" temp-dir))
-  (define-key projectile-mode-map (kbd "C-p") 'projectile-command-map)
-  (projectile-register-project-type 'yarn '("package.json"))
-  (projectile-mode 1))
-
 (use-package smartparen
   :straight (smartparens :host github :repo "Fuco1/smartparens")
   :init
@@ -386,18 +360,6 @@
   (prog-mode . smartparens-mode)
   :config
   (require 'smartparens-config))
-
-;; (use-package undo-tree
-;;   :straight (undo-tree :type git :host gitlab :repo "tsc25/undo-tree")
-;;   :demand t
-;;   :bind
-;;   ;;"C-x u" - visualize undo tree
-;;   ;; Remember undo history
-;;   :init
-;;   (setq
-;;    undo-tree-auto-save-history nil
-;;    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
-;;   (global-undo-tree-mode))
 
 (use-package undo-fu
   :config
@@ -461,17 +423,6 @@
   :bind
   ("A-d" . duplicate-thing))
 
-(use-package switch-window
-  :straight (switch-window :type git :host github :repo "dimitri/switch-window")
-  :init
-  (setq
-   switch-window-input-style 'read-event
-   switch-window-shortcut-style 'qwerty
-   switch-window-minibuffer-shortcut ?z)
-
-  :bind
-  ("s-s" . #'switch-window))
-
 ;; https://github.com/dajva/rg.el
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
@@ -502,7 +453,8 @@
   (ctrlf-mode +1))
 
 (use-package apheleia
-  :straight (apheleia :host github :repo "raxod502/apheleia" :build (:not compile))
+  ;; :straight (apheleia :host github :repo "raxod502/apheleia" :build (:not compile))
+  :straight (apheleia :host github :repo "raxod502/apheleia")
   :config
   ;; (setq apheleia-log-only-errors nil)
   (add-to-list 'apheleia-formatters '(prettier-svelte . ("prettier" "--stdin-filepath" filepath "--parser=svelte")))
@@ -515,16 +467,7 @@
   :init
   (apheleia-global-mode +1))
 
-;; (use-package highlight-indent-guides
-;;   :straight (highlight-indent-guides :type git :host github :repo "DarthFennec/highlight-indent-guides")
-;;   :custom (highlight-indent-guides-method 'character)
-;;   :hook (prog-mode . highlight-indent-guides-mode))
-
-
 (use-package windmove
-  :after (lsp-mode)
-  ;; :config
-  ;; (global-unset-key (kbd "s-l"))
   :bind
   ("s-o" . other-window)
   ("s-j" . windmove-left)
@@ -570,7 +513,7 @@
   (setq pulsar-iterations 10)
   (setq pulsar-face 'pulsar-magenta)
   (setq pulsar-highlight-face 'pulsar-yellow)
-  :bind ("s-p" . #'pulsar-pulse-line)
+  :bind ("M-p" . #'pulsar-pulse-line)
   :config
   (pulsar-global-mode 1))
 

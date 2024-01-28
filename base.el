@@ -121,7 +121,9 @@
  truncate-string-ellipsis           "…"
  ad-redefinition-action             'accept
  tramp-default-method               "ssh"
- warning-suppress-types (quote ((yasnippet backquote-change))))
+ warning-suppress-types (quote ((yasnippet backquote-change)))
+ warning-minimum-level              :error
+ native-comp-async-report-warnings-errors nil)
 
 ;; Bookmarks
 (setq

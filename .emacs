@@ -15,7 +15,6 @@
 (require 'lang-rust)
 (require 'lang-json)
 ;; (require 'lang-java)
-(require 'projectile-help-functions)
 (require 'low-config-modes)
 (require 'base-functions)
 (require 'base-global-keys)
