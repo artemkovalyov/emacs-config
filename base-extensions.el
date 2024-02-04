@@ -160,8 +160,6 @@
   :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
   :config
   (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-location-grep)
-  ;; (setf  (alist-get 'consult-location  embark-exporters-alist) #'artem/embark-consult-export-lines-to-grep)
-  ;; (setf  (alist-get 'consult-grep  embark-exporters-alist) #'art-export-grep)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
