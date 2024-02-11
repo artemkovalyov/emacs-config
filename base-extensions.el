@@ -135,7 +135,7 @@
 
 (use-package embark
   :ensure t
-  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
+  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark" :build (:not compile))
   :bind
   (("M-a" . embark-act)         ;; pick some comfortable binding
    ("M-d" . embark-dwim)        ;; good alternative: M-.
@@ -157,7 +157,8 @@
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
-  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark")
+  :straight (embark-consult :type git :host github :repo "oantolin/embark")
+  ;; :straight (embark-consult :type git :host github :repo "artemkovalyov/embark" :build (:not compile))
   :config
   (setf  (alist-get 'consult-location  embark-exporters-alist) #'embark-consult-export-location-grep)
   :hook
