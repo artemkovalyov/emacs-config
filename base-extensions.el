@@ -82,10 +82,6 @@
   ;; Adding to the list of consult-dir sources
   (add-to-list 'consult-dir-sources 'consult-dir--source-fasd t))
 
-;; (use-package consult-flycheck
-;;   :straight (consult-flycheck :type git :host github :repo "minad/consult-flycheck")
-;;   :bind ("s-g e" . consult-flycheck))
-
 ;; (use-package consult-lsp
 ;;   :straight (consult-lsp :type git :host github :repo "gagbo/consult-lsp")
 ;;   ;; :bind ("s-g e" . consult-flycheck)
@@ -525,6 +521,8 @@
   :bind
   (:map dirvish-mode-map
         ("TAB" . dirvish-subtree-toggle))
+  :config
+  (setq dired-dwim-target t)
   :init
   (dirvish-override-dired-mode))
 

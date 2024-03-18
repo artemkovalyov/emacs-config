@@ -1,48 +1,48 @@
 ;; -*- lexical-binding: t; -*-
-;;; package --- lsp.el
-;;; Commentary: LSP configuration
-;;; Code:
+;; package --- lsp.el
+;; Commentary: LSP configuration
+;; Code:
 
 
-;;; activate LSP mode
-;; (use-package lsp-mode
-;;   :straight (lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode")
-;;   :custom
-;;   (lsp-completion-provider :none) ;; corfu is used
-;;   :init
-;;   (setq lsp-keymap-prefix "s-SPC")
-;;   ;; lsp-enable-indentation t)
-;;   (setq lsp-use-plists t);; This cause my LSP setup to crash
-;;   ;; (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
-;;   (defun my/orderless-dispatch-flex-first (_pattern index _total)
-;;     (and (eq index 0) 'orderless-flex))
+;; activate LSP mode
+(use-package lsp-mode
+  :straight (lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode")
+  :custom
+  (lsp-completion-provider :none) ;; corfu is used
+  :init
+  (setq lsp-keymap-prefix "s-SPC")
+  ;; lsp-enable-indentation t)
+  (setq lsp-use-plists t);; This cause my LSP setup to crash
+  (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
+  (defun my/orderless-dispatch-flex-first (_pattern index _total)
+    (and (eq index 0) 'orderless-flex))
 
-;;   (defun my/lsp-mode-setup-completion ()
-;;     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-;;           '(orderless)))
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless)))
 
-;;   ;; Optionally configure the first word as flex filtered.
-;;   (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
+  ;; Optionally configure the first word as flex filtered.
+  (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
 
-;;   (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
 
-;;   :config
-;;   (add-to-list 'lsp-language-id-configuration '(svelte-mode . "svelte"))
-;;   ;; (define-key lsp-mode-map (kbd "s-SPC") lsp-command-map)
-;;   (define-key lsp-mode-map (kbd "s-l") nil)
-;;   ;; (lsp-treemacs-sync-mode 1)
+  :config
+  (add-to-list 'lsp-language-id-configuration '(svelte-mode . "svelte"))
+  ;; (define-key lsp-mode-map (kbd "s-SPC") lsp-command-map)
+  (define-key lsp-mode-map (kbd "s-l") nil)
+  ;; (lsp-treemacs-sync-mode 1)
 
-;;   :hook
-;;   ((typescript-mode go-mode rust-mode json-mode html-mode css-mode svelte-mode web-mode js-mode) . lsp-deferred)
-;;   (lsp-completion-mode . my/lsp-mode-setup-completion)
+  :hook
+  ((typescript-mode go-mode rust-mode json-mode html-mode css-mode svelte-mode web-mode js-mode) . lsp-deferred)
+  (lsp-completion-mode . my/lsp-mode-setup-completion)
 
-;;   :bind-keymap ("s-SPC" . lsp-command-map)
-;;   :bind (:map lsp-mode-map
-;;               ("s-r"  . lsp-rename))
+  :bind-keymap ("s-SPC" . lsp-command-map)
+  :bind (:map lsp-mode-map
+              ("s-r"  . lsp-rename))
 
-;;   :commands (lsp lsp-deferred))
+  :commands (lsp lsp-deferred))
 
-;; ;; LSP UI tools
+;; LSP UI tools
 ;; (use-package lsp-ui
 ;;   :straight (lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui")
 ;;   :defer t
@@ -106,18 +106,41 @@
 
 ;; ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-;; (use-package lsp-tailwindcss
-;;   :straight (lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
-;;   :after lsp-mode
-;;   :init
-;;   (setq lsp-tailwindcss-add-on-mode t)
-;;   :config
-;;   (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode)))
-
-(use-package eglot
+(use-package lsp-tailwindcss
+  :straight (lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
+  :after lsp-mode
+  :init
+  (setq lsp-tailwindcss-add-on-mode t)
   :config
-  (add-to-list 'eglot-server-programs
-               '(svelte-mode . ("svelteserver" "--stdio"))))
+  (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode)))
+
+;; (use-package lsp-bridge
+;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+;;                          :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+;;                          :build (:not compile))
+;;   :config
+;;   (setq lsp-bridge-python-command "/home/artem/.emacs.d/python/env/bin/python"
+;;         lsp-bridge-user-langserver-dir "/home/artem/.emacs.d/lsp/server"
+;;         lsp-bridge-user-multiserver-dir "/home/artem/.emacs.d/lsp/multiserver"
+;;         lsp-bridge-enable-completion-in-string t
+;;         acm-enable-icon nil
+;;         acm-candidate-match-function #'orderless-flex
+;;         ;; lsp-bridge-multi-lang-server-mode-list nil
+;;         ;; lsp-bridge-multi-lang-server-extension-list nil
+
+;;         )
+;;   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_tailwindcss"))
+;;   ;; (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "svelte"))
+;;   ;; (setq lsp-bridge-enable-log t)
+;;   ;; (setq lsp-bridge-enable-debug t)
+;;   :init
+;;   (global-lsp-bridge-mode))
+
+;; (use-package eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs
+;;                '(svelte-mode . ("svelteserver" "--stdio"))))
+;;'(svelte-mode . ("tailwindcss-language-server" "--stdio"))))
 
 (provide 'lsp-base)
 ;;; lsp-base.el ends here
