@@ -15,9 +15,9 @@
         lsp-bridge-multi-lang-server-extension-list nil
         )
   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_tailwindcss"))
-  (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "svelteserver"))
-  ;; (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "tailwindcss"))
-  (setq lsp-bridge-enable-log nil)
+  ;; (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "svelteserver"))
+  (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "tailwindcss"))
+  (setq lsp-bridge-enable-log t)
   (setq lsp-bridge-enable-debug nil)
   :init
   (global-lsp-bridge-mode))

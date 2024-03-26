@@ -269,11 +269,11 @@
 
 (use-package dashboard
   :init
-  (setq dashboard-items '((recents  . 5)
+  (setq dashboard-items '((recents  . 11)
                           (bookmarks . 5)
                           (registers . 5))
 	dashboard-banner-logo-title "Life's Awesome!"
-	dashboard-startup-banner nil)
+	dashboard-startup-banner 'official)
   :config
   (dashboard-setup-startup-hook))
 
