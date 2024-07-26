@@ -50,20 +50,6 @@
   (web-mode-javascript-indentation 2)
   (web-mode-script-padding 2))
 
-(use-package javascript-mode
-  :init (setq js-indent-level 2)
-  :mode (("\\.cjs\\'" . js-mode)
-         ("\\.jsx\\'" . js-mode)
-         ("\\.mjs\\'" . js-mode)
-         ))
-
-(use-package typescript-mode
-  :straight (typescript-mode :type git :host github :repo "emacs-typescript/typescript.el")
-  :mode (("\\.tsx\\'" . typescript-mode))
-  :config
-  (setq typescript-indent-level 2))
-
-
 (use-package d2-mode
   :straight (d2-mode :type git :host github :repo "andorsk/d2-mode"))
 

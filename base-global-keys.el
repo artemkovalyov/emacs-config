@@ -45,18 +45,35 @@
 (global-set-key (kbd "A-j") 'backward-char)
 (global-set-key (kbd "A-l") 'forward-char)
 
+;; Moving across text
+(global-set-key (kbd "A-л") 'next-line)
+(global-set-key (kbd "A-ш") 'previous-line)
+(global-set-key (kbd "A-о") 'backward-char)
+(global-set-key (kbd "A-д") 'forward-char)
+
 ;; Moving over words right and left
 (global-set-key (kbd "M-l") 'forward-word)
 (global-set-key (kbd "M-j") 'backward-word)
+
+;; Moving over words right and left
+(global-set-key (kbd "M-д") 'forward-word)
+(global-set-key (kbd "M-о") 'backward-word)
+
 ;; Scroll up/down
 (global-set-key (kbd "M-k") 'scroll-up-command)
 (global-set-key (kbd "M-i") 'scroll-down-command)
 
+(global-set-key (kbd "M-л") 'scroll-up-command)
+(global-set-key (kbd "M-ш") 'scroll-down-command)
+
 ;; Moving beg/end of line
 (global-set-key (kbd "A-w") 'artem/beginning-of-line)
 (global-set-key (kbd "A-e") 'artem/end-of-line)
+(global-set-key (kbd "A-ц") 'artem/beginning-of-line)
+(global-set-key (kbd "A-у") 'artem/end-of-line)
 
 ;; Mark the whole buffer
+(global-set-key (kbd "A-ф") 'mark-whole-buffer)
 (global-set-key (kbd "A-a") 'mark-whole-buffer)
 
 ;; Scroll beg/end of buffer
@@ -76,8 +93,8 @@
 ;; Deleting chars, characters and lines
 (global-set-key (kbd "A-H-l") 'delete-char)
 (global-set-key (kbd "A-H-j") 'delete-backward-char)
-(global-set-key (kbd "M-H-l") 'sp-delete-word)
-(global-set-key (kbd "M-H-j") 'sp-backward-delete-word)
+;; (global-set-key (kbd "M-H-l") 'sp-delete-word)
+;; (global-set-key (kbd "M-H-j") 'sp-backward-delete-word)
 (global-set-key (kbd "A-H-k") 'artem/delete-line-and-move-down)
 (global-set-key (kbd "A-H-i") 'artem/delete-line-and-move-up)
 (global-set-key (kbd "M-w") 'artem/delete-until-beginning-of-the-line)
@@ -87,6 +104,20 @@
 (global-set-key (kbd "A-s u") 'delete-indentation)
 ;; (global-set-key (kbd "A-u") 'fixup-whitespace)
 (global-set-key (kbd "A-u") 'cycle-spacing)
+
+(global-set-key (kbd "A-H-д") 'delete-char)
+(global-set-key (kbd "A-H-о") 'delete-backward-char)
+;; (global-set-key (kbd "M-H-l") 'sp-delete-word)
+;; (global-set-key (kbd "M-H-j") 'sp-backward-delete-word)
+(global-set-key (kbd "A-H-л") 'artem/delete-line-and-move-down)
+(global-set-key (kbd "A-H-ш") 'artem/delete-line-and-move-up)
+(global-set-key (kbd "M-ц") 'artem/delete-until-beginning-of-the-line)
+(global-set-key (kbd "M-у") 'artem/delete-until-end-of-the-line)
+
+(global-set-key (kbd "A-і A-г") 'delete-blank-lines)
+(global-set-key (kbd "A-і г") 'delete-indentation)
+;; (global-set-key (kbd "A-u") 'fixup-whitespace)
+(global-set-key (kbd "A-г") 'cycle-spacing)
 
 
 ;; Eval last sexp / eval defun
@@ -99,6 +130,9 @@
 
 (global-set-key (kbd "A-s s") 'save-buffer)
 (global-set-key (kbd "A-s A-s") 'save-some-buffers)
+
+(global-set-key (kbd "A-і і") 'save-buffer)
+(global-set-key (kbd "A-і A-i") 'save-some-buffers)
 
 (global-set-key (kbd "A-s '") 'wrap-singe-quote)
 (global-set-key (kbd "A-s \"") 'wrap-double-quote)
@@ -128,7 +162,7 @@
                 (lambda ()
                   (interactive)
                   (let ((old-face-attribute (face-attribute 'default :height)))
-                        (set-face-attribute 'default nil :height (+ old-face-attribute 5)))))
+                    (set-face-attribute 'default nil :height (+ old-face-attribute 5)))))
 
 (global-set-key (kbd "A--")
                 (lambda ()
@@ -139,12 +173,12 @@
 (global-set-key (kbd "A-0")
                 (lambda ()
                   (interactive)
-                    (set-face-attribute 'default nil :height default-global-text-scale)))
+                  (set-face-attribute 'default nil :height default-global-text-scale)))
 
 (global-set-key (kbd "H-0")
                 (lambda ()
                   (interactive)
-                    (set-face-attribute 'default nil :height 200)))
+                  (set-face-attribute 'default nil :height 200)))
 
 
 (provide 'base-global-keys)

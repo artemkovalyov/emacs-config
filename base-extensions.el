@@ -131,7 +131,7 @@
 
 (use-package embark
   :ensure t
-  :straight (embark-consult :type git :host github :repo "artemkovalyov/embark" :build (:not compile))
+  :straight (embark-consult :type git :host github :repo "oantolin/embark" :build (:not compile))
   :bind
   (("M-a" . embark-act)         ;; pick some comfortable binding
    ("M-d" . embark-dwim)        ;; good alternative: M-.
@@ -340,7 +340,7 @@
   ("C-n" . mc/mark-all-like-this)
   ("s-<mouse-1>" . mc/add-cursor-on-click))
 
-(use-package smartparen
+(use-package smartparens
   :straight (smartparens :host github :repo "Fuco1/smartparens")
   :init
   (setq sp-navigate-reindent-after-up-in-string nil
@@ -350,6 +350,8 @@
   ("H-k" . sp-forward-sexp)
   ("H-l" . sp-down-sexp)
   ("H-j" . sp-up-sexp)
+  ("M-H-j" . sp-backward-delete-word)
+  ("M-H-l" . sp-delete-word)
   :hook
   (text-mode . smartparens-mode)
   (prog-mode . smartparens-mode)

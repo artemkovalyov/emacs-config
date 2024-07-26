@@ -6,35 +6,66 @@
 
 ;; activate LSP mode
 (use-package lsp-mode
+  :diminish "LSP"
   :straight (lsp-mode :type git :host github :repo "emacs-lsp/lsp-mode")
-  :custom
-  (lsp-completion-provider :none) ;; corfu is used
+  :hook ((lsp-mode . lsp-diagnostics-mode)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-completion-mode . arty/lsp-mode-setup-completion)
+         ((typescript-mode typescript-ts-mode json-mode html-mode css-mode svelte-mode web-mode js-mode js-ts-mode tsx-ts-mode) . lsp-deferred))
   :init
-  (setq lsp-keymap-prefix "s-SPC")
-  ;; lsp-enable-indentation t)
-  (setq lsp-use-plists t);; This cause my LSP setup to crash
-  (setq lsp-log-io t) ; enable debug log - can be a huge performance hit
-  (defun my/orderless-dispatch-flex-first (_pattern index _total)
+  (setq lsp-use-plists t)
+  (defun arty/orderless-dispatch-flex-first (_pattern index _total)
     (and (eq index 0) 'orderless-flex))
-
-  (defun my/lsp-mode-setup-completion ()
+  (defun arty/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless)))
 
   ;; Optionally configure the first word as flex filtered.
   (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
-
   (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+
+  :custom
+  (lsp-completion-provider :none) ;; corfu is used
+  (lsp-log-io nil) ; enable debug log - can be a huge performance hit
+  (lsp-keep-workspace-alive nil)
+
+  ;; core
+  (lsp-enable-xref t)                   ; Use xref to find references
+  (lsp-auto-configure t)                ; Used to decide between current active servers
+  (lsp-eldoc-enable-hover t)            ; Display signature information in the echo area
+  (lsp-enable-dap-auto-configure t)     ; Debug support
+  (lsp-enable-file-watchers nil)
+  (lsp-enable-folding nil)              ; I disable folding since I use origami
+  (lsp-enable-imenu t)
+  (lsp-enable-indentation nil)          ; I use prettier
+  (lsp-enable-links nil)                ; No need since we have `browse-url'
+  (lsp-enable-on-type-formatting nil)   ; Prettier handles this
+  (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
+  (lsp-enable-symbol-highlighting t)     ; Shows usages of symbol at point in the current buffer
+  (lsp-enable-text-document-color nil)   ; This is Treesitter's job
+  (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
+  (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
+
+  ;; headerline
+  (lsp-headerline-breadcrumb-enable t)  ; Optional, I like the breadcrumbs
+  (lsp-headerline-breadcrumb-enable-diagnostics nil) ; Don't make them red, too noisy
+  (lsp-headerline-breadcrumb-enable-symbol-numbers nil)
+  (lsp-headerline-breadcrumb-icons-enable nil)
+  ;; modeline
+  (lsp-modeline-code-actions-enable nil) ; Modeline should be relatively clean
+  (lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
+  (lsp-modeline-workspace-status-enable nil) ; Modeline displays "LSP" when lsp-mode is enabled
+  (lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
+  (lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
+  (lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
+  ;; lens
+  (lsp-lens-enable nil)                 ; Optional, I don't need it
+  ;; semantic
+  (lsp-semantic-tokens-enable nil)      ; Related to highlighting, and we defer to treesitter
 
   :config
   (add-to-list 'lsp-language-id-configuration '(svelte-mode . "svelte"))
-  ;; (define-key lsp-mode-map (kbd "s-SPC") lsp-command-map)
   (define-key lsp-mode-map (kbd "s-l") nil)
-  ;; (lsp-treemacs-sync-mode 1)
-
-  :hook
-  ((typescript-mode go-mode rust-mode json-mode html-mode css-mode svelte-mode web-mode js-mode) . lsp-deferred)
-  (lsp-completion-mode . my/lsp-mode-setup-completion)
 
   :bind-keymap ("s-SPC" . lsp-command-map)
   :bind (:map lsp-mode-map
@@ -42,105 +73,60 @@
 
   :commands (lsp lsp-deferred))
 
-;; LSP UI tools
-;; (use-package lsp-ui
-;;   :straight (lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui")
-;;   :defer t
-;;   :commands
-;;   lsp-ui-mode
-;;   :custom
-;;   ;; lsp-ui-doc
-;;   (lsp-ui-doc-enable nil)
-;;   (lsp-ui-doc-header t)
-;;   (lsp-ui-doc-include-signature nil)
-;;   (lsp-ui-doc-position 'top) ;; top, bottom, or at-point
-;;   ;; (lsp-ui-doc-max-width 20)
-;;   ;; (lsp-ui-doc-max-height 30)
-;;   (lsp-ui-doc-use-childframe t)
-;;   (lsp-ui-doc-use-webkit t)
-;;   ;; lsp-ui-flycheck
-;;   (lsp-ui-flycheck-enable t)
-;;   ;; lsp-ui-sideline
-;;   (lsp-ui-sideline-enable nil)
-;;   (lsp-ui-sideline-ignore-duplicate t)
-;;   (lsp-ui-sideline-show-symbol t)
-;;   (lsp-ui-sideline-show-hover t)
-;;   (lsp-ui-sideline-show-diagnostics nil)
-;;   (lsp-ui-sideline-show-code-actions t)
-;;   (lsp-ui-sideline-code-actions-prefix "")
-;;   ;; lsp-ui-imenu
-;;   (lsp-ui-imenu-enable t)
-;;   (lsp-ui-imenu-kind-position 'top)
-;;   ;; lsp-ui-peek
-;;   (lsp-ui-peek-enable t)
-;;   (lsp-ui-peek-peek-height 20)
-;;   (lsp-ui-peek-list-width 50)
-;;   (lsp-ui-peek-fontify 'on-demand) ;; never, on-demand, or always
-;;   ;; semantic highlight
-;;   (lsp-enable-semantic-highlighting t)
-;;   :preface
-;;   (defun toggle-lsp-ui-doc ()
-;;     (interactive)
-;;     (if lsp-ui-doc-mode
-;; 	(progn
-;; 	  (lsp-ui-doc-mode -1)
-;; 	  (lsp-ui-doc--hide-frame))
-;;       (lsp-ui-doc-mode 1)))
-;;   :bind
-;;   (:map lsp-mode-map
-;; 	("H-r" . lsp-find-references)
-;; 	("H-d" . lsp-find-definition)
-;; 	("H-o"   . lsp-find-implementation)
-;; 	("H-m"   . lsp-ui-imenu)
-;; 	("C-c s"   . lsp-ui-sideline-mode)
-;; 	("C-c d"   . toggle-lsp-ui-doc))
-;;   :hook
-;;   (lsp-mode . lsp-ui-mode))
-
-;; ;; (straight-use-package '(lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs"))
-;; (use-package lsp-treemacs :after lsp-mode :commands lsp-treemacs-errors-list)
-;; ;; optionally if you want to use debugger
-
 ;; ;; (straight-use-package '(dap-mode :type git :host github :repo "emacs-lsp/dap-mode")) ;
 ;; (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode)) ;
 
 ;; ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
+
 (use-package lsp-tailwindcss
-  :straight (lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
+  :straight '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
   :after lsp-mode
-  :init
-  (setq lsp-tailwindcss-add-on-mode t)
+  :init (setq lsp-tailwindcss-add-on-mode t)
   :config
-  (setq lsp-tailwindcss-major-modes '(svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode)))
+  (dolist (tw-major-mode
+           '(css-mode
+             css-ts-mode
+             typescript-mode
+             typescript-ts-mode
+             tsx-ts-mode
+             web-mode
+             html-mode
+             js-ts-mode
+             clojure-mode))
+    (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
 
-;; (use-package lsp-bridge
-;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-;;                          :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-;;                          :build (:not compile))
-;;   :config
-;;   (setq lsp-bridge-python-command "/home/artem/.emacs.d/python/env/bin/python"
-;;         lsp-bridge-user-langserver-dir "/home/artem/.emacs.d/lsp/server"
-;;         lsp-bridge-user-multiserver-dir "/home/artem/.emacs.d/lsp/multiserver"
-;;         lsp-bridge-enable-completion-in-string t
-;;         acm-enable-icon nil
-;;         acm-candidate-match-function #'orderless-flex
-;;         ;; lsp-bridge-multi-lang-server-mode-list nil
-;;         ;; lsp-bridge-multi-lang-server-extension-list nil
+(defun lsp-booster--advice-json-parse (old-fn &rest args)
+  "Try to parse bytecode instead of json."
+  (or
+   (when (equal (following-char) ?#)
+     (let ((bytecode (read (current-buffer))))
+       (when (byte-code-function-p bytecode)
+         (funcall bytecode))))
+   (apply old-fn args)))
+(advice-add (if (progn (require 'json)
+                       (fboundp 'json-parse-buffer))
+                'json-parse-buffer
+              'json-read)
+            :around
+            #'lsp-booster--advice-json-parse)
 
-;;         )
-;;   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_tailwindcss"))
-;;   ;; (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("svelte") . "svelte"))
-;;   ;; (setq lsp-bridge-enable-log t)
-;;   ;; (setq lsp-bridge-enable-debug t)
-;;   :init
-;;   (global-lsp-bridge-mode))
+(defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+  "Prepend emacs-lsp-booster command to lsp CMD."
+  (let ((orig-result (funcall old-fn cmd test?)))
+    (if (and (not test?)                             ;; for check lsp-server-present?
+             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+             lsp-use-plists
+             (not (functionp 'json-rpc-connection))  ;; native json-rpc
+             (executable-find "emacs-lsp-booster"))
+        (progn
+          (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+            (setcar orig-result command-from-exec-path))
+          (message "Using emacs-lsp-booster for %s!" orig-result)
+          (cons "emacs-lsp-booster" orig-result))
+      orig-result)))
 
-;; (use-package eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs
-;;                '(svelte-mode . ("svelteserver" "--stdio"))))
-;;'(svelte-mode . ("tailwindcss-language-server" "--stdio"))))
+(advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
 (provide 'lsp-base)
 ;;; lsp-base.el ends here
