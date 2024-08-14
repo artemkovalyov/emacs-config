@@ -521,10 +521,12 @@
 (use-package dirvish
   :straight (dirvish :type git :host github :repo "alexluigit/dirvish")
   :bind
+  ("H-d" . dirvish-side)
   (:map dirvish-mode-map
         ("TAB" . dirvish-subtree-toggle))
   :config
   (setq dired-dwim-target t)
+  (setq dirvish-side-width 50)
   :init
   (dirvish-override-dired-mode))
 
