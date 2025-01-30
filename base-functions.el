@@ -220,5 +220,21 @@ The elements of LINES are assumed to be values of category `consult-line'."
       (when (fboundp 'wgrep-setup) (wgrep-setup)))
     (pop-to-buffer buf)))
 
+(defun artem/duplicate-line-or-region ()
+  "Duplicate the current line, or selected region if active."
+  (interactive)
+  (if (use-region-p)
+      (let ((beg (region-beginning))
+            (end (region-end)))
+        (let ((region-text (buffer-substring beg end)))
+          (goto-char end)
+          (newline)
+          (insert region-text)))
+    (let ((line-text (thing-at-point 'line t)))
+      (end-of-line)
+      (newline)
+      (insert line-text))))
+
+
 (provide 'base-functions)
 ;;; .base-functions.el ends here

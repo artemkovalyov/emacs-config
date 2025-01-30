@@ -180,6 +180,7 @@
                   (interactive)
                   (set-face-attribute 'default nil :height 200)))
 
+(global-set-key (kbd "A-d") 'artem/duplicate-line-or-region)
 
 (provide 'base-global-keys)
 ;;; base-global-keys.el ends here

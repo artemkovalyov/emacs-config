@@ -413,13 +413,6 @@
   ("A-s q" . 'vr/query-replace)
   ("A-s m" . 'vr/mc-mark))
 
-
-;;duplicating lines and
-(use-package duplicate-thing
-  :straight (duplicate-thing :type git :host github :repo "artemkovalyov/duplicate-thing")
-  :bind
-  ("A-d" . duplicate-thing))
-
 ;; https://github.com/dajva/rg.el
 (straight-use-package '(rg :type git :host github :repo "dajva/rg.el"))
 (use-package rg
