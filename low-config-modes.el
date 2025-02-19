@@ -36,6 +36,7 @@
 
 (use-package web-mode
   :commands (web-mode)
+  :mode ("\\.html?\\'" . web-mode)
   :bind
   (:map web-mode-map
         ("H-f" . web-mode-fold-or-unfold))

@@ -84,6 +84,11 @@
   :after lsp-mode
   :init (setq lsp-tailwindcss-add-on-mode t)
   :config
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("tailwindcss-language-server" "--stdio"))
+    :major-modes '(web-mode html-mode css-mode)
+    :server-id 'tailwindcss-ls))
   (dolist (tw-major-mode
            '(css-mode
              css-ts-mode
@@ -92,6 +97,7 @@
              tsx-ts-mode
              web-mode
              html-mode
+             mhtml-mode
              js-ts-mode
              clojure-mode))
     (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
