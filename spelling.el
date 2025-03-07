@@ -13,7 +13,7 @@
 ;; find aspell and hunspell automatically
 (cond
  ;; try hunspell at first
-  ;; if hunspell does NOT exist, use aspell
+ ;; if hunspell does NOT exist, use aspell
  (
   (executable-find "hunspell")
   (setq ispell-program-name "hunspell")
@@ -35,16 +35,16 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
-;; To make it work you'll have to install aspell dictionaries, it doesn't work with other dictionaries while can use hunspell as a back-end
+;;To make it work you'll have to install aspell dictionaries, it doesn't work with other dictionaries while can use hunspell as a back-end
 (use-package spell-fu
   :demand t
   :config
   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de"))
   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "us"))
-  ;; (spell-fu-dictionary-add
-  ;; (spell-fu-get-personal-dictionary "de-personal" "/home/user/.aspell.de.pws"))
-  ;; (spell-fu-dictionary-add
-  ;; (spell-fu-get-personal-dictionary "fr-personal" "/home/user/.aspell.fr.pws"))
+  (spell-fu-dictionary-add
+   (spell-fu-get-personal-dictionary "de-personal" "~/.aspell.de.pws"))
+  (spell-fu-dictionary-add
+   (spell-fu-get-personal-dictionary "en-personal" "~/.aspell.en.pws"))
 
   (setq spell-fu-ignore-modes (list 'org-mode))
   (setq global-spell-fu-ignore-buffer (lambda (buf) (buffer-local-value 'buffer-read-only buf)))
@@ -66,6 +66,20 @@
       (((symbol-function 'ispell-command-loop)
         (lambda (miss _guess _word _start _end) (car miss))))
     (ispell-word)))
+
+(defun ary/flyspell-save-word ()
+  "Save the word at point to the local dictionary."
+  (interactive)
+  (let ((word (flyspell-get-word)))
+    (if word
+        (let ((word (car word)))
+          (ispell-send-string (concat "*" word "\n"))
+          (ispell-send-string "#\n")
+          (message "Saved word '%s' to local dictionary" word))
+      (message "No word at point"))))
+
+(global-set-key (kbd "C-c $") 'my-flyspell-save-word)
+
 
 
 (provide 'spelling)
