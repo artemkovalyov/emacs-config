@@ -27,6 +27,7 @@
 
   ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
   ;; If it's nil, Emacs tries to automatically set up the dictionaries.
+  ;; If it's nil, Emacs tries to automatically set up the dictionaries.
   (when (boundp 'ispell-hunspell-dictionary-alist)
     (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
 
@@ -38,13 +39,17 @@
 ;;To make it work you'll have to install aspell dictionaries, it doesn't work with other dictionaries while can use hunspell as a back-end
 (use-package spell-fu
   :demand t
+  ;; :init
+  ;; (setq spell-fu-debug t)
   :config
-  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de"))
-  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "us"))
-  (spell-fu-dictionary-add
-   (spell-fu-get-personal-dictionary "de-personal" "~/.aspell.de.pws"))
-  (spell-fu-dictionary-add
-   (spell-fu-get-personal-dictionary "en-personal" "~/.aspell.en.pws"))
+  ;; (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de"))
+  ;; (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "us"))
+  ;; (spell-fu-dictionary-add
+  ;; (spell-fu-get-personal-dictionary "de-personal" "~/.aspell.de.pws"))
+  ;; (spell-fu-dictionary-add
+  ;; (spell-fu-get-personal-dictionary "en-personal" "/home/i531196/.hunspell_en_US"))
+  (setq ispell-personal-dictionary "~/.hunspell_en_US")
+
 
   (setq spell-fu-ignore-modes (list 'org-mode))
   (setq global-spell-fu-ignore-buffer (lambda (buf) (buffer-local-value 'buffer-read-only buf)))
