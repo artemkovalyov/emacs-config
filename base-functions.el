@@ -224,17 +224,22 @@ The elements of LINES are assumed to be values of category `consult-line'."
   "Duplicate the current line, or selected region if active."
   (interactive)
   (if (use-region-p)
-      (let ((beg (region-beginning))
-            (end (region-end)))
+      (let ((beg (save-excursion
+                   (goto-char (region-beginning))
+                   (line-beginning-position)))
+            (end (save-excursion
+                   (goto-char (region-end))
+                   (line-end-position))))
         (let ((region-text (buffer-substring beg end)))
           (goto-char end)
           (newline)
           (insert region-text)))
-    (let ((line-text (thing-at-point 'line t)))
-      (end-of-line)
-      (newline)
-      (insert line-text))))
-
+    (let ((beg (line-beginning-position))
+          (end (line-end-position)))
+      (let ((line-text (buffer-substring beg end)))
+        (end-of-line)
+        (newline)
+        (insert line-text)))))
 
 (provide 'base-functions)
 ;;; .base-functions.el ends here
