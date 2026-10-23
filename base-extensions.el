@@ -21,6 +21,7 @@
   (setq consult-preview-key nil)
   :bind
   ("s-s b" . consult-buffer)
+  ("A-b" . consult-buffer)
   ("M-f" . consult-ripgrep)
   ("s-b" . consult-bookmark)
   ("s-s f" . consult-line)
