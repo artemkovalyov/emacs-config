@@ -203,14 +203,14 @@
   :config
   (setq magit-refresh-status-buffer nil)
   :bind
-  ("s-g s" . magit-status)
-  ("s-g x" . magit-checkout)
-  ("s-g c" . magit-commit)
-  ("s-g p" . magit-push)
-  ("s-g u" . magit-pull)
-  ("s-g e" . magit-ediff-resolve)
-  ("s-g r" . magit-rebase-interactive)
-  ("s-g b" . magit-blame)
+  ("A-g s" . magit-status)
+  ("A-g x" . magit-checkout)
+  ("A-g c" . magit-commit)
+  ("A-g p" . magit-push)
+  ("A-g u" . magit-pull)
+  ("A-g e" . magit-ediff-resolve)
+  ("A-g r" . magit-rebase-interactive)
+  ("A-g b" . magit-blame)
   (:map magit-mode-map
 	("<tab>" . magit-section-toggle)))
 
