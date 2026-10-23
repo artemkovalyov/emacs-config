@@ -8,7 +8,7 @@
 
 (use-package ellama
   :straight (ellama :type git :host github :repo "s-kostyaev/ellama")
-  :bind-keymap ("s-s SPC" . ellama-prefix-map)
+  :bind-keymap ("A-s SPC" . ellama-prefix-map)
   :init
   (setopt ellama-language "English"
           ellama-auto-scroll t

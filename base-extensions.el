@@ -20,11 +20,10 @@
   :config
   (setq consult-preview-key nil)
   :bind
-  ("s-s b" . consult-buffer)
   ("A-b" . consult-buffer)
   ("M-f" . consult-ripgrep)
   ("s-b" . consult-bookmark)
-  ("s-s f" . consult-line)
+  ("A-f" . consult-line)
   ("M-o" . consult-outline))
 
 (use-package consult-dir
@@ -187,12 +186,12 @@
 
 (use-package expand-region
   :bind
-  ("s-s ." . er/expand-region))
+  ("A-s ." . er/expand-region))
 
 (use-package comment-dwim-2
   :defer t
   :bind
-  ("s-s /" . comment-dwim-2))
+  ("A-/" . comment-dwim-2))
 
 ;; https://github.com/mhayashi1120/Emacs-wgrep
 (use-package wgrep
@@ -253,7 +252,7 @@
   (yas-global-mode)
   :bind
   (:map yas-minor-mode-map
-        ("s-s y" . yas-insert-snippet))
+        ("A-y" . yas-insert-snippet))
   :config
   (yas-reload-all))
 
@@ -278,9 +277,9 @@
 (use-package visual-regexp
   :straight (visual-regexp :type git :host github :repo "benma/visual-regexp.el")
   :bind
-  ("s-s r" . 'vr/replace)
-  ("s-s q" . 'vr/query-replace)
-  ("s-s m" . 'vr/mc-mark))
+  ("A-s r" . 'vr/replace)
+  ("A-s q" . 'vr/query-replace)
+  ("A-s m" . 'vr/mc-mark))
 
 (use-package rg
   :straight (rg :type git :host github :repo "dajva/rg.el")
@@ -377,7 +376,7 @@
 (use-package dirvish
   :straight (dirvish :type git :host github :repo "alexluigit/dirvish")
   :bind
-  ("s-s e" . dirvish-side)
+  ("H-d" . dirvish-side)
   (:map dirvish-mode-map
         ("TAB" . dirvish-subtree-toggle))
   :config
