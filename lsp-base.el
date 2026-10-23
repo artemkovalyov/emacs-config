@@ -18,11 +18,10 @@
     (and (eq index 0) 'orderless-flex))
   (defun arty/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless)))
-
-  ;; Optionally configure the first word as flex filtered.
-  (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
-  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+          '(orderless))
+    ;; Optionally configure the first word as flex filtered.
+    (add-hook 'orderless-style-dispatchers #'arty/orderless-dispatch-flex-first nil 'local)
+    (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point))))
 
   :custom
   (lsp-completion-provider :none) ;; corfu is used
@@ -43,8 +42,6 @@
   (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
   (lsp-enable-symbol-highlighting t)     ; Shows usages of symbol at point in the current buffer
   (lsp-enable-text-document-color nil)   ; This is Treesitter's job
-  (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
-  (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
 
   ;; headerline
   (lsp-headerline-breadcrumb-enable t)  ; Optional, I like the breadcrumbs
@@ -56,7 +53,6 @@
   (lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
   (lsp-modeline-workspace-status-enable nil) ; Modeline displays "LSP" when lsp-mode is enabled
   (lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
-  (lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
   (lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
   ;; lens
   (lsp-lens-enable nil)                 ; Optional, I don't need it
@@ -73,34 +69,33 @@
 
   :commands (lsp lsp-deferred))
 
+(use-package lsp-ui
+  :straight (lsp-ui :type git :host github :repo "emacs-lsp/lsp-ui")
+  :after lsp-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-use-childframe t)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-show-hover nil)
+  (lsp-ui-sideline-diagnostic-max-lines 20))
+
 ;; ;; (straight-use-package '(dap-mode :type git :host github :repo "emacs-lsp/dap-mode")) ;
 ;; (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode)) ;
 
 ;; ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 
+
 (use-package lsp-tailwindcss
   :straight '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
   :after lsp-mode
-  :init (setq lsp-tailwindcss-add-on-mode t)
-  :config
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection '("tailwindcss-language-server" "--stdio"))
-    :major-modes '(web-mode html-mode css-mode)
-    :server-id 'tailwindcss-ls))
-  (dolist (tw-major-mode
-           '(css-mode
-             css-ts-mode
-             typescript-mode
-             typescript-ts-mode
-             tsx-ts-mode
-             web-mode
-             html-mode
-             mhtml-mode
-             js-ts-mode
-             clojure-mode))
-    (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
+  :init
+  (setq lsp-tailwindcss-add-on-mode t
+        lsp-tailwindcss-server-version "0.14.14"
+        lsp-tailwindcss-skip-config-check t
+        ;; lsp-tailwindcss--activate-p t
+        ;; lsp-tailwindcss-experimental-config-file "src/lib/styles/app.css"
+        ))
 
 (defun lsp-booster--advice-json-parse (old-fn &rest args)
   "Try to parse bytecode instead of json."

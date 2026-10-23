@@ -3,14 +3,12 @@
 ;; Gradle
 (use-package gradle-mode
   :defer t
-  :config
-  (gradle-mode 1)
   :mode ("\\.gradle\\'"))
 
 ;; Docker
 (use-package dockerfile-mode
   :defer t
-  :mode "\\Dockerfile\\'")
+  :mode "Dockerfile\\'")
 
 ;; YAML mode
 (use-package yaml-mode

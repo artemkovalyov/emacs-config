@@ -8,7 +8,6 @@
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
-(setq ispell-choices-win-default-height 3)
 
 ;; find aspell and hunspell automatically
 (cond
@@ -83,7 +82,7 @@
           (message "Saved word '%s' to local dictionary" word))
       (message "No word at point"))))
 
-(global-set-key (kbd "C-c $") 'my-flyspell-save-word)
+(global-set-key (kbd "C-c $") 'ary/flyspell-save-word)
 
 
 

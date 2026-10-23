@@ -5,7 +5,6 @@
   :config
   (setq lsp-java-vmargs
       (list
-       "-noverify"
        "-Xmx2G"
        "-XX:+UseG1GC"
        "-XX:+UseStringDeduplication"
@@ -26,6 +25,6 @@
 
       ;; lsp-java-java-path "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
       )
-  :hook (java-mode lsp))
+  :hook (java-mode . lsp))
 
 (provide 'lang-java)

@@ -9,7 +9,7 @@
   (interactive)
   (exchange-point-and-mark)
   (deactivate-mark nil))
-(define-key global-map (kbd "A-s p") 'exchange-point-and-mark-no-activate)
+(define-key global-map (kbd "s-s p") 'exchange-point-and-mark-no-activate)
 
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
@@ -95,7 +95,7 @@ point reaches the beginning or end of the buffer, stop there."
       (end-of-line))))
 
 (defun insert-current-date () (interactive)
-       (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+       (insert (format-time-string "%Y-%m-%d")))
 
 ;;toggle hide/show block for hs-minor-mode
 (defun hs-toggle ()
@@ -160,10 +160,7 @@ point reaches the beginning or end of the buffer, stop there."
 (defun insert-timestamp-unixtime ()
   "Insert the current Unix time"
   (interactive)
-  (let ((time (current-time)))
-    (let ((time1 (car time))
-          (time2 (car (cdr time))))
-      (insert (format "%d" (+ (* 65536 time1) time2))))))
+  (insert (format "%d" (time-convert nil 'integer))))
 (defalias 'itsu 'insert-timestamp-unixtime)
 
 (defun insert-timestamp-iso ()

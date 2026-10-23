@@ -17,7 +17,6 @@
 
 (use-package doom-themes
   :straight (doom-themes :type git :host github :repo "hlissner/emacs-doom-themes")
-  :ensure t
   :after (all-the-icons)
   :config
   ;; Global settings (defaults)
@@ -34,19 +33,6 @@
 
 (use-package doom-modeline
   :straight (doom-modeline :type git :host github :repo "seagle0128/doom-modeline")
-  :ensure t
   :init (doom-modeline-mode 1))
-
-;; custom colors for prescian (selectrum)
-(let ((class '((class color) (min-colors 89))))
-  (custom-set-faces
-   `(selectrum-current-candidate
-     ((,class (:background ,(doom-color 'dark-blue)
-                           :weight bold
-                           :foreground ,(doom-color 'base8)))))
-   `(selectrum-prescient-primary-highlight
-     ((,class (:foreground ,(doom-color 'blue)))))
-   `(selectrum-prescient-secondary-highlight
-     ((,class (:foreground ,(doom-color 'orange)))))))
 
 (provide 'base-theme)
