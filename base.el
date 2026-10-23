@@ -4,26 +4,8 @@
 ;;; Code:
 ;; (package-initialize)
 
-;; Go back to normal GC behavior after init
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (* 16 1024 1024 1024 ) ; 16mb
-                  gc-cons-percentage 0.1
-                  read-process-output-max  (* 1024 1024)))) ; 1 mb read buffer for LSP
-
-;; Don't do GC when the minibuffer is being used (lag during minibuffer usage is frustrating)
-(defun doom-defer-garbage-collection-h ()
-  "Disable garbage collection."
-  (setq gc-cons-threshold most-positive-fixnum))
-
-(defun doom-restore-garbage-collection-h ()
-  "Restore garbage collection."
-  (run-at-time
-   1 nil (lambda () (setq gc-cons-threshold 16777216))))
-
-(add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
-(add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
-;; GCMH (literally Garbage Collector Magic Hack) optimizes GC calls?
+;; Increase read buffer for LSP at startup
+(setq read-process-output-max (* 1024 1024)) ; 1mb
 
 ;; straight.el package manager
 (defvar bootstrap-version)
@@ -67,7 +49,6 @@
       scroll-step                     7
       scroll-conservatively           100000
       scroll-preserve-screen-position t
-      mac-mouse-wheel-smooth-scroll    nil
       scroll-error-top-bottom          t
       default-global-text-scale (face-attribute 'default :height))
 
@@ -79,7 +60,7 @@
 ;; Core settings
 ;; UTF-8 please
 (set-charset-priority 'unicode)
-(global-visual-line-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
 
 (setq locale-coding-system   'utf-8
       set-terminal-coding-system  'utf-8
@@ -100,8 +81,6 @@
  visible-bell                        nil
  ring-bell-function                  'ignore
  custom-file                         "~/.emacs.d/.custom.el"
- minibuffer-prompt-properties
- '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)
 
  ;; Disable non selected window highlight
  cursor-in-non-selected-windows     nil
@@ -112,8 +91,7 @@
  inhibit-startup-message            t
  fringes-outside-margins            t
  x-select-enable-clipboard          t
- use-package-always-ensure          t
- debug-on-error                     nil ; Activated debugging on any error in Emacs
+ debug-on-error                     nil
  message-log-max                    t
  load-prefer-newer                  t
  window-combination-resize          t
@@ -122,7 +100,7 @@
  ad-redefinition-action             'accept
  tramp-default-method               "ssh"
  warning-suppress-types (quote ((yasnippet backquote-change)))
- warning-minimum-level              :error
+ warning-minimum-level              :warning
  native-comp-async-report-warnings-errors nil)
 
 ;; Bookmarks
@@ -138,7 +116,6 @@
  make-backup-files                  t
  auto-save-default                  t
  auto-save-list-file-name           (concat temp-dir "/autosave")
- make-backup-files                  t
  create-lockfiles                   nil
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
  auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
@@ -175,7 +152,7 @@
 ;; (add-hook 'text-mode-hook
 ;;         (lambda() (set-fill-column 120)))
 
-(setq-default fill-column '120)
+(setq-default fill-column 120)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -187,9 +164,32 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Map XKB keysyms to Emacs modifiers (matches ~/.config/xkb/symbols/art-mods):
+;;   Left Alt  (Alt_L,  Mod1) → A-
+;;   Left Win  (Meta_L, Mod2) → M-
+;;   CapsLock  (Hyper_L,Mod3) → H-
+;;   Right Alt (Super_R,Mod4) → s-
+;;
+;; pgtk (Wayland) ignores x-*-keysym — it maps by Mod bit, not keysym name.
+;; x11 still uses x-*-keysym, so we keep both.
+(setq x-alt-keysym   'alt)
+(setq x-meta-keysym  'meta)
+(setq x-hyper-keysym 'hyper)
+(setq x-super-keysym 'super)
+(when (eq window-system 'pgtk)
+  (setq pgtk-use-im-context-on-new-connection nil)
+  ;; Mod1 (Alt_L)  → alt  (not meta, which is the pgtk default)
+  ;; Mod2 (Meta_L) → meta
+  ;; Mod3 (Hyper_L)→ hyper
+  ;; Mod4 (Super_R)→ super
+  (setq pgtk-alt-keysym   'alt)
+  (setq pgtk-meta-keysym  'meta)
+  (setq pgtk-hyper-keysym 'hyper)
+  (setq pgtk-super-keysym 'super))
+
 ;; Create a keymaps and bind them to your key combination
-(setq super-g-map (make-sparse-keymap))
-(global-set-key (kbd "s-g") super-g-map)
+(setq hyper-g-map (make-sparse-keymap))
+(global-set-key (kbd "H-g") hyper-g-map)
 
 (provide 'base)
 ;;; base ends here
