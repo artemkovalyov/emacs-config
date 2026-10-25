@@ -312,13 +312,16 @@
 (use-package apheleia
   :straight (apheleia :host github :repo "raxod502/apheleia")
   :config
-  (add-to-list 'apheleia-formatters '(prettier-svelte . ("prettier" "--stdin-filepath" filepath "--parser=svelte")))
   (setf  (alist-get 'svelte-mode apheleia-mode-alist) '(prettier-svelte))
-  (setf  (alist-get 'typescript-mode apheleia-mode-alist) '(prettier))
-  (setf  (alist-get 'html-mode apheleia-mode-alist) '(prettier))
-  (setf  (alist-get 'js-mode apheleia-mode-alist) '(prettier))
-  (setf  (alist-get 'web-mode apheleia-mode-alist) '(prettier))
-  (setf  (alist-get 'markdown-mode apheleia-mode-alist) '(prettier))
+  (setf  (alist-get 'typescript-mode apheleia-mode-alist) '(prettier-typescript))
+  (setf  (alist-get 'typescript-ts-mode apheleia-mode-alist) '(prettier-typescript))
+  (setf  (alist-get 'tsx-ts-mode apheleia-mode-alist) '(prettier-typescript))
+  (setf  (alist-get 'html-mode apheleia-mode-alist) '(prettier-html))
+  (setf  (alist-get 'js-mode apheleia-mode-alist) '(prettier-javascript))
+  (setf  (alist-get 'js-ts-mode apheleia-mode-alist) '(prettier-javascript))
+  (setf  (alist-get 'web-mode apheleia-mode-alist) '(prettier-html))
+  (setf  (alist-get 'markdown-mode apheleia-mode-alist) '(prettier-markdown))
+  (setf  (alist-get 'markdown-ts-mode apheleia-mode-alist) '(prettier-markdown))
   :init
   (apheleia-global-mode +1))
 

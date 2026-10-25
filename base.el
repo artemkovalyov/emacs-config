@@ -85,8 +85,6 @@
  ;; Disable non selected window highlight
  cursor-in-non-selected-windows     nil
  highlight-nonselected-windows      nil
- ;; PATH
- exec-path                          (append exec-path '("/usr/local/bin/"))
  indent-tabs-mode                   nil
  inhibit-startup-message            t
  fringes-outside-margins            t
