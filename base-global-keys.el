@@ -26,8 +26,8 @@
 (global-set-key (kbd "s-g j") 'jump-to-register)
 
 ;; Timestamps
-(global-set-key (kbd "s-g t") 'insert-timestamp-default)
-(global-set-key (kbd "s-g i") 'insert-timestamp-iso)
+(global-set-key (kbd "A-g t") 'insert-timestamp-default)
+(global-set-key (kbd "A-g i") 'insert-timestamp-iso)
 
 ;; Change window size
 (global-set-key (kbd "C-{") 'shrink-window-horizontally)

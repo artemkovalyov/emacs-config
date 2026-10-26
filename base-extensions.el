@@ -225,8 +225,8 @@
   (setq sp-navigate-reindent-after-up-in-string nil
         sp-navigate-reindent-after-up nil)
   :bind
-  ("s-M-J" . sp-backward-delete-word)
-  ("s-M-L" . sp-delete-word)
+  ("H-M-j" . sp-backward-delete-word)
+  ("H-M-l" . sp-delete-word)
   :hook
   (text-mode . smartparens-mode)
   (prog-mode . smartparens-mode)
